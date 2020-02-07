@@ -81,8 +81,11 @@ class Data:
                 testx = sequence.pad_sequences([i[:-1] for i in self.test], maxlen=maximum_lengh, padding='post')
                 trainx_final = np_utils.to_categorical(trainx, num_classes=class_numbers)
                 trainx_final[:, :, 0] = 0
+                # trainx_final = np.expand_dims(trainx_final, 3)
                 testx_final = np_utils.to_categorical(testx, num_classes=class_numbers)
                 testx_final[:, :, 0] = 0
+                # testx_final = np.expand_dims(testx_final, 3)
+
 
             train_labs = self.lable_create(self.train)
             test_labs = self.lable_create(self.test)
@@ -138,4 +141,4 @@ class Data:
 if __name__ == '__main__':
     # address = os.path.join(datapath, 'all_tools'
     # encode(address)
-    mydata = Data(0, deep=True, toolemb=True, titles=True,concat=True)
+    mydata = Data(0, deep=True, toolemb=False, titles=True,concat=True)
