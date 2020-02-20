@@ -9,8 +9,8 @@ try: # pragma: no cover
 except NameError: # pragma: no cover
     basestring = str
 
-BEGIN = '___BEGIN__'
-END = "-1"
+BEGIN = 1
+END = 54
 
 def accumulate(iterable, func=operator.add):
     """
@@ -59,6 +59,7 @@ class Chain(object):
         total = 0
 
         for run in corpus:
+            run = run[1:-1]
             items = ([ BEGIN ] * state_size) + run + [ END ]
             for i in range(len(run) + 1):
                 total +=1
@@ -118,8 +119,9 @@ class Chain_withid(object):
         model = {}
         total = 0
 
-        for run, id in corpus:
-            items = ([BEGIN] * state_size) + run + [END]
+        for id, run in enumerate(corpus):
+            run = run[1:-1]
+            items = ([ BEGIN ] * state_size) + run + [ END ]
             for i in range(len(run) + 1):
                 total += 1
                 state = tuple(items[i:i + state_size])

@@ -1,6 +1,6 @@
 import numpy as np
 import pickle as pk
-
+from nltk.util import ngrams
 import scipy.stats
 
 def save_obj(obj, name):
@@ -57,3 +57,27 @@ def upload(file):
         # upload gives you metadata about the file
         # we want to overwite any previous version of the file
         meta = d.files_upload(f.read(), targetfile, mode=dropbox.files.WriteMode("overwrite"))
+
+
+def ngram_simscore(text1, text2):
+    n = max(len(text1), len(text2))
+    score = 0
+    for i in range(n):
+        seq1tupes = get_tuples_nosentences(text1, i + 1)
+        seq2tupes = get_tuples_nosentences(text2, i + 1)
+        score += ((i+1)*(len(seq1tupes & seq2tupes)))
+    return score
+
+
+def similarity_score (titles, id1, ids):
+    score = 0
+    for id in ids:
+        score += ngram_simscore(titles[id1], mydata.titles[id])
+    # print(score)
+    return score/len(ids)
+
+def get_tuples_nosentences(txt, n):
+    """Get tuples that ignores all punctuation (including sentences)."""
+    if not txt: return None
+    ng = ngrams(txt, n)
+    return set(ng)

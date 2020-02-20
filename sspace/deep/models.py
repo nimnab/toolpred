@@ -4,6 +4,8 @@ from keras import regularizers
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.layers import TimeDistributed, Input, LSTM, Dense, Masking, Lambda, concatenate, RepeatVector, GRU, Dropout, SimpleRNN ,Permute
 from keras.models import Sequential, Model
+from sklearn.utils.class_weight import compute_class_weight
+
 
 
 def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
@@ -81,7 +83,7 @@ def lstm_gru(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     main_input = Input(shape=(seqlength, featurelen), dtype='float32')
     man_masked = Masking(mask_value=0, input_shape=(seqlength, featurelen), name='seq_masked')(main_input)
     # lstm_out = LSTM(hidden_size, return_sequences=True)(man_masked)
-    lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout=0.5)(man_masked)
+    lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout=0.2)(man_masked)
 
     _, titlelength, titlefeaturelen = np.shape(mydata.dtrain.titles)
 
@@ -93,21 +95,21 @@ def lstm_gru(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     out = concatenate([lstm_out, title_out])
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(out)
-    densout = Dropout(0.5)(densout)
+    densout = Dropout(0.2)(densout)
     last = Dense(tool_number, activation='softmax')(densout)
     model = Model(inputs=[main_input, title_input], outputs=last)
 
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['categorical_accuracy'])
-    # tool_freq = [y for x in mydata.train[counter] for y in x]
+    tool_freq = [y for x in mydata.train for y in x]
 
-    # class_weights = class_weight.compute_class_weight('balanced',np.unique(mydata.alltools), mydata.alltools)
+    class_weights = compute_class_weight('balanced',np.unique(tool_freq), tool_freq)
     es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
     mc = ModelCheckpoint(modelname.format(seed), monitor='val_categorical_accuracy', mode='max',
                          verbose=1, save_best_only=True)
 
     model.fit([mydata.dtrain.input, mydata.dtrain.titles], mydata.dtrain.target,
               validation_data=([mydata.dtest.input, mydata.dtest.titles], mydata.dtest.target),
-              epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
+              epochs=500, batch_size=10, verbose=2, callbacks=[es, mc], class_weight=class_weights)
     # make a prediction
     return 0
 
