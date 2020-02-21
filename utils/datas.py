@@ -2,7 +2,6 @@ import pickle as pk
 from keras.preprocessing import sequence
 from keras.utils import np_utils
 from sklearn.model_selection import train_test_split
-from flair.embeddings import WordEmbeddings, Sentence
 import numpy as np
 import os
 from collections import defaultdict, Counter

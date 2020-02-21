@@ -69,15 +69,10 @@ def ngram_simscore(text1, text2):
     return score
 
 
-def similarity_score (titles, id1, ids):
-    score = 0
-    for id in ids:
-        score += ngram_simscore(titles[id1], mydata.titles[id])
-    # print(score)
-    return score/len(ids)
-
 def get_tuples_nosentences(txt, n):
     """Get tuples that ignores all punctuation (including sentences)."""
     if not txt: return None
     ng = ngrams(txt, n)
     return set(ng)
+
+
