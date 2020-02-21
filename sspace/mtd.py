@@ -17,7 +17,7 @@ class Model():
 def plot_stats(toklls, win_pr):
     plt.figure()
     for tokll, col in toklls:
-        plt.plot(list(range(1, 1 + EM_ITERATIONS)), -1 * tokll, col)
+        plt.plot(list(range(1, 1 + emitr)), -1 * tokll, col)
     plt.ylabel('-tokLL')
     plt.xlabel('EM iterations')
 
@@ -29,17 +29,35 @@ def plot_stats(toklls, win_pr):
     plt.bar(list(win_pr.keys()), list(win_pr.values()), width=0.01)
     plt.show()
 
+def prior(data, mat):
+    for k in range(1, maxorder + 1):
+        for seq in data:
+            for t in range(k, len(seq)):
+                mat[k-1][seq[t]][seq[t-k]] +=1
+    return mat
 
 def initialize():
     # random initialization
-    mmat = np.random.rand(maxorder, vocablen, vocablen)
+    mmat = np.zeros([maxorder, vocablen, vocablen])
+    # mmat = np.random.rand(maxorder, vocablen, vocablen)
     landamat = [1 / maxorder] * maxorder
     phimat = np.empty([maxorder, vocablen, vocablen])
 
+    mmat = prior(mydata.train, mmat)
+
     for raw in mmat:
         for col in range(len(raw)):
-            su = sum(raw[:, col])
-            raw[:, col] /= su
+            su = sum(raw[col,:])
+            if su != 0:
+                nozeros = np.count_nonzero(raw[col,:])
+                zeros = vocablen - nozeros
+                for i in range(vocablen):
+                    if raw[col,i]==0:
+                        raw[col,i]= (alpha*nozeros/zeros)/su
+                    else:
+                        raw[col,i] = (raw[col,i]-alpha)/su
+            else:
+                raw[col, :] = 1/vocablen
 
     return landamat, mmat, phimat
 
@@ -58,6 +76,7 @@ def estep():
 
 
 def mstep(data):
+    global landamat, mmat
     for k in range(1, maxorder + 1):
         landasum = landanorm = 0
         msum = np.zeros([vocablen, vocablen])
@@ -70,17 +89,21 @@ def mstep(data):
 
         for i in range(1,vocablen):
             mnorm = sum(msum[i])
-            if mnorm != 0:
-                zeros = vocablen - np.count_nonzero(msum[i])
-                for j in range(vocablen):
-                        if msum[i][j] ==0:
-                            val = alpha/zeros
-                        else:
-                            val =  msum[i][j]-alpha
-                        mmat[k-1][i][j] = val / mnorm
-            else:
-                for j in range(vocablen):
-                    mmat[k - 1][i][j] = 1/vocablen
+            # mmat[k - 1][i] = msum[i]/mnorm
+            # if mnorm != 0:
+            nonzeros = np.count_nonzero(msum[i])
+            zeros = vocablen - nonzeros
+            for j in range(vocablen):
+                    if msum[i][j] ==0:
+                        val = (alpha*nonzeros)/zeros
+                    else:
+                        val =  msum[i][j]-alpha
+                    mmat[k-1][i][j] = val / mnorm
+            # else:
+            #     for j in range(vocablen):
+            #         mmat[k - 1][i][j] = 1/vocablen
+    sumlan = sum(landamat)
+    landamat = [i / sumlan for i in landamat]
 
 
 
@@ -102,15 +125,17 @@ def test():
                 correct+=1
             # else:
             #     print(t,p)
-
             olds.append(t)
     return correct/total
 
+if __name__ == '__main__':
+    mydata = Data(0, encod=True)
+    vocablen = len(mydata.encodedic)
+    maxt = max([len(a) for a in mydata.train])
+    maxorder = 10
+    emitr = 100
+    alpha = 1e-10
 
-
-def run_em():
-    global landamat, mmat, phimat
-    # EM algorithm implementation
     landamat, mmat, phimat = initialize()
 
     for it in range(emitr):
@@ -119,13 +144,3 @@ def run_em():
         mstep(mydata.train)
         accu = test()
         print('Accuracy:', accu*100)
-    return 0
-
-
-if __name__ == '__main__':
-    mydata = Data(0, encod=True)
-    vocablen = len(mydata.encodedic)
-    maxorder = 10
-    emitr = 100
-    alpha = 1e-10
-    run_em()

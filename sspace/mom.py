@@ -14,7 +14,7 @@ class Model():
 def plot_stats(toklls, win_pr):
     plt.figure()
     for tokll, col in toklls:
-        plt.plot(list(range(1,1+EM_ITERATIONS)), -1*tokll, col)
+        plt.plot(list(range(1,1+it)), -1*tokll, col)
     plt.ylabel('-tokLL')
     plt.xlabel('EM iterations')
     
