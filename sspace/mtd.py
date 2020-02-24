@@ -132,7 +132,7 @@ if __name__ == '__main__':
     mydata = Data(0, encod=True)
     vocablen = len(mydata.encodedic)
     maxt = max([len(a) for a in mydata.train])
-    maxorder = 10
+    maxorder = 1
     emitr = 100
     alpha = 1e-10
 

@@ -2,6 +2,7 @@ import numpy as np
 import pickle as pk
 from nltk.util import ngrams
 import scipy.stats
+import sys
 
 def save_obj(obj, name):
     with open(name + '.pkl', 'wb') as f:
@@ -58,14 +59,24 @@ def upload(file):
         # we want to overwite any previous version of the file
         meta = d.files_upload(f.read(), targetfile, mode=dropbox.files.WriteMode("overwrite"))
 
+dicscores = dict()
 
-def ngram_simscore(text1, text2):
+def ngram_simscore(text1, text2, landa):
     n = max(len(text1), len(text2))
     score = 0
     for i in range(n):
-        seq1tupes = get_tuples_nosentences(text1, i + 1)
-        seq2tupes = get_tuples_nosentences(text2, i + 1)
-        score += ((i+1)*(len(seq1tupes & seq2tupes)))
+        if (' '.join(text1), i + 1) in dicscores:
+            seq1tupes = dicscores[(' '.join(text1), i + 1)]
+        else:
+            seq1tupes = get_tuples_nosentences(text1, i + 1)
+            dicscores[(' '.join(text1), i + 1)] = seq1tupes
+
+        if (' '.join(text2), i + 1) in dicscores:
+            seq2tupes = dicscores[(' '.join(text2), i + 1)]
+        else:
+            seq2tupes = get_tuples_nosentences(text2, i + 1)
+            dicscores[(' '.join(text2), i + 1)] = seq2tupes
+        score += ((landa[i])*(len(seq1tupes & seq2tupes)))
     return score
 
 
