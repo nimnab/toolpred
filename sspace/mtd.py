@@ -2,7 +2,8 @@ import nltk
 import numpy as np
 
 nltk.data.path.append("/hri/localdisk/nnabizad/nltk_data")
-import matplotlib.pyplot as plt
+from utils.util import output
+from utils.util import mean_confidence_interval
 from utils.datas import Data
 
 
@@ -110,17 +111,35 @@ class TestData():
 
 if __name__ == '__main__':
     mydata = Data(0, encod=True)
+    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/mixed.txt'
+    file= open(filename, 'a')
     # mydata = TestData()
     vocablen = len(mydata.decodedic)
-    maxorder = 20
+    # maxorder = 5
     emitr = 100
     alpha = 1e-5
-
-    landamat, mmat, phimat = initialize()
-    for it in range(emitr):
-        print('Iteration:', it + 1)
-        accu = test()
-        estep()
-        mstep(mydata.train)
-        print('Accuracy:', accu*100)
-        print('Weights', landamat)
+    seeds = [0, 12, 21, 32, 45, 64, 77, 98, 55, 120]
+    for maxorder in range(2,20):
+        accu_list = []
+        maxlanda = []
+        for seed in seeds:
+            maxaccu = 0
+            landamat, mmat, phimat = initialize()
+            for it in range(emitr):
+                print('Seed:{}, Iteration:{}'.format(seed,it))
+                accu = test()
+                estep()
+                mstep(mydata.train)
+                print('Accuracy:', accu*100)
+                if accu > maxaccu:
+                    maxaccu = accu
+                    maxlanda = landamat
+                if accu < maxaccu and it > 10:
+                    accu_list.append(maxaccu)
+                    break
+        m, mu = mean_confidence_interval(accu_list)
+        file.write('{} , {} , {}'.format(maxorder, m, mu))
+        for val in maxlanda:
+            file.write(', ' + str(val))
+        file.write('\n')
+    file.close()
