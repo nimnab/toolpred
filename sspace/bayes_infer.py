@@ -1,80 +1,104 @@
-
-
-from .chain import Chain_withid
-# from utils.sentemb import cosin_sim , fasttext , tfidf
+from nltk.util import ngrams
 from utils.datas import Data
-from utils.util import mean_confidence_interval , ngram_simscore , output, load_obj, save_obj, get_tuples_nosentences, goal_simscore
-import numpy as np
-from fse import IndexedList
+from utils.util import mean_confidence_interval, output
+from .chain import Chain_withid
 
 datapath = '/hri/localdisk/nnabizad/toolpreddata/'
 
 # simdic = load_obj(datapath + 'ngram-similarities')
 simdic = dict()
+dicscores = dict()
+
+
+def goal_simscore(tups, text2):
+    tupleslenn = max([len(i) for i in tups])
+    n = max(tupleslenn, len(text2))
+    score = 0
+    for i in range(n):
+        if (' '.join(text2), i + 1) in dicscores:
+            seq2tupes = dicscores[(' '.join(text2), i + 1)]
+        else:
+            seq2tupes = get_tuples_nosentences(text2, i + 1)
+            dicscores[(' '.join(text2), i + 1)] = seq2tupes
+        score += ((i + 1) * (len(tups & seq2tupes)))
+    return score
+
+
+def get_tuples_nosentences(txt, n):
+    """Get tuples that ignores all punctuation (including sentences)."""
+    if not txt: return None
+    txt = [i for i in txt if len(i) > 0]
+    ng = ngrams(txt, n)
+    return set(ng)
+
 
 def similarity_score(goal, ids):
     score = 0
     for id in ids:
-        # if (' ' .join(mydata.titles_test[id1]),' '.join(mydata.titles_train[id])) not in simdic:
-        sim =  goal_simscore(goal, mydata.titles_train[id])
-            # simdic[(' ' .join(mydata.titles_test[id1]),' '.join(mydata.titles_train[id]))] = sim
+        sim = goal_simscore(goal, mydata.titles_train[id])
         score += sim
-    print(score/len(ids))
-    return score/len(ids)
+    return score / len(ids)
 
 
-def predict(lis, goal):
+def predict(history):
     global prediction
-    history = tuple(lis)
-    # landa = 0.5
-    order = (maxst-1) if len(lis) > (maxst-1) else len(lis)
-    if history in models[order-1].keys():
-        normp = sum([models[order-1][history][k][0] for k in models[order-1][history].keys()])
+    order = (maxst - 1) if len(history) > (maxst - 1) else len(history)
+    if history in models[order - 1].keys():
+        normp = sum([models[order - 1][history][k][0] for k in models[order - 1][history].keys()])
         # norms = sum([similarity_score(id,models[order-1][history][k][1]) for k in models[order-1][history].keys()])
-        prediction = max(models[order-1][history].keys(), key=(lambda k:  (models[order-1][history][k][0]/normp) * similarity_score(goal,models[order-1][history][k][1])))
+        prediction = max(models[order - 1][history].keys(), key=(
+            lambda k: (models[order - 1][history][k][0] / normp) * similarity_score(goal,
+                                                                                    models[order - 1][history][k][1])))
         return prediction
-    elif len(lis) > 0:
-        lis2 = lis[1:]
-        predict(lis2, id)
+    elif len(history) > 0:
+        lis2 = history[1:]
+        predict(lis2)
     else:
         return -1
 
 
 ngramdic = dict()
+
+
 def prev_goal_ngrams(history):
-    history = tuple(history)
-    if history not in ngramdic:
-        order = len(history)
-        ngrams = []
-        for t in models[order - 1][history].keys():
-            for g in models[order - 1][history][t][1]:
-                text = mydata.titles_train[g]
-                for n in range(len(text)):
-                    [ngrams.append(i) for i in get_tuples_nosentences(text, n) if len(i)>0]
-        ngramdic[history] = tuple(ngrams)
-    return ngramdic[history]
+    order =  (maxst - 1) if len(history) > (maxst - 1) else len(history)
+    global goal
+    if history in models[order - 1]:
+        if history not in ngramdic:
+            ngrams = set()
+            for t in models[order - 1][history]:
+                for g in models[order - 1][history][t][1]:
+                    text = mydata.titles_train[g]
+                    for n in range(len(text)):
+                        [ngrams.add(i) for i in get_tuples_nosentences(text, n) if len(i) > 0]
+            ngramdic[history] = ngrams
+        goal = ngramdic[history]
+        return ngramdic[history]
+
+    elif len(history) > 0:
+        lis = history[1:]
+        prev_goal_ngrams(lis)
+    else:
+        print('#AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
 
 
 def accu_all(test):
     corr = total = 0
     preds = []
     for manual in test:
-        # print(id)
         tmppred = []
-        oldtool = [1]
+        oldtool = (1,)
         for tool in manual[1:]:
-            goal = prev_goal_ngrams(oldtool)
-            p1 = predict(oldtool, goal)
+            prev_goal_ngrams(oldtool)
+            # print(goal)
+            predict(oldtool)
             total += 1
             if prediction == tool:
-                corr +=1
-            oldtool.append(tool)
+                corr += 1
+            oldtool += (tool,)
             tmppred.append(prediction)
         preds.append(tmppred)
-    return preds , (corr)/(total)
-
-def average_len(l):
-  return int(sum(map(len, [i[0] for i in l]))/len(l))+1
+    return preds, (corr) / (total)
 
 
 def write_result(filename):
@@ -87,22 +111,18 @@ def write_result(filename):
         mydata = Data(seed, titles=True)
         prediction = 0
         global maxst
-        maxngram = max([len(i) for i in mydata.titles_train])
-        maxst = max([len(i) for i in mydata.train])
-        # maxst = 3
+        # maxst = max([len(i) for i in mydata.train])
+        maxst = 2
         global models
         global landa
-        models = [Chain_withid(mydata.train, i).model for i in range(1,maxst)]
-        # for mu in np.arange(1, 11):
-        #     for sigma in np.arange(0.001, 11, 0.5):
-        # landa = np.random.normal(mu, sigma, maxngram)
-        preds , acc = accu_all(mydata.test)
+        models = [Chain_withid(mydata.train, i).model for i in range(1, maxst)]
+        preds, acc = accu_all(mydata.test)
         accu_list.append(acc)
-        print("accuracy {}".format( acc))
+        print("accuracy {}".format(acc))
     output(mean_confidence_interval(accu_list), filename=filename, func='write')
     output(accu_list, filename=filename, func='write')
 
 
 if __name__ == '__main__':
-    write_result('/home/nnabizad/code/toolpred/sspace/res/mac/bayes-akom.txt')
+    write_result('/home/nnabizad/code/toolpred/sspace/res/mac/bayes-bigram.txt')
     # save_obj(simdic, 'fast-similarities')
