@@ -111,8 +111,8 @@ def write_result(filename):
         mydata = Data(seed, titles=True)
         prediction = 0
         global maxst
-        # maxst = max([len(i) for i in mydata.train])
-        maxst = 2
+        maxst = max([len(i) for i in mydata.train])
+        # maxst = 2
         global models
         global landa
         models = [Chain_withid(mydata.train, i).model for i in range(1, maxst)]
@@ -124,5 +124,5 @@ def write_result(filename):
 
 
 if __name__ == '__main__':
-    write_result('/home/nnabizad/code/toolpred/sspace/res/mac/bayes-bigram.txt')
+    write_result('/home/nnabizad/code/toolpred/sspace/res/mac/bayes-akom.txt')
     # save_obj(simdic, 'fast-similarities')
