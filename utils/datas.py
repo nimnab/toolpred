@@ -46,8 +46,8 @@ def encode(address):
     biglisencoded = []
     morethanmin = len(encode)
     encode['start'] = 0
-    encode['end'] = morethanmin + 1
-    encode['unknown'] = morethanmin + 2
+    encode['unknown'] = morethanmin + 1
+    encode['end'] = morethanmin + 2
     decode = {v: k for k, v in encode.items()}
     for lis in biglis:
         _tmp = []

@@ -45,7 +45,9 @@ def initialize():
             else:
                 order[:,next_tool] = 1/vocablen
     for k in range(maxorder):
-        mmat[k,0,:] = 0
+        mmat[k, 0, :] = 0
+        mmat[k, :, -1] = np.nan
+
     return landamat, mmat, phimat
 
 def estep():
@@ -75,9 +77,7 @@ def mstep(data):
             norm = sum(msum[k-1,:,i])
             mmat[k-1, :, i] = msum[k-1,:,i]/norm
         mmat[k-1, 0, :] = 0
-
-
-
+        mmat[k-1, :, -1] = np.nan
 
 
 def predict(seq):
@@ -112,7 +112,7 @@ if __name__ == '__main__':
     mydata = Data(0, encod=True)
     # mydata = TestData()
     vocablen = len(mydata.decodedic)
-    maxorder = 10
+    maxorder = 20
     emitr = 100
     alpha = 1e-5
 
@@ -123,3 +123,4 @@ if __name__ == '__main__':
         estep()
         mstep(mydata.train)
         print('Accuracy:', accu*100)
+        print('Weights', landamat)
