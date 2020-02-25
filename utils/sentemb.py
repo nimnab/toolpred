@@ -21,7 +21,7 @@ mydata = Data(0, titles=True)
 # sentences = IndexedList(mydata.titles_train)
 # model.train(sentences)
 #
-# sentence_embedding = sister.MeanEmbedding(lang="en")
+sentence_embedding = sister.MeanEmbedding(lang="en")
 
 
 vectorizer = TfidfVectorizer(analyzer='word', ngram_range=(1,5), min_df = 0, stop_words = 'english')
@@ -50,7 +50,7 @@ def fasttext(text1, text2):
     return sim
 
 
-def cosin_sim(text1, text2):
+def sif(text1, text2):
     vec1 = model.infer([(text1,0)])
     vec2 = model.infer([(text2,0)])
     sim = np.dot(matutils.unitvec(vec1), np.transpose(matutils.unitvec(vec2)))

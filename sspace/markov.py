@@ -59,7 +59,7 @@ def write_result(filename):
         prediction = 0
         global maxst
         # maxst = max([len(i) for i in mydata.train])
-        maxst = 2
+        maxst = 4
         global models
         models = [Chain(mydata.train, i).model for i in range(1,maxst)]
         preds , acc = accu_all(mydata.test)
@@ -70,6 +70,6 @@ def write_result(filename):
 
 
 if __name__ == '__main__':
-    write_result('/home/nnabizad/code/toolpred/sspace/res/mac/bi-gram.txt')
+    write_result('/home/nnabizad/code/toolpred/sspace/res/mac/4gram.txt')
     # mydata = Data(0)
     # accu_unigram(mydata.test)

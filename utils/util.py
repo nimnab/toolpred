@@ -79,10 +79,29 @@ def ngram_simscore(text1, text2, landa):
         score += ((landa[i])*(len(seq1tupes & seq2tupes)))
     return score
 
+def goal_simscore(tuples, text2):
+    tupleslenn = max([len(i) for i in tuples])
+    n = max(tupleslenn, len(text2))
+    score = 0
+    for i in range(n):
+        # if (' '.join(text1), i + 1) in dicscores:
+        #     seq1tupes = dicscores[(' '.join(text1), i + 1)]
+        # else:
+        #     seq1tupes = get_tuples_nosentences(text1, i + 1)
+        #     dicscores[(' '.join(text1), i + 1)] = seq1tupes
+
+        if (' '.join(text2), i + 1) in dicscores:
+            seq2tupes = dicscores[(' '.join(text2), i + 1)]
+        else:
+            seq2tupes = get_tuples_nosentences(text2, i + 1)
+            dicscores[(' '.join(text2), i + 1)] = seq2tupes
+        score += ((i+1)*(len(tuples & seq2tupes)))
+    return score
 
 def get_tuples_nosentences(txt, n):
     """Get tuples that ignores all punctuation (including sentences)."""
     if not txt: return None
+    txt = [i for i in txt if len(i)>0]
     ng = ngrams(txt, n)
     return set(ng)
 
