@@ -17,6 +17,7 @@ sentsembs = dict()
 # simdic = load_obj(datapath + 'ngram-similarities')
 simdic = dict()
 
+
 def sifembed(text):
     sent = ' '.join(text)
     if sent not in sentsembs:
@@ -31,7 +32,6 @@ def siftrain():
     sentences = IndexedList(mydata.titles_train)
     model.train(sentences)
     return model
-
 
 #
 # def embed(text):

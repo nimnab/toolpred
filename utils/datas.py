@@ -6,6 +6,9 @@ import numpy as np
 import os
 from collections import defaultdict, Counter
 import re
+from gensim.models.keyedvectors import KeyedVectors
+from fse.models import SIF
+from fse import IndexedList
 
 # datapath = '/hri/localdisk/nnabizad/toolpred/data/'
 datapath = '/home/nnabizad/code/toolpred/data/mac/mac_'
@@ -30,6 +33,21 @@ def load_obj(name):
         return pk.load(file)
 
 
+sentsembs = dict()
+def sifembed(text , sifmodel):
+    sent = ' '.join(text)
+    if sent not in sentsembs:
+        sentsembs[sent] = sifmodel.infer([(text,0)])[0]
+    return sentsembs[sent]
+
+
+
+def siftrain(data):
+    glove = KeyedVectors.load("/hri/localdisk/nnabizad/w2v/glove100_word2vec1")
+    model = SIF(glove, workers=1, lang_freq="en")
+    sentences = IndexedList(data)
+    model.train(sentences)
+    return model
 
 
 
@@ -135,7 +153,7 @@ class Mydata():
 
 
 class Data:
-    def __init__(self, seed, encod=False, deep = False, toolemb = False, titles = False, concat = False):
+    def __init__(self, seed, encod=False, deep = False, toolemb = False, title = False, concat = False, sif = False):
         if encod:
             biglis , self.encodedic, self.decodedic = encode(datapath +  'tools')
         else:
@@ -148,27 +166,34 @@ class Data:
         re_stripper = re.compile('[^\w+\/\.-]')
         self.train, self.test = train_test_split(biglis, test_size=0.2, random_state=seed)
         titles_test = titles_train = None
-        if titles:
+        if title:
             cats = load_obj(datapath + 'cats')
             titles = [cat[0] for cat in cats]
             titles = [re.split('[, \!?:]+', i) for i in titles]
             titles = [[re_stripper.sub('', a).lower() for a in i] for i in titles]
             self.titles_train, self.titles_test = train_test_split(titles, test_size=0.2, random_state=seed)
             if deep:
-                if os.path.isfile(bigdatapath + 'myglove.npy'):
-                    print('loading the titles from file')
-                    titles_pad = np.load(bigdatapath +  'myglove.npy')
+                if sif:
+                    titles_pad = []
+                    sifmodel = siftrain(titles)
+                    for tit in titles:
+                        titles_pad.append(sifembed(tit,sifmodel))
+                    titles_pad = np.asarray(titles_pad)
                 else:
-                    # embedding = WordEmbeddings('glove')
-                    embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/glove100_word2vec1')
-                    # embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/myword2vec_300')
-                    stitles = [Sentence(i) for i in titles]
-                    max_titles_len = max([len(i) for i in stitles])
-                    titles = [embedding.embed(i) for i in stitles]
-                    titles_emb = [[np.asarray(i.embedding) for i in sent[0]] for sent in titles]
-                    titles_pad = np.asarray([np.vstack((i, np.zeros([max_titles_len-len(i),emb_dim]))) for i in titles_emb])
-                    np.save(bigdatapath +  'myglove' ,titles_pad)
-                    print('file saved')
+                    if os.path.isfile(bigdatapath + 'myglove.npy'):
+                        print('loading the titles from file')
+                        titles_pad = np.load(bigdatapath +  'myglove.npy')
+                    else:
+                        # embedding = WordEmbeddings('glove')
+                        embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/glove100_word2vec1')
+                        # embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/myword2vec_300')
+                        stitles = [Sentence(i) for i in titles]
+                        max_titles_len = max([len(i) for i in stitles])
+                        titles = [embedding.embed(i) for i in stitles]
+                        titles_emb = [[np.asarray(i.embedding) for i in sent[0]] for sent in titles]
+                        titles_pad = np.asarray([np.vstack((i, np.zeros([max_titles_len-len(i),emb_dim]))) for i in titles_emb])
+                        np.save(bigdatapath +  'myglove' ,titles_pad)
+                        print('file saved')
                 titles_train, titles_test = train_test_split(titles_pad, test_size=0.2, random_state=seed)
 
         if deep:

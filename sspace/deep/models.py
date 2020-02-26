@@ -125,12 +125,12 @@ def lstm_sum_zeroh(mydata, modelname, seed, hidden_size, dens1_size, dens2_size)
     # cell_states = Input(np.random.normal(size=(500)), dtype='float32')
 
     sum_titles = Lambda(lambda x: K.sum(x, axis=1))(title_input)
-    title_out = Dense(hidden_size, activation='relu')(sum_titles)
-    inital = [title_out, title_out]
+    # title_out = Dense(hidden_size, activation='relu')(sum_titles)
+    inital = [sum_titles, sum_titles]
 
     main_input = Input(shape=(seqlength, featurelen), dtype='float32')
     man_masked = Masking(mask_value=0, input_shape=(seqlength, featurelen), name='seq_masked')(main_input)
-    lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout = 0.2)(man_masked, initial_state=inital)
+    lstm_out = LSTM(titlefeaturelen, return_sequences=True, recurrent_dropout = 0.2)(man_masked, initial_state=inital)
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(lstm_out)
     densout = Dropout(0.2)(densout)
@@ -326,6 +326,46 @@ def lstm_gru_mult(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(out)
     # densout = Dropout(0.5)(densout)
+    last = Dense(tool_number, activation='softmax')(densout)
+    model = Model(inputs=[main_input, title_input], outputs=last)
+
+    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['categorical_accuracy'])
+    # tool_freq = [y for x in mydata.train[counter] for y in x]
+
+    # class_weights = class_weight.compute_class_weight('balanced',np.unique(mydata.alltools), mydata.alltools)
+    es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
+    mc = ModelCheckpoint(modelname.format(seed), monitor='val_categorical_accuracy', mode='max',
+                         verbose=1, save_best_only=True)
+
+    model.fit([mydata.dtrain.input, mydata.dtrain.titles], mydata.dtrain.target,
+              validation_data=([mydata.dtest.input, mydata.dtest.titles], mydata.dtest.target),
+              epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
+    # make a prediction
+    return 0
+
+def lstm_sif(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
+    # for seed in seeds:
+    _, seqlength, tool_number = np.shape(mydata.dtest.target)
+    featurelen = np.shape(mydata.dtest.input[0])[1]
+
+    main_input = Input(shape=(seqlength, featurelen), dtype='float32')
+    man_masked = Masking(mask_value=0, input_shape=(seqlength, featurelen), name='seq_masked')(main_input)
+    lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout = 0.1)(man_masked)
+    # lstm_out = LSTM(hidden_size, return_sequences=True)(man_masked)
+
+    _, titlefeaturelen = np.shape(mydata.dtrain.titles)
+
+    title_input = Input(shape=(titlefeaturelen,), dtype='float32')
+
+    # sum_titles = Lambda(lambda x: K.sum(x, axis=1))(title_input)
+
+    # title_out = Dense(dens1_size, activation='relu')(sum_titles)
+    title_out = RepeatVector(seqlength)(title_input)
+    out = concatenate([lstm_out, title_out])
+    # '''
+
+    densout = TimeDistributed(Dense(dens2_size, activation='relu'))(out)
+    densout = Dropout(0.2)(densout)
     last = Dense(tool_number, activation='softmax')(densout)
     model = Model(inputs=[main_input, title_input], outputs=last)
 
