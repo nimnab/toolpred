@@ -65,7 +65,7 @@ def average_len(l):
 
 def write_result(filename):
     global mydata
-    mydata = Data(seed, titles=True)
+    mydata = Data(seed, title=True)
     prediction = 0
     global maxst
     maxngram = max([len(i) for i in mydata.titles_train])
@@ -78,8 +78,8 @@ def write_result(filename):
             for sigma in [0.001, 0.1, 0,5, 1, 5, 10]:
                 landa = np.random.normal(mu, sigma, maxngram)
                 preds , acc = accu_all(mydata.test)
-                print('{}, {}, {}. {}'.format(seed, mu, sigma, acc))
-                output('{}, {}, {}. {}'.format(seed, mu, sigma, acc),filename=filename, func='write')
+                print('{}, {}, {}, {}. {}'.format(seed, maxst, mu, sigma, acc))
+                output('{}, {},  {}, {}. {}'.format(seed, maxst,  mu, sigma, acc),filename=filename, func='write')
 
 if __name__ == '__main__':
     filename = '/home/nnabizad/code/toolpred/sspace/res/mac/ngram_target.csv'
