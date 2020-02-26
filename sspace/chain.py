@@ -8,7 +8,7 @@ try: # pragma: no cover
     basestring
 except NameError: # pragma: no cover
     basestring = str
-
+from collections import Counter, defaultdict
 BEGIN = 1
 END = 54
 
@@ -41,8 +41,20 @@ class Chain(object):
         uses to represent its state. For text generation, 2 or 3 are typical.
         """
         self.state_size = state_size
-        self.model = model or self.build(corpus, self.state_size)
-        self.precompute_begin_state()
+        if state_size == 0:
+            self.model = {}
+            flatlist = [item for sublist in corpus for item in sublist]
+            counter = Counter(flatlist)
+            norm = sum(counter.values())
+            for t in counter:
+                self.model[(t,)] = {}
+                for t2 in counter:
+                    self.model[(t,)][t2] = counter[t2]/norm
+        else:
+            self.model = model or self.build(corpus, self.state_size)
+            self.precompute_begin_state()
+
+
 
     def build(self, corpus, state_size):
         """
@@ -102,8 +114,28 @@ class Chain_withid(object):
         uses to represent its state. For text generation, 2 or 3 are typical.
         """
         self.state_size = state_size
-        self.model = model or self.build(corpus, self.state_size)
+        if state_size == 0:
+            self.model = {}
+            flatlist = [item for sublist in corpus for item in sublist]
+            counter = Counter(flatlist)
+            norm = sum(counter.values())
+            titles = self.title_count(corpus)
+            for t in counter:
+                self.model[(t,)] = {}
+                for t2 in counter:
+                    self.model[(t,)][t2] = [None, None]
+                    self.model[(t,)][t2][0] = counter[t2]/norm
+                    self.model[(t,)][t2][1] = titles[t2]
+        else:
+            self.model = model or self.build(corpus, self.state_size)
         # self.precompute_begin_state()
+
+    def title_count(self, corpus):
+        titles = defaultdict(list)
+        for id, lis in enumerate(corpus):
+            for t in lis:
+                titles[t].append(id)
+        return titles
 
     def build(self, corpus, state_size):
         """

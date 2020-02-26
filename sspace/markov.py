@@ -53,23 +53,21 @@ def average_len(l):
 
 def write_result(filename):
     seeds = [0, 12, 21, 32, 45, 64, 77, 98, 55, 120]
-    accu_list = []
     for n, seed in enumerate(seeds):
-        mydata = Data(seed)
-        prediction = 0
+        global mydata
+        mydata = Data(seed, titles=True)
         global maxst
-        # maxst = max([len(i) for i in mydata.train])
-        maxst = 4
+        maxsts = [1,2,3,4,max([len(i) for i in mydata.train])]
         global models
-        models = [Chain(mydata.train, i).model for i in range(1,maxst)]
-        preds , acc = accu_all(mydata.test)
-        accu_list.append(acc)
-    output(mean_confidence_interval(accu_list),filename=filename, func='write')
-    output(accu_list,filename=filename, func='write')
-
+        for maxst in maxsts:
+            models = [Chain(mydata.train, i).model for i in range(0, maxst)]
+            preds, acc = accu_all(mydata.test)
+            print('{}, {}, {}'.format(maxst, seed,  acc))
+            output('{}, {}, {}'.format(maxst, seed,acc), filename=filename, func='write')
+        # output(accu_list,filename=filename, func='write')
 
 
 if __name__ == '__main__':
-    write_result('/home/nnabizad/code/toolpred/sspace/res/mac/4gram.txt')
-    # mydata = Data(0)
-    # accu_unigram(mydata.test)
+    filename ='/home/nnabizad/code/toolpred/sspace/res/mac/bigram-sif.txt'
+    output('order, seed, acc', filename=filename, func='write')
+    write_result(filename)
