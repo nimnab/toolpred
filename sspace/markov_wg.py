@@ -69,7 +69,7 @@ def write_result(filename):
     prediction = 0
     global maxst
     maxngram = max([len(i) for i in mydata.titles_train])
-    maxsts = [1,2,3, max([len(i) for i in mydata.train])]
+    maxsts = [1,2,3,4,5,max([len(i) for i in mydata.train])]
     global models
     global landa
     for maxst in maxsts:
@@ -82,7 +82,7 @@ def write_result(filename):
                 output('{}, {},  {}, {}. {}'.format(seed, maxst,  mu, sigma, acc),filename=filename, func='write')
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/ngram_target.csv'
+    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/markov_target.csv'
     seed = int(sys.argv[1])
     print('Training with seed:{}'.format(seed), flush=True)
     write_result(filename)

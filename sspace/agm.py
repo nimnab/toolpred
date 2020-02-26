@@ -115,24 +115,27 @@ def write_result(filename):
 
     # for n, seed in enumerate(seeds):
     global mydata
-    mydata = Data(seed, titles=True)
+    mydata = Data(seed, title=True)
     global sifmodel
     sifmodel = siftrain()
     global sent_classes
     global maxst
-    maxsts = [1,2,3,max([len(i) for i in mydata.train])]
+    maxsts = [1,2,3,4, 5, max([len(i) for i in mydata.train])]
     global models
+    # for class_number in range(10, 200, 20):
     for maxst in maxsts:
         models = [Chain_withid(mydata.train, i).model for i in range(0, maxst)]
-        for class_number in range(10, 200, 20):
-            sent_classes = cluster(mydata.titles_train, class_number)
-            preds, acc = accu_all(mydata.test)
-            print('{}, {}, {}, {}'.format(seed, maxst, class_number, acc))
-            output('{}, {}, {}, {}'.format(seed, maxst, class_number, acc), filename=filename, func='write')
+    # for class_number in range(10, 200, 20):
+        sent_classes = cluster(mydata.titles_train, class_number)
+        preds, acc = accu_all(mydata.test)
+        print('{}, {}, {}, {}'.format(seed,class_number, maxst, acc))
+        output('{}, {}, {}, {}'.format(seed,class_number, maxst, acc), filename=filename, func='write')
 
 
 if __name__ == '__main__':
     filename ='/home/nnabizad/code/toolpred/sspace/res/mac/sif_target.csv'
     seed = int(sys.argv[1])
-    print('Training with seed:{}'.format(seed), flush=True)
+    class_number = int(sys.argv[2])
+    # seed = 15
+    print('Training with seed:{}, classes {}'.format(seed, class_number), flush=True)
     write_result(filename)

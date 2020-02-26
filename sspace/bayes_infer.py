@@ -108,7 +108,7 @@ def write_result(filename):
     accu_list = []
     for n, seed in enumerate(seeds):
         global mydata
-        mydata = Data(seed, titles=True)
+        mydata = Data(seed, title=True)
         prediction = 0
         global maxst
         maxst = max([len(i) for i in mydata.train])

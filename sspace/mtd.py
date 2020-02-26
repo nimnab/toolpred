@@ -110,33 +110,37 @@ class TestData():
         self.test = [[0,1,2,4,5]]
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/mtd.csv'
+    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/mtd15.csv'
     seed = int(sys.argv[1])
+    # seed = 15
     print('Training with seed:{}'.format(seed), flush=True)
     mydata = Data(seed, encod=True)
     vocablen = len(mydata.decodedic)
     emitr = 100
     alpha = 1e-5
     file = open(filename, 'a')
-    for maxorder in range(2,11):
-        accu_list = []
-        maxlanda = []
-        maxaccu = 0
-        landamat, mmat, phimat = initialize()
-        for it in range(emitr):
-            # print('Seed:{}, Iteration:{}'.format(seed,it))
-            accu = test()
-            estep()
-            mstep(mydata.train)
-            # print('Accuracy:', accu*100)
-            if accu > maxaccu:
-                maxaccu = accu
-                maxlanda = landamat
-            if accu < maxaccu and it > 10:
-                accu_list.append(maxaccu)
-                break
-            file.write('{} , {} , {} , {}'.format(seed, maxorder, it, accu))
-            for val in landamat:
-                file.write(', ' + str(val))
+    # for maxorder in range(2,11):
+    maxorder = 10
+    accu_list = []
+    maxlanda = []
+    maxaccu = 0
+    landamat, mmat, phimat = initialize()
+    for it in range(emitr):
+        # print('Seed:{}, Iteration:{}'.format(seed,it))
+        accu = test()
+        estep()
+        mstep(mydata.train)
+        # print('Accuracy:', accu*100)
+        if accu > maxaccu:
+            maxaccu = accu
+            maxlanda = landamat
+        if accu < maxaccu and it > 20:
+            accu_list.append(maxaccu)
+            break
+        for order, val in enumerate(landamat):
+            file.write('{} , {} , {}'.format(order, it, val))
             file.write('\n')
+        # for val in landamat:
+        #     file.write(', ' + str(val))
+        file.write('\n')
     file.close()

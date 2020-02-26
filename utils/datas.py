@@ -7,8 +7,8 @@ import os
 from collections import defaultdict, Counter
 import re
 from gensim.models.keyedvectors import KeyedVectors
-from fse.models import SIF
-from fse import IndexedList
+# from fse.models import SIF
+# from fse import IndexedList
 
 # datapath = '/hri/localdisk/nnabizad/toolpred/data/'
 datapath = '/home/nnabizad/code/toolpred/data/mac/mac_'

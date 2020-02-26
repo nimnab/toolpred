@@ -13,7 +13,7 @@ import sister
 
 
 datapath = '/hri/localdisk/nnabizad/toolpreddata/'
-mydata = Data(0, titles=True)
+mydata = Data(0, title=True)
 
 
 # glove = KeyedVectors.load("/hri/localdisk/nnabizad/w2v/glove100_word2vec1")

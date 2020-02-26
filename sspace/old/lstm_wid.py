@@ -71,7 +71,7 @@ def write_result(hidden_size,dens1_size, dens2_size):
     accu_list = []
     global mydata
     for seed in seeds:
-        mydata = Data(seed, deep=True, titles=True)
+        mydata = Data(seed, deep=True, title=True)
         if not os.path.isfile(modelname):
             keras_pred(mydata, modelname, seed)
         saved_model = load_model(modelname.format(seed))

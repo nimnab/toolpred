@@ -6,7 +6,7 @@ from keras.layers import TimeDistributed, Input, LSTM, Dense, Masking, Lambda, c
 from keras.models import Sequential, Model
 from sklearn.utils.class_weight import compute_class_weight
 
-
+dr = 0.2
 
 def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     # for seed in seeds:
@@ -15,10 +15,10 @@ def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
 
     model = Sequential()
     model.add(Masking(mask_value=0., input_shape=(seqlength, featurelen)))
-    model.add(LSTM(hidden_size, return_sequences=True))
+    model.add(LSTM(hidden_size, return_sequences=True, recurrent_dropout=dr))
 
     model.add(TimeDistributed(Dense(dens2_size, activation='relu')))
-    model.add(Dropout(0.2))
+    model.add(Dropout(dr))
     model.add(Dense(tool_number, activation='softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['categorical_accuracy'])
     # tool_freq = [y for x in mydata.train[counter] for y in x]
@@ -42,7 +42,7 @@ def lstm_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
 
     main_input = Input(shape=(seqlength, featurelen), dtype='float32')
     man_masked = Masking(mask_value=0, input_shape=(seqlength, featurelen), name='seq_masked')(main_input)
-    lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout = 0.1)(man_masked)
+    lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout = dr)(man_masked)
     # lstm_out = LSTM(hidden_size, return_sequences=True)(man_masked)
 
     _, titlelength, titlefeaturelen = np.shape(mydata.dtrain.titles)
@@ -57,7 +57,7 @@ def lstm_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     # '''
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(out)
-    densout = Dropout(0.2)(densout)
+    densout = Dropout(dr)(densout)
     last = Dense(tool_number, activation='softmax')(densout)
     model = Model(inputs=[main_input, title_input], outputs=last)
 
@@ -83,7 +83,7 @@ def lstm_gru(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     main_input = Input(shape=(seqlength, featurelen), dtype='float32')
     man_masked = Masking(mask_value=0, input_shape=(seqlength, featurelen), name='seq_masked')(main_input)
     # lstm_out = LSTM(hidden_size, return_sequences=True)(man_masked)
-    lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout=0.2)(man_masked)
+    lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout=dr)(man_masked)
 
     _, titlelength, titlefeaturelen = np.shape(mydata.dtrain.titles)
 
@@ -95,7 +95,7 @@ def lstm_gru(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     out = concatenate([lstm_out, title_out])
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(out)
-    densout = Dropout(0.2)(densout)
+    densout = Dropout(dr)(densout)
     last = Dense(tool_number, activation='softmax')(densout)
     model = Model(inputs=[main_input, title_input], outputs=last)
 
@@ -130,10 +130,10 @@ def lstm_sum_zeroh(mydata, modelname, seed, hidden_size, dens1_size, dens2_size)
 
     main_input = Input(shape=(seqlength, featurelen), dtype='float32')
     man_masked = Masking(mask_value=0, input_shape=(seqlength, featurelen), name='seq_masked')(main_input)
-    lstm_out = LSTM(titlefeaturelen, return_sequences=True, recurrent_dropout = 0.2)(man_masked, initial_state=inital)
+    lstm_out = LSTM(titlefeaturelen, return_sequences=True, recurrent_dropout = dr)(man_masked, initial_state=inital)
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(lstm_out)
-    densout = Dropout(0.2)(densout)
+    densout = Dropout(dr)(densout)
     last = Dense(tool_number, activation='softmax')(densout)
     model = Model(inputs=[main_input, title_input], outputs=last)
 
@@ -169,7 +169,7 @@ def lstm_gru_zeroh(mydata, modelname, seed, hidden_size, dens1_size, dens2_size)
     lstm_out = LSTM(hidden_size, return_sequences=True)(man_masked, initial_state=inital)
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(lstm_out)
-    densout = Dropout(0.2)(densout)
+    densout = Dropout(dr)(densout)
     last = Dense(tool_number, activation='softmax')(densout)
     model = Model(inputs=[main_input, title_input], outputs=last)
 
@@ -201,7 +201,7 @@ def lstm_contcat(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout=0.1)(man_masked)
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(lstm_out)
-    densout = Dropout(0.2)(densout)
+    densout = Dropout(dr)(densout)
     last = Dense(tool_number, activation='softmax')(densout)
     model = Model(inputs=[main_input], outputs=last)
 
@@ -233,7 +233,7 @@ def lstm_wem_contcat(mydata, modelname, seed, hidden_size, dens1_size, dens2_siz
     # lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout=0.1)(sec_input)
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(lstm_out)
-    densout = Dropout(0.2)(densout)
+    densout = Dropout(dr)(densout)
     last = Dense(tool_number, activation='softmax')(densout)
     model = Model(inputs=[main_input], outputs=last)
 
@@ -259,7 +259,7 @@ def lstm_wem_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     main_input = Input(shape=(seqlength, featurelen), dtype='float32')
     man_masked = Masking(mask_value=0, input_shape=(seqlength, featurelen), name='seq_masked')(main_input)
     sec_input = Dense(300, activation='relu', activity_regularizer=regularizers.l1(0.001))(man_masked)
-    # lstm_out = LSTM(hidden_size, return_sequences=True, , recurrent_dropout = 0.2)(sec_input)
+    # lstm_out = LSTM(hidden_size, return_sequences=True, , recurrent_dropout = dr)(sec_input)
     lstm_out = LSTM(hidden_size, return_sequences=True)(sec_input)
 
     _, titlelength, titlefeaturelen = np.shape(mydata.dtrain.titles)
@@ -274,7 +274,7 @@ def lstm_wem_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     # '''
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(out)
-    densout = Dropout(0.2)(densout)
+    densout = Dropout(dr)(densout)
     last = Dense(tool_number, activation='softmax')(densout)
     model = Model(inputs=[main_input, title_input], outputs=last)
 
@@ -306,7 +306,7 @@ def lstm_gru_mult(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     main_input = Input(shape=(seqlength, featurelen), dtype='float32')
     man_masked = Masking(mask_value=0, input_shape=(seqlength, featurelen), name='seq_masked')(main_input)
     # lstm_out = LSTM(hidden_size, return_sequences=True)(man_masked)
-    lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout=0.2)(man_masked)
+    lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout=dr)(man_masked)
     # print('###########', lstm_out)
     _, titlelength, titlefeaturelen = np.shape(mydata.dtrain.titles)
 
@@ -365,7 +365,7 @@ def lstm_sif(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     # '''
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(out)
-    densout = Dropout(0.2)(densout)
+    densout = Dropout(dr)(densout)
     last = Dense(tool_number, activation='softmax')(densout)
     model = Model(inputs=[main_input, title_input], outputs=last)
 
