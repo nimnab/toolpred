@@ -2,17 +2,17 @@ import itertools
 import numpy as np
 from .chain import Chain_withid
 from gensim import matutils
-from sister import MeanEmbedding
+import sys
 from sklearn.cluster import KMeans
 from gensim.models.keyedvectors import KeyedVectors
 from fse.models import SIF
 from fse import IndexedList
-from utils.datas import Data
+from utils.datas import Data, seeds
 from utils.util import output
 from collections import defaultdict
 
 datapath = '/hri/localdisk/nnabizad/toolpreddata/'
-sentence_embedding = MeanEmbedding(lang="en")
+# sentence_embedding = MeanEmbedding(lang="en")
 sentsembs = dict()
 # simdic = load_obj(datapath + 'ngram-similarities')
 simdic = dict()
@@ -33,12 +33,12 @@ def siftrain():
     return model
 
 
-
-def embed(text):
-    sent = ' '.join(text)
-    if sent not in sentsembs:
-        sentsembs[sent] = sentence_embedding(sent)
-    return sentsembs[sent]
+#
+# def embed(text):
+#     sent = ' '.join(text)
+#     if sent not in sentsembs:
+#         sentsembs[sent] = sentence_embedding(sent)
+#     return sentsembs[sent]
 
 
 def cossim(vec1, vec2):
@@ -54,16 +54,16 @@ def predict(lis, id):
     # probs = [dict()] * class_number
     probs = defaultdict(list)
 
-    if history in models[order - 1].keys():
+    if history in models[order].keys():
         for clas in sent_classes.cluster_centers_:
             p_goal = cossim(sifembed(mydata.titles_test[id]), clas)
-            for t in models[order - 1][history].keys():
-                goals = models[order - 1][history][t][1]
+            for t in models[order][history].keys():
+                goals = models[order][history][t][1]
                 summs = 0
                 for g in goals:
                     numerator = len([i for i in goals if i == g])
                     denum = len([i for i in list(
-                        itertools.chain(*[models[order - 1][history][i][1] for i in models[order - 1][history].keys()]))
+                        itertools.chain(*[models[order][history][i][1] for i in models[order][history].keys()]))
                                  if i == g])
                     # print('denum:', denum, 'num:', numerator)
                     summs += (numerator / denum) * cossim(sifembed(mydata.titles_train[g]), clas)
@@ -101,7 +101,7 @@ def average_len(l):
     return int(sum(map(len, [i[0] for i in l])) / len(l)) + 1
 
 
-def cluster(sents):
+def cluster(sents, class_number):
     X = []
     for text in sents:
         # sent = ' '.join(text)
@@ -112,28 +112,27 @@ def cluster(sents):
 
 
 def write_result(filename):
-    seeds = [0, 12, 21, 32, 45, 64, 77, 98, 55, 120]
-    for n, seed in enumerate(seeds):
-        global mydata
-        mydata = Data(seed, titles=True)
-        global sifmodel
-        sifmodel = siftrain()
-        global sent_classes
-        sent_classes = cluster(mydata.titles_train)
-        global maxst
-        maxsts = [1,2,3,4,max([len(i) for i in mydata.train])]
-        # maxsts = [1]
-        global models
-        for maxst in maxsts:
-            models = [Chain_withid(mydata.train, i).model for i in range(0, maxst)]
+
+    # for n, seed in enumerate(seeds):
+    global mydata
+    mydata = Data(seed, titles=True)
+    global sifmodel
+    sifmodel = siftrain()
+    global sent_classes
+    global maxst
+    maxsts = [1,2,3,max([len(i) for i in mydata.train])]
+    global models
+    for maxst in maxsts:
+        models = [Chain_withid(mydata.train, i).model for i in range(0, maxst)]
+        for class_number in range(10, 200, 20):
+            sent_classes = cluster(mydata.titles_train, class_number)
             preds, acc = accu_all(mydata.test)
-            print('{}, {}, {}, {}'.format(maxst, seed, class_number, acc))
-            output('{}, {}, {}, {}'.format(maxst, seed, class_number, acc), filename=filename, func='write')
-        # output(accu_list,filename=filename, func='write')
+            print('{}, {}, {}, {}'.format(seed, maxst, class_number, acc))
+            output('{}, {}, {}, {}'.format(seed, maxst, class_number, acc), filename=filename, func='write')
 
 
 if __name__ == '__main__':
-    filename ='/home/nnabizad/code/toolpred/sspace/res/mac/bigram-sif.txt'
-    output('order, seed, class_number, acc', filename=filename, func='write')
-    for class_number in range(10,100,10):
-        write_result(filename)
+    filename ='/home/nnabizad/code/toolpred/sspace/res/mac/sif_target.csv'
+    seed = int(sys.argv[1])
+    print('Training with seed:{}'.format(seed), flush=True)
+    write_result(filename)

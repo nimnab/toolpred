@@ -12,6 +12,8 @@ datapath = '/home/nnabizad/code/toolpred/data/mac/mac_'
 bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/mac/mac_'
 cleaner = re.compile(r'[^\'\w+\.]')
 
+seeds = [5, 896783, 21, 322, 45234]
+
 def save_obj(obj, name):
     """
     Saving the pickle object
