@@ -73,7 +73,7 @@ def lstm_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
               validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
-    return 0
+    return model
 
 def lstm_gru(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     # for seed in seeds:
@@ -111,7 +111,7 @@ def lstm_gru(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
               validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc], class_weight=class_weights)
     # make a prediction
-    return 0
+    return model
 
 
 def lstm_sum_zeroh(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
@@ -149,7 +149,7 @@ def lstm_sum_zeroh(mydata, modelname, seed, hidden_size, dens1_size, dens2_size)
               validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
-    return 0
+    return model
 
 
 def lstm_gru_zeroh(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
@@ -185,7 +185,7 @@ def lstm_gru_zeroh(mydata, modelname, seed, hidden_size, dens1_size, dens2_size)
               validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
-    return 0
+    return model
 
 
 def lstm_contcat(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
@@ -217,7 +217,7 @@ def lstm_contcat(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
               validation_data=([mydata.dtest.titles], mydata.dtest.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
-    return 0
+    return model
 
 def lstm_wem_contcat(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     # for seed in seeds:
@@ -249,7 +249,7 @@ def lstm_wem_contcat(mydata, modelname, seed, hidden_size, dens1_size, dens2_siz
               validation_data=([mydata.dtest.titles], mydata.dtest.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
-    return 0
+    return model
 
 def lstm_wem_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     # for seed in seeds:
@@ -290,7 +290,7 @@ def lstm_wem_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
               validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
-    return 0
+    return model
 
 def dot_(tensors):
     tensors[1] = K.repeat(tensors[1], 147)
@@ -341,7 +341,7 @@ def lstm_gru_mult(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
               validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
-    return 0
+    return model
 
 def lstm_sif(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     # for seed in seeds:
@@ -381,4 +381,4 @@ def lstm_sif(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
               validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
-    return 0
+    return model

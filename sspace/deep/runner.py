@@ -7,14 +7,14 @@ from pandas import DataFrame
 
 def write_result(hidden_size,dens1_size, dens2_size):
 
-    model = lstm_sif
+    model = lstm_contcat
     filename = '/home/nnabizad/code/toolpred/sspace/res/mac/val/{}_{}_{}_{}.txt'.format(model.__name__, hidden_size, dens1_size, dens2_size)
     modelname = '/hri/localdisk/nnabizad/models/mac/w{}_h{}_d{}_d{}'.format(model.__name__, hidden_size, dens1_size, dens2_size)+ '_s{}'
     seeds = [15 , 896783 , 9 , 12 , 45234]
     accu_list = []
     global mydata
     for seed in seeds:
-        mydata = Data(seed, deep=True, title=True, concat=True, toolemb=False, sif=True)
+        mydata = Data(seed, deep=True, title=True, concat=True, toolemb=False, sif=False)
         trained = model(mydata, modelname, seed, hidden_size,  dens1_size, dens2_size)
         # saved_model = load_model(modelname.format(seed))
         accu = trained.evaluate([mydata.dtest.input, mydata.dtest.titles], mydata.dtest.target)[1]
