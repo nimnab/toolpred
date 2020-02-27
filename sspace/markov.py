@@ -68,7 +68,8 @@ def write_result(filename):
 
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/markov.csv'
+    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/val/markov.csv'
     seed = int(sys.argv[1])
     print('Training with seed:{}'.format(seed), flush=True)
     write_result(filename)
+    sys.exit()

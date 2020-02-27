@@ -68,13 +68,13 @@ def write_result(filename):
     mydata = Data(seed, title=True)
     prediction = 0
     global maxst
-    maxngram = max([len(i) for i in mydata.titles_train])
+    maxngram = max([len(i) for i in mydata.titles_train]+ [len(i) for i in mydata.titles_test])
     maxsts = [1,2,3,4,5,max([len(i) for i in mydata.train])]
     global models
     global landa
     for maxst in maxsts:
         models = [Chain_withid(mydata.train, i).model for i in range(0,maxst)]
-        for mu in np.arange(1, 11):
+        for mu in np.arange(1, 15):
             for sigma in [0.001, 0.1, 0,5, 1, 5, 10]:
                 landa = np.random.normal(mu, sigma, maxngram)
                 preds , acc = accu_all(mydata.test)
@@ -82,8 +82,9 @@ def write_result(filename):
                 output('{}, {},  {}, {}. {}'.format(seed, maxst,  mu, sigma, acc),filename=filename, func='write')
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/markov_target.csv'
+    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/val/markov_target.csv'
     seed = int(sys.argv[1])
     print('Training with seed:{}'.format(seed), flush=True)
     write_result(filename)
+    sys.exit()
 

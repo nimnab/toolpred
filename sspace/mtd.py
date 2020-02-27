@@ -110,7 +110,7 @@ class TestData():
         self.test = [[0,1,2,4,5]]
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/mtd15.csv'
+    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/val/mtd.csv'
     seed = int(sys.argv[1])
     # seed = 15
     print('Training with seed:{}'.format(seed), flush=True)
@@ -137,10 +137,11 @@ if __name__ == '__main__':
         if accu < maxaccu and it > 20:
             accu_list.append(maxaccu)
             break
-        for order, val in enumerate(landamat):
-            file.write('{} , {} , {}'.format(order, it, val))
-            file.write('\n')
-        # for val in landamat:
-        #     file.write(', ' + str(val))
+        file.write('seed: {}, iteration: {} ,accuracy{}'.format(seed, it, accu))
         file.write('\n')
+        # for order, val in enumerate(landamat):
+        #     file.write('{} , {} , {}'.format(order, it, val))
+        #     file.write('\n')
+    file.write('seed{} ,MAX{}'.format(seed, maxaccu))
+    file.write('\n')
     file.close()

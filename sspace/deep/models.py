@@ -28,11 +28,11 @@ def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     mc = ModelCheckpoint(modelname.format(seed), monitor='val_categorical_accuracy', mode='max', verbose=1,
                          save_best_only=True)
     model.fit(mydata.dtrain.input, mydata.dtrain.target,
-              validation_data=(mydata.dtest.input, mydata.dtest.target),
+              validation_data=(mydata.dval.input, mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
     # np.concatenate(mydata.dtest.input, axis=0)
-    return 0
+    return model
 
 
 def lstm_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
@@ -70,7 +70,7 @@ def lstm_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
                          verbose=1, save_best_only=True)
 
     model.fit([mydata.dtrain.input, mydata.dtrain.titles], mydata.dtrain.target,
-              validation_data=([mydata.dtest.input, mydata.dtest.titles], mydata.dtest.target),
+              validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
     return 0
@@ -108,7 +108,7 @@ def lstm_gru(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
                          verbose=1, save_best_only=True)
 
     model.fit([mydata.dtrain.input, mydata.dtrain.titles], mydata.dtrain.target,
-              validation_data=([mydata.dtest.input, mydata.dtest.titles], mydata.dtest.target),
+              validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc], class_weight=class_weights)
     # make a prediction
     return 0
@@ -146,7 +146,7 @@ def lstm_sum_zeroh(mydata, modelname, seed, hidden_size, dens1_size, dens2_size)
                          verbose=1, save_best_only=True)
 
     model.fit([mydata.dtrain.input, mydata.dtrain.titles], mydata.dtrain.target,
-              validation_data=([mydata.dtest.input, mydata.dtest.titles], mydata.dtest.target),
+              validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
     return 0
@@ -182,7 +182,7 @@ def lstm_gru_zeroh(mydata, modelname, seed, hidden_size, dens1_size, dens2_size)
                          verbose=1, save_best_only=True)
 
     model.fit([mydata.dtrain.input, mydata.dtrain.titles], mydata.dtrain.target,
-              validation_data=([mydata.dtest.input, mydata.dtest.titles], mydata.dtest.target),
+              validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
     return 0
@@ -287,7 +287,7 @@ def lstm_wem_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
                          verbose=1, save_best_only=True)
 
     model.fit([mydata.dtrain.input, mydata.dtrain.titles], mydata.dtrain.target,
-              validation_data=([mydata.dtest.input, mydata.dtest.titles], mydata.dtest.target),
+              validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
     return 0
@@ -338,7 +338,7 @@ def lstm_gru_mult(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
                          verbose=1, save_best_only=True)
 
     model.fit([mydata.dtrain.input, mydata.dtrain.titles], mydata.dtrain.target,
-              validation_data=([mydata.dtest.input, mydata.dtest.titles], mydata.dtest.target),
+              validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
     return 0
@@ -378,7 +378,7 @@ def lstm_sif(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
                          verbose=1, save_best_only=True)
 
     model.fit([mydata.dtrain.input, mydata.dtrain.titles], mydata.dtrain.target,
-              validation_data=([mydata.dtest.input, mydata.dtest.titles], mydata.dtest.target),
+              validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
     return 0

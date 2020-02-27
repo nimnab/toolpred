@@ -133,7 +133,7 @@ def write_result(filename):
 
 
 if __name__ == '__main__':
-    filename ='/home/nnabizad/code/toolpred/sspace/res/mac/sif_target.csv'
+    filename ='/home/nnabizad/code/toolpred/sspace/res/mac/val/sif_target.csv'
     seed = int(sys.argv[1])
     class_number = int(sys.argv[2])
     # seed = 15
