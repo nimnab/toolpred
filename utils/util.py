@@ -1,6 +1,6 @@
 import numpy as np
 import pickle as pk
-# from nltk.util import ngrams
+from nltk.util import ngrams
 import scipy.stats
 import sys
 

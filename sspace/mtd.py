@@ -110,11 +110,11 @@ class TestData():
         self.test = [[0,1,2,4,5]]
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/val/mtd.csv'
+    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/val/emtd.csv'
     seed = int(sys.argv[1])
     # seed = 15
     print('Training with seed:{}'.format(seed), flush=True)
-    mydata = Data(seed, encod=True)
+    mydata = Data(seed, encod=True, extracted=True)
     vocablen = len(mydata.decodedic)
     emitr = 100
     alpha = 1e-5

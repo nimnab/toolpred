@@ -44,13 +44,14 @@ def predict(lis, id):
 
 def accu_all(test):
     corr = total = 0
+    global prediction
     preds = []
     for id, manual in enumerate(test):
         # print(id)
         tmppred = []
         oldtool = [1]
         for tool in manual[1:]:
-            p1 = predict(oldtool, id)
+            prediction = predict(oldtool, id)
             total += 1
             if prediction == tool:
                 corr +=1
@@ -65,7 +66,7 @@ def average_len(l):
 
 def write_result(filename):
     global mydata
-    mydata = Data(seed, title=True)
+    mydata = Data(seed, title=True, extracted=True)
     prediction = 0
     global maxst
     maxngram = max([len(i) for i in mydata.titles_train]+ [len(i) for i in mydata.titles_test])
@@ -82,7 +83,7 @@ def write_result(filename):
                 output('{}, {},  {}, {}. {}'.format(seed, maxst,  mu, sigma, acc),filename=filename, func='write')
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/val/markov_target.csv'
+    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/val/emarkov_target.csv'
     seed = int(sys.argv[1])
     print('Training with seed:{}'.format(seed), flush=True)
     write_result(filename)

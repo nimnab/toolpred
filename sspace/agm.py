@@ -87,7 +87,7 @@ def accu_all(test):
         tmppred = []
         oldtool = [1]
         for tool in manual[1:]:
-            p1 = predict(oldtool, id)
+            prediction = predict(oldtool, id)
             total += 1
             if prediction == tool:
                 corr += 1
