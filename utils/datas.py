@@ -8,7 +8,10 @@ from gensim.models.keyedvectors import KeyedVectors
 from keras.preprocessing import sequence
 from keras.utils import np_utils
 from sklearn.model_selection import train_test_split
-#
+
+from flair.embeddings import WordEmbeddings
+from flair.data import Sentence
+
 # from fse.models import SIF
 # from fse import IndexedList
 
@@ -153,28 +156,40 @@ class Mydata():
 
 
 class Data:
-    def __init__(self, seed, encod=False, deep=False, toolemb=False, title=False, concat=False, sif=False):
+    def __init__(self, seed, encod=False, deep=False, toolemb=False, title=False, concat=False, sif=False, extracted = False):
         train_ratio = 0.7
         validation_ratio = 0.1
         test_ratio = 0.2
+        suffix = ''
+        if extracted:
+            suffix = '_extracted'
+            goldlist = load_obj(datapath + 'encoded_tools')
         if encod:
-            biglis, self.encodedic, self.decodedic = encode(datapath + 'tools')
+            biglis, self.encodedic, self.decodedic = encode(datapath + 'tools'+suffix)
         else:
-            biglis = load_obj(datapath + 'encoded_tools')
+            biglis = load_obj(datapath + 'encoded_tools'+suffix)
             self.encodedic = load_obj(datapath + 'encodedic')
             self.decodedic = load_obj(datapath + 'decodedic')
         class_numbers = max([i for x in biglis for i in x]) + 1
         maximum_lengh = max([len(x) for x in biglis])
         emb_dim = 100
         re_stripper = re.compile('[^\w+\/\.-]')
-        self.train, self.test = train_test_split(biglis, test_size=test_ratio, random_state=seed)
+
+        self.train, self.test = train_test_split(biglis, test_size=1 - train_ratio, random_state=seed)
+
+        if extracted:
+            _, self.test = train_test_split(goldlist, test_size=1 - train_ratio, random_state=seed)
+
         titles_test = titles_train = titles_val = None
         if title:
             cats = load_obj(datapath + 'cats')
             titles = [cat[0] for cat in cats]
             titles = [re.split('[, \!?:]+', i) for i in titles]
             titles = [[re_stripper.sub('', a).lower() for a in i] for i in titles]
-            self.titles_train, self.titles_test = train_test_split(titles, test_size=test_ratio, random_state=seed)
+            self.titles_train, self.titles_test = train_test_split(titles, test_size=1 - train_ratio, random_state=seed)
+            # self.titles_test, self.titles_val = train_test_split(titles_test,
+            #                                            test_size=test_ratio / (test_ratio + validation_ratio),
+            #                                            random_state=seed)
             if deep:
                 if sif:
                     titles_pad = []
@@ -190,7 +205,7 @@ class Data:
                         # embedding = WordEmbeddings('glove')
                         embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/glove100_word2vec1')
                         # embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/myword2vec_300')
-                        stitles = [Sentence(i) for i in titles]
+                        stitles = [Sentence(' '.join(i)) for i in titles]
                         max_titles_len = max([len(i) for i in stitles])
                         titles = [embedding.embed(i) for i in stitles]
                         titles_emb = [[np.asarray(i.embedding) for i in sent[0]] for sent in titles]
@@ -198,47 +213,55 @@ class Data:
                             [np.vstack((i, np.zeros([max_titles_len - len(i), emb_dim]))) for i in titles_emb])
                         np.save(bigdatapath + 'myglove', titles_pad)
                         print('file saved')
-                titles_train, titles_test = train_test_split(titles_pad, test_size=1 - train_ratio, random_state=seed)
-                titles_test, titles_val = train_test_split(titles_test,
-                                                            test_size=test_ratio / (test_ratio + validation_ratio),
-                                                            random_state=seed)
+                titles_train, titles_test_ = train_test_split(titles_pad, test_size=1 - train_ratio, random_state=seed)
+                titles_val, titles_test = train_test_split(titles_test_,
+                                                           test_size=test_ratio / (test_ratio + validation_ratio),
+                                                           random_state=seed)
         if deep:
             if toolemb:
                 tool_embeding = load_obj(bigdatapath + 'tool_embedding')
                 data = [[tool_embeding[i] for i in man[:-1]] for man in biglis]
-                # testx = [[tool_embeding[i] for i in man[:-1]] for man in self.test]
                 data_final = np.asarray(
                     [np.vstack((i, np.zeros([maximum_lengh - len(i), emb_dim]))) for i in data])
-                # testx_final = np.asarray(
-                #     [np.vstack((i, np.zeros([maximum_lengh - len(i), emb_dim]))) for i in testx])
             else:
                 data = sequence.pad_sequences([i[:-1] for i in biglis], maxlen=maximum_lengh, padding='post')
-                # testx = sequence.pad_sequences([i[:-1] for i in self.test], maxlen=maximum_lengh, padding='post')
                 data_final = np_utils.to_categorical(data, num_classes=class_numbers)
                 data_final[:, :, 0] = 0
-                # data_final = np.expand_dims(data_final, 3)
-                # testx_final = np_utils.to_categorical(testx, num_classes=class_numbers)
-                # testx_final[:, :, 0] = 0
-                # testx_final = np.expand_dims(testx_final, 3)
 
-            trainx_final, testx_final = train_test_split(data_final, test_size=1 - train_ratio, random_state=seed)
-            testx_final, valx_final = train_test_split(testx_final,
-                                                        test_size=test_ratio / (test_ratio + validation_ratio),
-                                                        random_state=seed)
+
+            trainx_final, testx_ = train_test_split(data_final, test_size=1 - train_ratio, random_state=seed)
+            valx_final, testx_final = train_test_split(testx_,
+                                                       test_size=test_ratio / (test_ratio + validation_ratio),
+                                                       random_state=seed)
+            if extracted:
+                # _, otestx = train_test_split(goldlist, test_size=1 - train_ratio, random_state=seed)
+                testx = sequence.pad_sequences([i[:-1] for i in self.test], maxlen=maximum_lengh, padding='post')
+                testx = np_utils.to_categorical(testx, num_classes=class_numbers)
+                testx[:, :, 0] = 0
+                valx_final, testx_final = train_test_split(testx,
+                                                           test_size=test_ratio / (test_ratio + validation_ratio),
+                                                           random_state=seed)
+
+
 
 
             labels = self.lable_create(biglis)
-            # test_labs = self.lable_create(self.test)
             labels_padded = sequence.pad_sequences(labels, maxlen=maximum_lengh, padding='post')
-            # testy = sequence.pad_sequences(test_labs, maxlen=maximum_lengh, padding='post')
             labels_onehot = np_utils.to_categorical(labels_padded, num_classes=class_numbers)
             labels_onehot[:, :, 0] = 0
-            # testy_onehot = np_utils.to_categorical(testy, num_classes=class_numbers)
-            # testy_onehot[:, :, 0] = 0
-            trainy_final, testy_final = train_test_split(labels_onehot, test_size=1 - train_ratio, random_state=seed)
-            testy_final, valy_final = train_test_split(testy_final,
-                                                        test_size=test_ratio / (test_ratio + validation_ratio),
-                                                        random_state=seed)
+            trainy_final, testy = train_test_split(labels_onehot, test_size=1 - train_ratio, random_state=seed)
+            valy_final ,testy_final = train_test_split(testy,
+                                                       test_size=test_ratio / (test_ratio + validation_ratio),
+                                                       random_state=seed)
+            if extracted:
+                testlabels = self.lable_create(self.test)
+                test_labels_padded = sequence.pad_sequences(testlabels, maxlen=maximum_lengh, padding='post')
+                test_labels_onehot = np_utils.to_categorical(test_labels_padded, num_classes=class_numbers)
+                test_labels_onehot[:, :, 0] = 0
+                valy_final, testy_final = train_test_split(test_labels_onehot,
+                                                           test_size=test_ratio / (test_ratio + validation_ratio),
+                                                           random_state=seed)
+
 
             if concat and title:
                 title_ = np.repeat(np.expand_dims(np.sum(titles_pad, axis=1), 1), maximum_lengh, axis=1)
@@ -250,9 +273,9 @@ class Data:
                 # test_lens = np.sum(np.sign(np.max(np.abs(testx_final), 2)), 1)
                 # for i in range(len(titles_test)): titles_test[i][int(test_lens[i]):] = 0
                 titles_train, titles_test = train_test_split(title_concat, test_size=1 - train_ratio, random_state=seed)
-                titles_test, titles_val = train_test_split(titles_test,
-                                                            test_size=test_ratio / (test_ratio + validation_ratio),
-                                                            random_state=seed)
+                titles_val, titles_test = train_test_split(titles_test,
+                                                           test_size=test_ratio / (test_ratio + validation_ratio),
+                                                           random_state=seed)
 
             self.dtrain = Mydata(trainx_final, trainy_final, titles_train)
             self.dtest = Mydata(testx_final, testy_final, titles_test)
@@ -270,5 +293,5 @@ if __name__ == '__main__':
     address = datapath + 'tools'
     encode(address)
 
-    mydata = Data(0, deep=False, toolemb=False, titles=False, concat=False)
-    t = Topicmodel(0)
+    mydata = Data(0, deep=True, toolemb=False, title=True, concat=False)
+    # t = Topicmodel(0)

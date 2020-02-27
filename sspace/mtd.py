@@ -145,3 +145,4 @@ if __name__ == '__main__':
     file.write('seed{} ,MAX{}'.format(seed, maxaccu))
     file.write('\n')
     file.close()
+    sys.exit()

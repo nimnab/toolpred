@@ -139,3 +139,4 @@ if __name__ == '__main__':
     # seed = 15
     print('Training with seed:{}, classes {}'.format(seed, class_number), flush=True)
     write_result(filename)
+    sys.exit()
