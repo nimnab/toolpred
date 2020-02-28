@@ -28,13 +28,13 @@ class Markov_wg():
         for maxst in maxsts:
             self.maxst = maxst
             self.models = [Chain_withid(self.mydata.train, i).model for i in range(0, self.maxst)]
-            for mu in np.arange(1, 15):
-                for sigma in [0.001, 0.1, 0, 5, 1, 5, 10]:
-                    self.landa = np.random.normal(mu, sigma, maxngram)
-                    preds, acc = self.accu_all(self.mydata.test)
-                    print('{}, {}, {}, {}. {}'.format(seed, self.maxst, mu, sigma, acc))
-                    output('{}, {},  {}, {}. {}'.format(seed, self.maxst, mu, sigma, acc), filename=filename,
-                           func='write')
+            # for mu in np.arange(1, 10):
+            for sigma in [0.001, 0.1, 0.5 , 5, 10]:
+                self.landa = np.random.normal(mu, sigma, maxngram)
+                preds, acc = self.accu_all(self.mydata.test)
+                print('{}, {}, {}, {}. {}'.format(seed, self.maxst, mu, sigma, acc))
+                output('{}, {},  {}, {}. {}'.format(seed, self.maxst, mu, sigma, acc), filename=filename,
+                       func='write')
         
     # 
     def similarity_score(self,id1, ids):
@@ -87,6 +87,7 @@ def average_len(l):
 if __name__ == '__main__':
     filename = '/home/nnabizad/code/toolpred/res/Emarkov_target.csv'
     seed = int(sys.argv[1])
+    mu = int(sys.argv[2])
     simdic = dict()
     print('Training with seed:{}'.format(seed), flush=True)
     Markov_wg(extracted=True)

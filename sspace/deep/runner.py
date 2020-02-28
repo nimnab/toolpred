@@ -10,15 +10,15 @@ models = [lstm_pred, lstm_sum, lstm_gru, lstm_sif, lstm_sum_zeroh, lstm_contcat]
 
 def write_result(hidden_size, dens1_size, dens2_size):
     model = models[modelindex]
-    filename = '/home/nnabizad/code/toolpred/res/{}_{}_{}_{}.txt'.format(model.__name__, hidden_size,
+    filename = '/home/nnabizad/code/toolpred/res/E{}_{}_{}_{}.txt'.format(model.__name__, hidden_size,
                                                                                 dens1_size, dens2_size)
-    modelname = '/hri/localdisk/nnabizad/models/mac/{}_h{}_d{}_d{}'.format(model.__name__, hidden_size, dens1_size,
+    modelname = '/hri/localdisk/nnabizad/models/mac/E{}_h{}_d{}_d{}'.format(model.__name__, hidden_size, dens1_size,
                                                                            dens2_size) + '_s{}'
     seeds = [15, 896783, 9, 12, 45234]
     accu_list = []
     global mydata
     for seed in seeds:
-        mydata = Data(seed, deep=True, title=True, concat=(modelindex == 5), sif=(modelindex == 3))
+        mydata = Data(seed, deep=True, title=True, concat=(modelindex == 5), sif=(modelindex == 3), extracted=True)
         inputs = [mydata.dtest.input, [mydata.dtest.input, mydata.dtest.titles],
                   [mydata.dtest.input, mydata.dtest.titles], [mydata.dtest.input, mydata.dtest.titles],
                   [mydata.dtest.input, mydata.dtest.titles], [mydata.dtest.titles]]
@@ -36,9 +36,9 @@ def write_result(hidden_size, dens1_size, dens2_size):
 
 
 if __name__ == '__main__':
-    hidden_size = 1000
-    dens1_size = 100
-    dens2_size = 1000
+    hidden_size = 100
+    dens1_size = 50
+    dens2_size = 200
     modelindex = int(sys.argv[1])
     file = write_result(hidden_size, dens1_size, dens2_size)
     # upload(file)

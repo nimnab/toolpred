@@ -1,6 +1,6 @@
 import itertools
 import numpy as np
-from chain import Chain_withid
+from .chain import Chain_withid
 from gensim import matutils
 import sys
 from sklearn.cluster import KMeans
@@ -169,5 +169,5 @@ if __name__ == '__main__':
     class_number = int(sys.argv[2])
     # seed = 15
     print('Training with seed:{}, classes {}'.format(seed, class_number), flush=True)
-    AGM(extracted = True)
+    AGM(extracted = False)
     sys.exit()

@@ -8,7 +8,7 @@ filename=$1
 # tags=$*
 
  
-seeds=(2 3 4)
+seeds=(0 1 2 3 4 5)
  
 
 for j in "${seeds[@]}"
