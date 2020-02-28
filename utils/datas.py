@@ -12,8 +12,8 @@ from sklearn.model_selection import train_test_split
 from flair.embeddings import WordEmbeddings
 from flair.data import Sentence
 
-from fse.models import SIF
-from fse import IndexedList
+# from fse.models import SIF
+# from fse import IndexedList
 
 # datapath = '/hri/localdisk/nnabizad/toolpred/data/'
 datapath = '/home/nnabizad/code/toolpred/data/mac/mac_'

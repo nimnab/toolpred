@@ -17,11 +17,10 @@ datapath = '/hri/localdisk/nnabizad/toolpreddata/'
 
 
 class Markov_wg():
-    def __init__(self):
-        self.mydata = Data(seed, title=True, extracted=True)
+    def __init__(self, extracted):
+        self.mydata = Data(seed, title=True, extracted=extracted)
         maxngram = max([len(i) for i in self.mydata.titles_train] + [len(i) for i in self.mydata.titles_test])
         maxsts = [1, 2, 3, 4, 5, max([len(i) for i in self.mydata.train])]
-        self.simdic = dict()
         self.write_result(maxsts,maxngram)
         
         
@@ -41,10 +40,10 @@ class Markov_wg():
     def similarity_score(self,id1, ids):
         score = 0
         for id in ids:
-            if (' ' .join(self.mydata.titles_test[id1]),' '.join(self.mydata.titles_train[id]), ' '.join(str(i) for i in self.landa)) not in self.simdic:
+            if (' ' .join(self.mydata.titles_test[id1]),' '.join(self.mydata.titles_train[id]), ' '.join(str(i) for i in self.landa)) not in simdic:
                 sim =  ngram_simscore(self.mydata.titles_test[id1], self.mydata.titles_train[id], landa=self.landa)
-                self.simdic[(' ' .join(self.mydata.titles_test[id1]),' '.join(self.mydata.titles_train[id]), ' '.join(str(i) for i in self.landa))] = sim
-            score += self.simdic[(' ' .join(self.mydata.titles_test[id1]),' '.join(self.mydata.titles_train[id]), ' '.join(str(i) for i in self.landa))]
+                simdic[(' ' .join(self.mydata.titles_test[id1]),' '.join(self.mydata.titles_train[id]), ' '.join(str(i) for i in self.landa))] = sim
+            score += simdic[(' ' .join(self.mydata.titles_test[id1]),' '.join(self.mydata.titles_train[id]), ' '.join(str(i) for i in self.landa))]
         # print(score/len(ids))
         return score/len(ids)
     
@@ -86,9 +85,10 @@ def average_len(l):
   return int(sum(map(len, [i[0] for i in l]))/len(l))+1
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/val/emarkov_target.csv'
+    filename = '/home/nnabizad/code/toolpred/res/Emarkov_target.csv'
     seed = int(sys.argv[1])
+    simdic = dict()
     print('Training with seed:{}'.format(seed), flush=True)
-    Markov_wg()
+    Markov_wg(extracted=True)
     sys.exit()
 

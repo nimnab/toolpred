@@ -17,126 +17,129 @@ sentsembs = dict()
 # simdic = load_obj(datapath + 'ngram-similarities')
 simdic = dict()
 
-
-def sifembed(text):
-    sent = ' '.join(text)
-    if sent not in sentsembs:
-        sentsembs[sent] = sifmodel.infer([(text,0)])[0]
-    return sentsembs[sent]
-
-
-
-def siftrain():
-    glove = KeyedVectors.load("/hri/localdisk/nnabizad/w2v/glove100_word2vec1")
-    model = SIF(glove, workers=1, lang_freq="en")
-    sentences = IndexedList(mydata.titles_train)
-    model.train(sentences)
-    return model
-
-#
-# def embed(text):
-#     sent = ' '.join(text)
-#     if sent not in sentsembs:
-#         sentsembs[sent] = sentence_embedding(sent)
-#     return sentsembs[sent]
-
-
 def cossim(vec1, vec2):
     sim = np.dot(matutils.unitvec(vec1), np.transpose(matutils.unitvec(vec2)))
     return sim
-
-
-def predict(lis, id):
-    # print('##########',lis)
-    global prediction
-    history = tuple(lis)
-    order = (maxst - 1) if len(lis) > (maxst - 1) else len(lis)
-    # probs = [dict()] * class_number
-    probs = defaultdict(list)
-
-    if history in models[order].keys():
-        for clas in sent_classes.cluster_centers_:
-            p_goal = cossim(sifembed(mydata.titles_test[id]), clas)
-            for t in models[order][history].keys():
-                goals = models[order][history][t][1]
-                summs = 0
-                for g in goals:
-                    numerator = len([i for i in goals if i == g])
-                    denum = len([i for i in list(
-                        itertools.chain(*[models[order][history][i][1] for i in models[order][history].keys()]))
-                                 if i == g])
-                    # print('denum:', denum, 'num:', numerator)
-                    summs += (numerator / denum) * cossim(sifembed(mydata.titles_train[g]), clas)
-                probs[t].append(summs * p_goal)
-
-        sumvals = {i: sum(probs[i]) for i in probs.keys()}
-        prediction = max(sumvals, key=sumvals.get)
-        return prediction
-
-    elif len(lis) > 0:
-        lis2 = lis[1:]
-        predict(lis2, id)
-    else:
-        return -1
-
-def accu_all(test):
-    corr = total = 0
-    preds = []
-    for id, manual in enumerate(test):
-        # print(id)
-        tmppred = []
-        oldtool = [1]
-        for tool in manual[1:]:
-            prediction = predict(oldtool, id)
-            total += 1
-            if prediction == tool:
-                corr += 1
-            oldtool.append(tool)
-            tmppred.append(prediction)
-        preds.append(tmppred)
-    return preds, (corr) / (total)
 
 
 def average_len(l):
     return int(sum(map(len, [i[0] for i in l])) / len(l)) + 1
 
 
-def cluster(sents, class_number):
-    X = []
-    for text in sents:
-        # sent = ' '.join(text)
-        X.append(sifembed(text))
-    km = KMeans(n_clusters=class_number, init='k-means++', random_state=0)
-    kmeans = km.fit(X)
-    return kmeans
+class Mittul():
+    def __init__(self, extracted):
+        self.mydata = Data(seed, title=True, extracted=extracted)
+        self.sifmodel = self.siftrain()
+        self.sent_classes = self.cluster(self.mydata.titles_train, class_number)
+        self.write_result()
 
+    def write_result(self):
+        model = Chain_withid(self.mydata.train, 1)
+        self.bigram, self.unigrams = self.creat_table(model)
+        preds, acc = self.accu_all(self.mydata.test)
+        print('{}, {}, {}, {}'.format(seed, class_number, self.maxst, acc))
+        output('{}, {}, {}, {}'.format(seed, class_number, self.maxst, acc), filename=filename, func='write')
 
-def write_result(filename):
+    def predict(self, lis, id):
+        probs = dict()
+        for t in self.mydata.encodedic:
+            sum = 0
+            for clas in range(class_number):
+                first = self.unigrams[clas][lis[0]-1]
+                for i in range(len(lis)):
+                    first *= self.bigram[clas][lis[i]-1][t-1]
+                second = cossim(self.sifembed(self.mydata.titles_test[id]), self.sent_classes.cluster_centers_[clas])
+                sum += (first*second)
+            probs[t]= sum
 
-    # for n, seed in enumerate(seeds):
-    global mydata
-    mydata = Data(seed, title=True, extracted=True)
-    global sifmodel
-    sifmodel = siftrain()
-    global sent_classes
-    global maxst
-    maxsts = [1,2,3,4, 5, max([len(i) for i in mydata.train])]
-    global models
-    # for class_number in range(10, 200, 20):
-    # for maxst in maxsts:
-    models = [Chain_withid(mydata.train, i).model for i in range(0, 1)]
-# for class_number in range(10, 200, 20):
-    sent_classes = cluster(mydata.titles_train, class_number)
-    preds, acc = accu_all(mydata.test)
-    print('{}, {}, {}, {}'.format(seed,class_number, maxst, acc))
-    output('{}, {}, {}, {}'.format(seed,class_number, maxst, acc), filename=filename, func='write')
+        self.prediction = max(probs, key=probs.get)
+        return self.prediction
+
+    def accu_all(self, test):
+        corr = total = 0
+        preds = []
+        for id, manual in enumerate(test):
+            # print(id)
+            tmppred = []
+            oldtool = [1]
+            for tool in manual[1:]:
+                self.predict(oldtool, id)
+                total += 1
+                if self.prediction == tool:
+                    corr += 1
+                oldtool.append(tool)
+                tmppred.append(self.prediction)
+            preds.append(tmppred)
+        return preds, (corr) / (total)
+
+    def creat_table(self, model):
+        bigrams = np.zeros([class_number, len(self.mydata.encodedic), len(self.mydata.encodedic)])
+        unigrams = np.zeros([class_number,len(self.mydata.encodedic)])
+        for t in model.titles:
+            ids = model.titles[t]
+            for id in ids:
+                title = self.sifembed(self.mydata.titles_train[id])
+                p = self.sent_classes.predict(title.reshape(1, -1))[0]
+                unigrams[p][t-1] += 1
+        for clas in range(class_number):
+            unigrams[clas] = self.smooth(unigrams[clas])
+
+        for t1 in model.model:
+            for t2 in model.model[t1]:
+                ids = model.model[t1][t2][1]
+                for id in ids:
+                    title = self.sifembed(self.mydata.titles_train[id])
+                    p = self.sent_classes.predict(title.reshape(1, -1))[0]
+                    bigrams[p, t1[0]-1, t2-1] +=1
+
+        for clas in range(class_number):
+            for t in range(len(bigrams[clas])):
+                bigrams[clas][t] = self.smooth(bigrams[clas][t])
+        print()
+        return  bigrams, unigrams
+    
+    def smooth(self, lis):
+        su = sum(lis)
+        if su != 0:
+            nonzeros = np.count_nonzero(lis)
+            zeros = len(lis) - nonzeros
+            if zeros > 0:
+                for i in range(len(lis)):
+                    if lis[i] == 0:
+                        lis[i] = ((alpha * nonzeros) / zeros) / su
+                    else:
+                        lis[i] = (lis[i] - alpha) / su
+        else:
+            lis = 1 / len(lis)
+        return lis
+
+    def sifembed(self, text):
+        sent = ' '.join(text)
+        if sent not in sentsembs:
+            sentsembs[sent] = self.sifmodel.infer([(text, 0)])[0]
+        return sentsembs[sent]
+
+    def siftrain(self):
+        glove = KeyedVectors.load("/hri/localdisk/nnabizad/w2v/glove100_word2vec1")
+        model = SIF(glove, workers=1, lang_freq="en")
+        sentences = IndexedList(self.mydata.titles_train)
+        model.train(sentences)
+        return model
+
+    def cluster(self, sents, class_number):
+        X = []
+        for text in sents:
+            X.append(self.sifembed(text))
+        km = KMeans(n_clusters=class_number, init='k-means++', random_state=0)
+        kmeans = km.fit(X)
+        return kmeans
 
 
 if __name__ == '__main__':
-    filename ='/home/nnabizad/code/toolpred/sspace/res/mac/val/sif_target.csv'
-    # seed = int(sys.argv[1])
-    class_number = 10
-    seed = 15
+    filename = '/home/nnabizad/code/toolpred/sspace/res/mittul.csv'
+    seed = int(sys.argv[1])
+    class_number = int(sys.argv[2])
+    alpha = 1e-5
     print('Training with seed:{}, classes {}'.format(seed, class_number), flush=True)
-    write_result(filename)
+    Mittul(extracted=True)
     sys.exit()
