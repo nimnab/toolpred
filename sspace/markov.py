@@ -54,7 +54,7 @@ def write_result(filename):
     # seeds = [0, 12, 21, 32, 45, 64, 77, 98, 55, 120]
     # for n, seed in enumerate(seeds):
     global mydata
-    mydata = Data(seed, title=False, extracted=True)
+    mydata = Data(seed, title=False)
     global maxst
     maxsts = [1,2,3,4,5,max([len(i) for i in mydata.train])]
     global models
@@ -68,7 +68,7 @@ def write_result(filename):
 
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/val/emarkov.csv'
+    filename = '/home/nnabizad/code/toolpred/sspace/res/mac/val/markov.csv'
     seed = int(sys.argv[1])
     print('Training with seed:{}'.format(seed), flush=True)
     write_result(filename)

@@ -57,23 +57,24 @@ def siftrain(data):
     return model
 
 
-def encode(address):
-    min_tool_freq = 1
-    from collections import Counter
+def encode(address, encode=None):
     biglis = load_obj(address)
-    flatlist = []
-    for lis in biglis:
-        [flatlist.append(i) for i in lis]
-    counts = sorted(Counter(flatlist).items(), key=lambda x: x[1], reverse=True)
-    encode = dict()
-    for i, j in enumerate(counts):
-        if j[1] > min_tool_freq:
-            encode[j[0]] = i + 1
     biglisencoded = []
-    morethanmin = len(encode)
-    encode['start'] = 0
-    encode['unknown'] = morethanmin + 1
-    encode['end'] = morethanmin + 2
+    if not encode:
+        min_tool_freq = 1
+        from collections import Counter
+        flatlist = []
+        for lis in biglis:
+            [flatlist.append(i) for i in lis]
+        counts = sorted(Counter(flatlist).items(), key=lambda x: x[1], reverse=True)
+        encode = dict()
+        for i, j in enumerate(counts):
+            if j[1] > min_tool_freq:
+                encode[j[0]] = i + 1
+        morethanmin = len(encode)
+        encode['start'] = 0
+        encode['unknown'] = morethanmin + 1
+        encode['end'] = morethanmin + 2
     decode = {v: k for k, v in encode.items()}
     for lis in biglis:
         _tmp = []
@@ -164,8 +165,11 @@ class Data:
         if extracted:
             suffix = '_extracted'
             goldlist = load_obj(datapath + 'encoded_tools')
+
         if encod:
             biglis, self.encodedic, self.decodedic = encode(datapath + 'tools'+suffix)
+            goldlist, _, _ = encode(datapath + 'tools', self.encodedic)
+
         else:
             biglis = load_obj(datapath + 'encoded_tools'+suffix)
             self.encodedic = load_obj(datapath + 'encodedic')
