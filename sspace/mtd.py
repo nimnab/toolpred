@@ -44,6 +44,9 @@ def initialize():
                             order[i, next_tool]= ((alpha*nozeros)/zeros)/su
                         else:
                             order[i, next_tool] = (order[i, next_tool]-alpha)/su
+                else:
+                    for i in range(vocablen):
+                        order[i,next_tool] /= su
             else:
                 order[:,next_tool] = 1/vocablen
     for k in range(maxorder):

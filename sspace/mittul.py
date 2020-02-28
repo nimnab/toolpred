@@ -1,6 +1,6 @@
 import itertools
 import numpy as np
-from chain import Chain_withid
+from .chain import Chain_withid
 from gensim import matutils
 import sys
 from sklearn.cluster import KMeans
@@ -37,22 +37,22 @@ class Mittul():
         model = Chain_withid(self.mydata.train, 1)
         self.bigram, self.unigrams = self.creat_table(model)
         preds, acc = self.accu_all(self.mydata.test)
-        print('{}, {}, {}, {}'.format(seed, class_number, self.maxst, acc))
-        output('{}, {}, {}, {}'.format(seed, class_number, self.maxst, acc), filename=filename, func='write')
+        print('{}, {}, {}'.format(seed, class_number, acc))
+        output('{}, {}, {}'.format(seed, class_number, acc), filename=filename, func='write')
 
     def predict(self, lis, id):
-        probs = dict()
-        for t in self.mydata.encodedic:
-            sum = 0
-            for clas in range(class_number):
-                first = self.unigrams[clas][lis[0]-1]
-                for i in range(len(lis)):
-                    first *= self.bigram[clas][lis[i]-1][t-1]
-                second = cossim(self.sifembed(self.mydata.titles_test[id]), self.sent_classes.cluster_centers_[clas])
-                sum += (first*second)
-            probs[t]= sum
+        sum = np.zeros([len(self.mydata.decodedic)])
+        for clas in range(class_number):
+            first = self.unigrams[clas][lis[0]-1]
+            for i in range(len(lis)-1):
+                first *= self.bigram[clas][lis[i]-1][lis[i+1]-1]
+            second = cossim(self.sifembed(self.mydata.titles_test[id]), self.sent_classes.cluster_centers_[clas])
+            for t in self.mydata.decodedic:
+                first *= self.bigram[clas][lis[-1]-1][t-1]
+                sum[t-1] += (first*second)
+                # probs[t]= sum
 
-        self.prediction = max(probs, key=probs.get)
+        self.prediction = np.argmax(sum)+1
         return self.prediction
 
     def accu_all(self, test):
@@ -95,7 +95,7 @@ class Mittul():
         for clas in range(class_number):
             for t in range(len(bigrams[clas])):
                 bigrams[clas][t] = self.smooth(bigrams[clas][t])
-        print()
+
         return  bigrams, unigrams
     
     def smooth(self, lis):
@@ -109,8 +109,11 @@ class Mittul():
                         lis[i] = ((alpha * nonzeros) / zeros) / su
                     else:
                         lis[i] = (lis[i] - alpha) / su
+            else:
+                for i in range(len(lis)):
+                    lis[i]/= su
         else:
-            lis = 1 / len(lis)
+            lis = [1 / len(lis) for _ in range(len(lis))]
         return lis
 
     def sifembed(self, text):
@@ -136,10 +139,10 @@ class Mittul():
 
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/sspace/res/mittul.csv'
+    filename = '/home/nnabizad/code/toolpred/res/Emittul.csv'
     seed = int(sys.argv[1])
     class_number = int(sys.argv[2])
-    alpha = 1e-5
+    alpha = 0.001
     print('Training with seed:{}, classes {}'.format(seed, class_number), flush=True)
     Mittul(extracted=True)
     sys.exit()

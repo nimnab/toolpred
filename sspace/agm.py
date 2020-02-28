@@ -73,6 +73,9 @@ class AGM():
         else:
             order -=1
             if history in self.models[order].keys():
+                # csum = np.sum(
+                #     [cossim(self.sifembed(self.mydata.titles_test[id]), self.sent_classes.cluster_centers_[o]) for o in
+                #      range(class_number)])
                 for clas in self.sent_classes.cluster_centers_:
                     p_goal = cossim(self.sifembed(self.mydata.titles_test[id]), clas)
                     for t in self.models[order][history].keys():
