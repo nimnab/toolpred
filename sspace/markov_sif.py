@@ -8,44 +8,47 @@ import numpy as np
 from utils.datas import Data
 from utils.util import ngram_simscore, output
 from .chain import Chain_withid
-
+from gensim import matutils
+import sys
+from gensim.models.keyedvectors import KeyedVectors
+from fse.models import SIF
+from fse import IndexedList
 # from fse import IndexedList
 
 datapath = '/hri/localdisk/nnabizad/toolpreddata/'
+sentsembs = dict()
+
+def cossim(vec1, vec2):
+    sim = np.dot(matutils.unitvec(vec1), np.transpose(matutils.unitvec(vec2)))
+    return sim
 
 
 
-
-class Markov_wg():
-    def __init__(self, extracted):
+class Markov_sif():
+    def __init__(self, extracted, maxst):
         self.mydata = Data(seed, title=True, extracted=extracted)
-        maxngram = max([len(i) for i in self.mydata.titles_train] + [len(i) for i in self.mydata.titles_test])
-        maxsts = [1, 2, 3, 4, 5, max([len(i) for i in self.mydata.train])]
-        self.write_result(maxsts,maxngram)
+        self.sifmodel = self.siftrain()
+        self.write_result(maxst)
 
         
         
-    def write_result(self, maxsts, maxngram):
-        for maxst in maxsts:
-            self.maxst = maxst
-            self.models = [Chain_withid(self.mydata.train, i).model for i in range(0, self.maxst)]
-            # for mu in np.arange(1, 10):
-            for sigma in [0.001, 0.1, 0.5 , 5, 10]:
-                self.landa = np.random.normal(mu, sigma, maxngram)
-                preds, acc = self.accu_all(self.mydata.test)
-                print('{}, {}, {}, {}. {}'.format(seed, self.maxst, mu, sigma, acc))
-                output('{}, {},  {}, {}. {}'.format(seed, self.maxst, mu, sigma, acc), filename=filename,
-                       func='write')
+    def write_result(self, maxst):
+        # for maxst in maxsts:
+        self.maxst = maxst
+        self.models = [Chain_withid(self.mydata.train, i).model for i in range(0, self.maxst)]
+        # for mu in np.arange(1, 10):
+
+        preds, acc = self.accu_all(self.mydata.test)
+        print('{}, {}, {}'.format(seed, self.maxst, acc))
+        output('{}, {}, {}'.format(seed, self.maxst, acc), filename=filename,
+               func='write')
         
     # 
-    def similarity_score(self,id1, ids):
-        score = 0
+    def similarity_score(self,idtest, ids):
+        idsembed =[]
         for id in ids:
-            if (' ' .join(self.mydata.titles_test[id1]),' '.join(self.mydata.titles_train[id]), ' '.join(str(i) for i in self.landa)) not in simdic:
-                sim =  ngram_simscore(self.mydata.titles_test[id1], self.mydata.titles_train[id], landa=self.landa)
-                simdic[(' ' .join(self.mydata.titles_test[id1]),' '.join(self.mydata.titles_train[id]), ' '.join(str(i) for i in self.landa))] = sim
-            score += simdic[(' ' .join(self.mydata.titles_test[id1]),' '.join(self.mydata.titles_train[id]), ' '.join(str(i) for i in self.landa))]
-        # print(score/len(ids))
+            idsembed.append(self.sifembed(self.mydata.titles_train[id]))
+        score = cossim(np.mean(idsembed, axis=0), self.sifembed(self.mydata.titles_test[idtest]))
         return score/len(ids)
     
     
@@ -82,15 +85,27 @@ class Markov_wg():
             preds.append(tmppred)
         return preds , (corr)/(total)
 
-def average_len(l):
-  return int(sum(map(len, [i[0] for i in l]))/len(l))+1
+    def sifembed(self, text):
+        sent = ' '.join(text)
+        if sent not in sentsembs:
+            sentsembs[sent] = self.sifmodel.infer([(text, 0)])[0]
+        return sentsembs[sent]
+
+    def siftrain(self):
+        glove = KeyedVectors.load("/hri/localdisk/nnabizad/w2v/glove100_word2vec1")
+        model = SIF(glove, workers=1, lang_freq="en")
+        sentences = IndexedList(self.mydata.titles_train)
+        model.train(sentences)
+        return model
+
+
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/res/Emarkov_target.csv'
+    filename = '/home/nnabizad/code/toolpred/res/Emarkov_sif.csv'
     seed = int(sys.argv[1])
-    mu = int(sys.argv[2])
+    order = int(sys.argv[1])
     simdic = dict()
     print('Training with seed:{}'.format(seed), flush=True)
-    Markov_wg(extracted=True)
+    Markov_sif(extracted=True, maxst=order)
     sys.exit()
 

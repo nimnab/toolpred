@@ -9,11 +9,11 @@ filename=$1
 
  
 seeds=(15 896783 9 12 45234)
-classes=(10 50 100 150 200 300 500)
+orders=(62 5 4 3 2 1)
 
 
 
-for c in "${classes[@]}"
+for c in "${orders[@]}"
 do
 	for j in "${seeds[@]}"
 	do

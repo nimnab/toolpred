@@ -191,9 +191,7 @@ class Data:
             titles = [re.split('[, \!?:]+', i) for i in titles]
             titles = [[re_stripper.sub('', a).lower() for a in i] for i in titles]
             self.titles_train, self.titles_test = train_test_split(titles, test_size=1 - train_ratio, random_state=seed)
-            # self.titles_test, self.titles_val = train_test_split(titles_test,
-            #                                            test_size=test_ratio / (test_ratio + validation_ratio),
-            #                                            random_state=seed)
+
             if deep:
                 if sif:
                     titles_pad = []
