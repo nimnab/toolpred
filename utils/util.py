@@ -1,6 +1,6 @@
 import numpy as np
 import pickle as pk
-from nltk.util import ngrams
+# from nltk.util import ngrams
 import scipy.stats
 import sys
 
@@ -15,10 +15,7 @@ def load_obj(name):
     with open(name + '.pkl', 'rb') as f:
         return pk.load(f)
 
-def randinsert(lis,randomportion = 0.2):
-    for _ in range(int(len(lis)*randomportion)):
-        lis.insert(random.randint(0,len(lis)), random.choice(lis))
-    return lis
+
 
 pth = '/hri/localdisk/nnabizad/'
 def output(input, filename = pth + "corpus.txt", func = print , nonewline=False):
@@ -63,7 +60,7 @@ def upload(file):
 
 dicscores = dict()
 
-def ngram_simscore(text1, text2, landa):
+def ngram_simscore(text1, text2, landa=None):
     n = max(len(text1), len(text2))
     score = 0
     for i in range(n):
@@ -78,7 +75,7 @@ def ngram_simscore(text1, text2, landa):
         else:
             seq2tupes = get_tuples_nosentences(text2, i + 1)
             dicscores[(' '.join(text2), i + 1)] = seq2tupes
-        score += ((landa[i])*(len(seq1tupes & seq2tupes)))
+        score += np.exp(i+1)*(len(seq1tupes & seq2tupes))
     return score
 
 def goal_simscore(tups, text2):

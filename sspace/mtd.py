@@ -26,11 +26,11 @@ def prior(data, mat):
 def initialize():
     # random initialization
     mmat = np.zeros([maxorder, vocablen, vocablen])
-    # mmat = np.random.rand(maxorder, vocablen, vocablen)
+    mmat = np.random.rand(maxorder, vocablen, vocablen)
     landamat = [1 / maxorder] * maxorder
     phimat = np.empty([maxorder, vocablen, vocablen])
 
-    mmat = prior(mydata.train, mmat)
+    # mmat = prior(mydata.train, mmat)
 
     for order in mmat:
         for next_tool in range(len(order)):
@@ -113,14 +113,14 @@ class TestData():
         self.test = [[0,1,2,4,5]]
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/res/Emtd15.csv'
+    filename = '/home/nnabizad/code/toolpred/res/final/mtd_noprior.csv'
     seed = int(sys.argv[1])
     # seed = 15
     print('Training with seed:{}'.format(seed), flush=True)
-    mydata = Data(seed, encod=True, extracted=True)
+    mydata = Data(seed, encod=True, extracted=False)
     vocablen = len(mydata.decodedic)
     emitr = 100
-    alpha = 1e-5
+    alpha = 1e-2
     file = open(filename, 'a')
     # for maxorder in range(2,11):
     maxorder = 10
@@ -137,15 +137,15 @@ if __name__ == '__main__':
         if accu > maxaccu:
             maxaccu = accu
             maxlanda = landamat
-        if accu < maxaccu and it > 20:
+        if accu < maxaccu and it > 10:
             accu_list.append(maxaccu)
             break
-        # file.write('seed: {}, iteration: {} ,accuracy{}'.format(seed, it, accu))
-        # file.write('\n')
-        for order, val in enumerate(landamat):
-            file.write('{} , {} , {}'.format(order, it, val))
-            file.write('\n')
+        file.write('{}, {} ,{}'.format(seed, it, accu))
+        file.write('\n')
+        # for order, val in enumerate(landamat):
+        #     file.write('{} , {} , {}'.format(order, it, val))
+        #     file.write('\n')
     # file.write('seed{} ,MAX{}'.format(seed, maxaccu))
-    # file.write('\n')
+    file.write('\n')
     file.close()
     sys.exit()

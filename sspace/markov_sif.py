@@ -101,11 +101,11 @@ class Markov_sif():
 
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/res/Emarkov_sif.csv'
+    filename = '/home/nnabizad/code/toolpred/res/markov_sif.csv'
     seed = int(sys.argv[1])
-    order = int(sys.argv[1])
+    order = int(sys.argv[2])
     simdic = dict()
     print('Training with seed:{}'.format(seed), flush=True)
-    Markov_sif(extracted=True, maxst=order)
+    Markov_sif(extracted=False, maxst=order)
     sys.exit()
 
