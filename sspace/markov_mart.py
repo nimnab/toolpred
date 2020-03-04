@@ -111,12 +111,12 @@ class Markov_mart():
 
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/res/markov_martin.csv'
-    alpha = 1e-2
+    filename = '/home/nnabizad/code/toolpred/res/Emarkov_bow.csv'
+    alpha = 1
     seed = int(sys.argv[1])
     # order = int(sys.argv[1])
     simdic = dict()
     print('Training with seed:{}'.format(seed), flush=True)
-    Markov_mart(extracted=False)
+    Markov_mart(extracted=True)
     sys.exit()
 

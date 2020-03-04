@@ -1,6 +1,6 @@
 import numpy as np
 import pickle as pk
-# from nltk.util import ngrams
+from nltk.util import ngrams
 import scipy.stats
 import sys
 
@@ -63,6 +63,7 @@ dicscores = dict()
 def ngram_simscore(text1, text2, landa=None):
     n = max(len(text1), len(text2))
     score = 0
+    summ = sum([(i+1) for i in range(n)])
     for i in range(n):
         if (' '.join(text1), i + 1) in dicscores:
             seq1tupes = dicscores[(' '.join(text1), i + 1)]
@@ -75,7 +76,7 @@ def ngram_simscore(text1, text2, landa=None):
         else:
             seq2tupes = get_tuples_nosentences(text2, i + 1)
             dicscores[(' '.join(text2), i + 1)] = seq2tupes
-        score += np.exp(i+1)*(len(seq1tupes & seq2tupes))
+        score += (i+1)/summ*(len(seq1tupes & seq2tupes))
     return score
 
 def goal_simscore(tups, text2):

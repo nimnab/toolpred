@@ -9,7 +9,7 @@ filename=$1
 
  
 seeds=(15 896783 9 12 45234)
-orders=(62 5 4 3 2 1)
+orders=(62 3 2 1)
 
 
 

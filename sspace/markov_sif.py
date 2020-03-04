@@ -50,7 +50,12 @@ class Markov_sif():
             idsembed.append(self.sifembed(self.mydata.titles_train[id]))
         score = cossim(np.mean(idsembed, axis=0), self.sifembed(self.mydata.titles_test[idtest]))
         return score/len(ids)
-    
+
+    def similarity_score2(self,idtest, ids):
+        score = 0
+        for id in ids:
+            score += cossim(self.sifembed(self.mydata.titles_train[id]), self.sifembed(self.mydata.titles_test[idtest]))
+        return score/len(ids)
     
     def predict(self, lis, id):
         history = tuple(lis)
@@ -58,7 +63,7 @@ class Markov_sif():
         if history in self.models[order].keys():
             normp = sum([self.models[order][history][k][0] for k in self.models[order][history].keys()])
             # norms = sum([similarity_score(id,self.models[order][history][k][1]) for k in self.models[order][history].keys()])
-            self.prediction = max(self.models[order][history].keys(), key=(lambda k:  (self.models[order][history][k][0]/normp) * self.similarity_score(id,self.models[order][history][k][1])))
+            self.prediction = max(self.models[order][history].keys(), key=(lambda k:  (self.models[order][history][k][0]/normp) * self.similarity_score2(id,self.models[order][history][k][1])))
             return self.prediction
         elif len(lis) > 0:
             lis2 = lis[1:]
@@ -101,7 +106,7 @@ class Markov_sif():
 
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/res/markov_sif.csv'
+    filename = '/home/nnabizad/code/toolpred/res/markov_sif2.csv'
     seed = int(sys.argv[1])
     order = int(sys.argv[2])
     simdic = dict()
