@@ -25,23 +25,24 @@ def cossim(vec1, vec2):
 
 
 class Markov_sif():
-    def __init__(self, extracted, maxst):
+    def __init__(self, extracted):
         self.mydata = Data(seed, title=True, extracted=extracted)
+        maxsts = [1, 2, 3, 4, 5, max([len(i) for i in self.mydata.train])]
         self.sifmodel = self.siftrain()
-        self.write_result(maxst)
+        self.write_result(maxsts)
 
         
         
-    def write_result(self, maxst):
-        # for maxst in maxsts:
-        self.maxst = maxst
-        self.models = [Chain_withid(self.mydata.train, i).model for i in range(0, self.maxst)]
-        # for mu in np.arange(1, 10):
+    def write_result(self, maxsts):
+        for maxst in maxsts:
+            self.maxst = maxst
+            self.models = [Chain_withid(self.mydata.train, i).model for i in range(0, self.maxst)]
+            # for mu in np.arange(1, 10):
 
-        preds, acc = self.accu_all(self.mydata.test)
-        print('{}, {}, {}'.format(seed, self.maxst, acc))
-        output('{}, {}, {}'.format(seed, self.maxst, acc), filename=filename,
-               func='write')
+            preds, acc = self.accu_all(self.mydata.test)
+            print('{}, {}, {}'.format(seed, self.maxst, acc))
+            output('{}, {}, {}'.format(seed, self.maxst, acc), filename=filename,
+                   func='write')
         
     # 
     def similarity_score(self,idtest, ids):
@@ -106,11 +107,11 @@ class Markov_sif():
 
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/res/markov_sif2.csv'
+    filename = '/home/nnabizad/code/toolpred/res/markov_sif.csv'
     seed = int(sys.argv[1])
-    order = int(sys.argv[2])
+    # order = int(sys.argv[2])
     simdic = dict()
     print('Training with seed:{}'.format(seed), flush=True)
-    Markov_sif(extracted=False, maxst=order)
+    Markov_sif(extracted=False)
     sys.exit()
 

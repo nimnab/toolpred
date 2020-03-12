@@ -16,7 +16,7 @@ from fse.models import SIF
 from fse import IndexedList
 
 # datapath = '/hri/localdisk/nnabizad/toolpred/data/'
-datapath = '/home/nnabizad/code/toolpred/data/yammly/yam_'
+datapath = '/home/nnabizad/code/toolpred/data/yammly/mlyam_'
 bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/mac/mac_'
 cleaner = re.compile(r'[^\'\w+\.]')
 
@@ -157,7 +157,7 @@ class Mydata():
 
 
 class Data:
-    def __init__(self, seed, encod=False, deep=False, toolemb=False, title=False, concat=False, sif=False, extracted = False):
+    def __init__(self, seed, encod=False, deep=False, toolemb=False, title=False, multilable=False, sif=False, extracted = False):
         train_ratio = 0.7
         validation_ratio = 0.1
         test_ratio = 0.2
@@ -174,7 +174,11 @@ class Data:
             biglis = load_obj(datapath + 'encoded_tools'+suffix)
             self.encodedic = load_obj(datapath + 'encodedic')
             self.decodedic = load_obj(datapath + 'decodedic')
-        class_numbers = max([i for x in biglis for i in x]) + 1
+
+        if multilable:
+            class_numbers = self.encodedic['end'][0]+1
+        else:
+            class_numbers = max([i for x in biglis for i in x]) + 1
         maximum_lengh = max([len(x) for x in biglis])
         emb_dim = 100
         re_stripper = re.compile('[^\w+\/\.-]')
@@ -225,10 +229,31 @@ class Data:
                 data = [[tool_embeding[i] for i in man[:-1]] for man in biglis]
                 data_final = np.asarray(
                     [np.vstack((i, np.zeros([maximum_lengh - len(i), emb_dim]))) for i in data])
+
+            if multilable:
+                data = []
+                for rec in biglis:
+                    _tmprec = []
+                    for step in rec:
+                        tools = np.sum(np.asarray([np_utils.to_categorical(i, num_classes=class_numbers) for i in step]),
+                               axis=0)
+                        _tmprec.append(tools)
+
+                    data.append(_tmprec)
+                labels = self.lable_create(data)
+                data = [i[:-1] for i in data]
+                data_final = sequence.pad_sequences(data, maxlen=maximum_lengh, padding='post')
+                labels_onehot = sequence.pad_sequences(labels, maxlen=maximum_lengh, padding='post')
+
+
             else:
                 data = sequence.pad_sequences([i[:-1] for i in biglis], maxlen=maximum_lengh, padding='post')
                 data_final = np_utils.to_categorical(data, num_classes=class_numbers)
                 data_final[:, :, 0] = 0
+                labels = self.lable_create(biglis)
+                labels_padded = sequence.pad_sequences(labels, maxlen=maximum_lengh, padding='post')
+                labels_onehot = np_utils.to_categorical(labels_padded, num_classes=class_numbers)
+                labels_onehot[:, :, 0] = 0
 
 
             trainx_final, testx_ = train_test_split(data_final, test_size=1 - train_ratio, random_state=seed)
@@ -244,13 +269,6 @@ class Data:
                                                            test_size=test_ratio / (test_ratio + validation_ratio),
                                                            random_state=seed)
 
-
-
-
-            labels = self.lable_create(biglis)
-            labels_padded = sequence.pad_sequences(labels, maxlen=maximum_lengh, padding='post')
-            labels_onehot = np_utils.to_categorical(labels_padded, num_classes=class_numbers)
-            labels_onehot[:, :, 0] = 0
             trainy_final, testy = train_test_split(labels_onehot, test_size=1 - train_ratio, random_state=seed)
             valy_final ,testy_final = train_test_split(testy,
                                                        test_size=test_ratio / (test_ratio + validation_ratio),
@@ -261,21 +279,6 @@ class Data:
                 test_labels_onehot = np_utils.to_categorical(test_labels_padded, num_classes=class_numbers)
                 test_labels_onehot[:, :, 0] = 0
                 valy_final, testy_final = train_test_split(test_labels_onehot,
-                                                           test_size=test_ratio / (test_ratio + validation_ratio),
-                                                           random_state=seed)
-
-
-            if concat and title:
-                title_ = np.repeat(np.expand_dims(np.sum(titles_pad, axis=1), 1), maximum_lengh, axis=1)
-                # ttest = np.repeat(np.expand_dims(np.sum(titles_test, axis=1), 1), maximum_lengh, axis=1)
-                title_concat = np.dstack((data_final, title_))
-                ter_lens = np.sum(np.sign(np.max(np.abs(labels_onehot), 2)), 1)
-                for i in range(len(title_concat)): title_concat[i][int(ter_lens[i]):] = 0
-                # titles_test = np.dstack((testx_final, ttest))
-                # test_lens = np.sum(np.sign(np.max(np.abs(testx_final), 2)), 1)
-                # for i in range(len(titles_test)): titles_test[i][int(test_lens[i]):] = 0
-                titles_train, titles_test = train_test_split(title_concat, test_size=1 - train_ratio, random_state=seed)
-                titles_val, titles_test = train_test_split(titles_test,
                                                            test_size=test_ratio / (test_ratio + validation_ratio),
                                                            random_state=seed)
 
@@ -295,6 +298,6 @@ if __name__ == '__main__':
     address = datapath + 'tools'
     encode(address)
 
-    mydata = Data(0, deep=False, toolemb=False, title=True, concat=False)
+    mydata = Data(0, deep=True, toolemb=False, title=True, multilable=True, encod = False)
     print()
     # t = Topicmodel(0)

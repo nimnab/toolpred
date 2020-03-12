@@ -86,7 +86,7 @@ def average_len(l):
   return int(sum(map(len, [i[0] for i in l]))/len(l))+1
 
 if __name__ == '__main__':
-    filename = '/home/nnabizad/code/toolpred/res/markov_target_nn.csv'
+    filename = '/home/nnabizad/code/toolpred/res/markov_target.csv'
     seed = int(sys.argv[1])
     # mu = int(sys.argv[2])
     simdic = dict()
