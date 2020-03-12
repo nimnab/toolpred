@@ -30,9 +30,9 @@ sub = subset(res, Order == " All")
 sub$Mean <- as.factor(sub$Mean)
 sub$Std <- as.factor(sub$Std)
 
-p1 <- ggplot(data=sub, aes(x=Mean, y=Acuracy, group=Std, color = Std)) +
+p1 <- ggplot(data=sub, aes(x=Mean, y=Accuracy, group=Std, color = Std)) +
   geom_line()+
-  geom_point()+ geom_text(aes(label=Acuracy),vjust=-1) + theme(text = element_text(size=30))
+  geom_point()+ geom_text(aes(label=Accuracy),vjust=-1) + theme(text = element_text(size=30))
 p1
 
 
@@ -68,3 +68,19 @@ qplot(lens$length,
 
 ggplot(lens, aes(x=length)) + 
   geom_histogram(bins=20, colour='gray',size=1) + theme(text = element_text(size=30))
+
+res <- read.csv("/home/nnabizad/code/toolpred/res/final/high-orders.csv")
+
+
+
+res$Model <- as.factor(res$Model)
+
+
+
+p<- ggplot(res, aes(x=Model, y=Accuracy, fill=Training.set)) +scale_fill_grey()+
+  geom_bar(stat="identity", color="black", 
+           position=position_dodge()) + theme_bw() + geom_text(aes(label=Accuracy), position=position_dodge(width=0.9), vjust=-0.5,size = 10) + theme(text = element_text(size=30))+ theme(axis.text.x = element_text(angle=45, hjust=1))
+
+p
+    
+

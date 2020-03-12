@@ -16,7 +16,7 @@ from fse.models import SIF
 from fse import IndexedList
 
 # datapath = '/hri/localdisk/nnabizad/toolpred/data/'
-datapath = '/home/nnabizad/code/toolpred/data/mac/mac_'
+datapath = '/home/nnabizad/code/toolpred/data/yammly/yam_'
 bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/mac/mac_'
 cleaner = re.compile(r'[^\'\w+\.]')
 
@@ -295,5 +295,6 @@ if __name__ == '__main__':
     address = datapath + 'tools'
     encode(address)
 
-    mydata = Data(0, deep=True, toolemb=False, title=True, concat=False)
+    mydata = Data(0, deep=False, toolemb=False, title=True, concat=False)
+    print()
     # t = Topicmodel(0)

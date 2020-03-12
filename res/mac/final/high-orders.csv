@@ -1,6 +1,6 @@
 Model, Accuracy, Training set
-Kn, 81.18 , Manual
-Kn, 66.87 , Automatic
+Knesr Ney, 81.18 , Manual
+Knesr Ney, 66.87 , Automatic
 Gaussian weights,  80.94, Manual
 Gaussian weights, 68.38, Automatic
 Linear weights, 82.08, Manual
@@ -9,3 +9,7 @@ Exponential weights, 83.18, Manual
 Exponential weights, 69.52, Automatic
 Sentence Embedding, 80.04, Manual
 Sentence Embedding,  66.24, Automatic
+LSTM+GRU, 86.54, Manual
+LSTM+GRU, 72.59, Automatic
+LSTM+SIF, 86.21, Manual
+LSTM+SIF, 71.00, Automatic
