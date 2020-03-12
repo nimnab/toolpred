@@ -31,7 +31,7 @@ def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
 
     h=model.fit(mydata.dtrain.input, mydata.dtrain.target,
               validation_data=(mydata.dval.input, mydata.dval.target),
-              epochs=5, batch_size=10, verbose=2, callbacks=[es, mc])
+              epochs=50, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
     # np.concatenate(mydata.dtest.input, axis=0)
     return model,h

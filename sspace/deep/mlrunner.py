@@ -18,7 +18,7 @@ def write_result(hidden_size, dens1_size, dens2_size):
     seeds = [15, 896783, 9, 12, 45234]
     accu_list = []
     global mydata
-    for seed in seeds:
+    for seed in seeds[0:1]:
         mydata = Data(seed, deep=True, title=True, multilable=True, sif=(modelindex == 3))
         inputs = [mydata.dtest.input, [mydata.dtest.input, mydata.dtest.titles],
                   [mydata.dtest.input, mydata.dtest.titles], [mydata.dtest.input, mydata.dtest.titles],
@@ -26,19 +26,26 @@ def write_result(hidden_size, dens1_size, dens2_size):
         trained, history = model(mydata, modelname, seed, hidden_size, dens1_size, dens2_size)
         # saved_model = load_model(modelname.format(seed))
         # accu = trained.evaluate(inputs[modelindex], mydata.dtest.target)[1]
+
         predictions = trained.predict([inputs[modelindex]])
         thresholds = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
         for val in thresholds:
+            precision = []
+            recall = []
+            f1 = []
             pred = predictions.copy()
 
             pred[pred >= val] = 1
             pred[pred < val] = 0
 
-            precision = precision_score(mydata.dtest.target, pred, average='micro')
-            recall = recall_score(mydata.dtest.target, pred, average='micro')
-            f1 = f1_score(mydata.dtest.target, pred, average='micro')
-            print("Micro-average quality numbers")
-            print("Precision: {:.4f}, Recall: {:.4f}, F1-measure: {:.4f}".format(precision, recall, f1))
+            for man in range(len(pred)):
+                for step in range(len(pred[man])):
+                    if np.sum(mydata.dtest.target[man][step]) !=0:
+                        precision.append(precision_score(mydata.dtest.target[man][step], pred[man][step], average='macro'))
+                        recall.append(recall_score(mydata.dtest.target[man][step], pred[man][step], average='macro'))
+                        f1.append(f1_score(mydata.dtest.target[man][step], pred[man][step], average='macro'))
+            print("Micro-average quality numbers with val = {}".format(val))
+            print("Precision: {:.4f}, Recall: {:.4f}, F1-measure: {:.4f}".format(np.mean(precision), np.mean(recall), np.mean(f1)))
 
     #     print(accu)
     #     accu_list.append(accu)
@@ -51,9 +58,9 @@ def write_result(hidden_size, dens1_size, dens2_size):
 
 
 if __name__ == '__main__':
-    hidden_size = 200
+    hidden_size = 100
     dens1_size = 50
-    dens2_size = 500
+    dens2_size = 200
     modelindex = 0
     file = write_result(hidden_size, dens1_size, dens2_size)
     # upload(file)
