@@ -5,8 +5,8 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.layers import TimeDistributed, Input, LSTM, Dense, Masking, Lambda, concatenate, RepeatVector, GRU, Dropout, SimpleRNN ,Permute
 from keras.models import Sequential, Model
 from sklearn.utils.class_weight import compute_class_weight
-
-dr = 0.2
+from keras.optimizers import Adam
+dr = 0.3
 
 def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     # for seed in seeds:
@@ -15,23 +15,24 @@ def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
 
     model = Sequential()
     model.add(Masking(mask_value=0., input_shape=(seqlength, featurelen)))
-    model.add(LSTM(hidden_size, return_sequences=True, recurrent_dropout=dr))
+    model.add(GRU(hidden_size, return_sequences=True, recurrent_dropout=dr))
 
     model.add(TimeDistributed(Dense(dens2_size, activation='relu')))
     model.add(Dropout(dr))
     model.add(Dense(tool_number, activation='sigmoid'))
     model.summary()
-    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['binary_accuracy'])
+    # adam = Adam(lr=0.001)
+    model.compile(loss='binary_crossentropy', optimizer='adam')
     # tool_freq = [y for x in mydata.train[counter] for y in x]
 
     # class_weights = class_weight.compute_class_weight('balanced',np.unique(mydata.alltools), mydata.alltools)
     es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
-    mc = ModelCheckpoint(modelname.format(seed), monitor='val_binary_crossentropy', mode='max', verbose=1,
-                         save_best_only=True)
+    # mc = ModelCheckpoint(modelname.format(seed), monitor='val_binary_crossentropy', mode='max', verbose=1,
+    #                      save_best_only=True)
 
     h=model.fit(mydata.dtrain.input, mydata.dtrain.target,
               validation_data=(mydata.dval.input, mydata.dval.target),
-              epochs=50, batch_size=10, verbose=2, callbacks=[es, mc])
+              epochs=50, batch_size=10, verbose=2, callbacks=[es])
     # make a prediction
     # np.concatenate(mydata.dtest.input, axis=0)
     return model,h
@@ -62,7 +63,8 @@ def lstm_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     densout = Dropout(dr)(densout)
     last = Dense(tool_number, activation='softmax')(densout)
     model = Model(inputs=[main_input, title_input], outputs=last)
-
+    adam = Adam(lr=0.001,
+                decay=0.0)
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['categorical_accuracy'])
     # tool_freq = [y for x in mydata.train[counter] for y in x]
 
