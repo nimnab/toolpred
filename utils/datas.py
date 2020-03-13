@@ -15,9 +15,10 @@ from flair.data import Sentence
 from fse.models import SIF
 from fse import IndexedList
 
-# datapath = '/hri/localdisk/nnabizad/toolpred/data/'
-datapath = '/home/nnabizad/code/toolpred/data/yammly/mlyam_'
-bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/yammly/yammly_'
+# datapath = '/home/nnabizad/code/toolpred/data/yammly/mlyam_'
+# bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/yammly/yammly_'
+datapath = '/home/nnabizad/code/toolpred/data/mac/mlmac_'
+bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/mac/mlmac_'
 cleaner = re.compile(r'[^\'\w+\.]')
 
 seeds = [5, 896783, 21, 322, 45234]
@@ -208,8 +209,8 @@ class Data:
                         print('loading the titles from file')
                         titles_pad = np.load(bigdatapath + 'myglove.npy')
                     else:
-                        embedding = WordEmbeddings('glove')
-                        # embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/glove100_word2vec1')
+                        # embedding = WordEmbeddings('glove')
+                        embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/glove100_word2vec1')
                         # embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/myword2vec_300')
                         stitles = [Sentence(' '.join(i)) for i in titles]
                         max_titles_len = max([len(i) for i in stitles])

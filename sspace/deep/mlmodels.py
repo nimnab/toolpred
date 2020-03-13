@@ -5,8 +5,13 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.layers import TimeDistributed, Input, LSTM, Dense, Masking, Lambda, concatenate, RepeatVector, GRU, Dropout, SimpleRNN ,Permute
 from keras.models import Sequential, Model
 from sklearn.utils.class_weight import compute_class_weight
-from keras.optimizers import Adam
+import tensorflow as tf
+import keras.backend.tensorflow_backend as tfb
+
 dr = 0.3
+
+POS_WEIGHT = 2  # multiplier for positive targets, needs to be tuned
+
 
 def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     # for seed in seeds:
@@ -15,7 +20,7 @@ def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
 
     model = Sequential()
     model.add(Masking(mask_value=0., input_shape=(seqlength, featurelen)))
-    model.add(GRU(hidden_size, return_sequences=True, recurrent_dropout=dr))
+    model.add(SimpleRNN(hidden_size, return_sequences=True, recurrent_dropout=dr))
 
     model.add(TimeDistributed(Dense(dens2_size, activation='relu')))
     model.add(Dropout(dr))
@@ -27,11 +32,12 @@ def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
 
     # class_weights = class_weight.compute_class_weight('balanced',np.unique(mydata.alltools), mydata.alltools)
     es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
+    # bcm_callback = mltb.keras.BinaryClassifierMetricsCallback(mydata.dval.input, mydata.dval.target)
     # mc = ModelCheckpoint(modelname.format(seed), monitor='val_binary_crossentropy', mode='max', verbose=1,
     #                      save_best_only=True)
 
     h=model.fit(mydata.dtrain.input, mydata.dtrain.target,
-              validation_data=(mydata.dval.input, mydata.dval.target),
+              # validation_data=(mydata.dval.input, mydata.dval.target),
               epochs=50, batch_size=10, verbose=2, callbacks=[es])
     # make a prediction
     # np.concatenate(mydata.dtest.input, axis=0)
@@ -45,7 +51,7 @@ def lstm_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
 
     main_input = Input(shape=(seqlength, featurelen), dtype='float32')
     man_masked = Masking(mask_value=0, input_shape=(seqlength, featurelen), name='seq_masked')(main_input)
-    lstm_out = LSTM(hidden_size, return_sequences=True, recurrent_dropout = dr)(man_masked)
+    lstm_out = SimpleRNN(hidden_size, return_sequences=True, recurrent_dropout = dr)(man_masked)
     # lstm_out = LSTM(hidden_size, return_sequences=True)(man_masked)
 
     _, titlelength, titlefeaturelen = np.shape(mydata.dtrain.titles)
@@ -61,21 +67,21 @@ def lstm_sum(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(out)
     densout = Dropout(dr)(densout)
-    last = Dense(tool_number, activation='softmax')(densout)
+    last = Dense(tool_number, activation='sigmoid')(densout)
     model = Model(inputs=[main_input, title_input], outputs=last)
-    adam = Adam(lr=0.001,
-                decay=0.0)
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['categorical_accuracy'])
+    # adam = Adam(lr=0.001,
+    #             decay=0.0)
+    model.compile(loss='binary_crossentropy', optimizer='adam')
     # tool_freq = [y for x in mydata.train[counter] for y in x]
 
     # class_weights = class_weight.compute_class_weight('balanced',np.unique(mydata.alltools), mydata.alltools)
     es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
-    mc = ModelCheckpoint(modelname.format(seed), monitor='val_categorical_accuracy', mode='max',
-                         verbose=1, save_best_only=True)
+    # mc = ModelCheckpoint(modelname.format(seed), monitor='val_categorical_accuracy', mode='max',
+    #                      verbose=1, save_best_only=True)
 
     h=model.fit([mydata.dtrain.input, mydata.dtrain.titles], mydata.dtrain.target,
               validation_data=([mydata.dval.input, mydata.dval.titles], mydata.dval.target),
-              epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
+              epochs=50, batch_size=10, verbose=2, callbacks=[es])
     # make a prediction
     return model,h
 

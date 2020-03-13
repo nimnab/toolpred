@@ -1,2 +1,22 @@
 Precision: 0.5392, Recall: 0.5875, F1-measure: 0.5414
 with title Precision: 0.5570, Recall: 0.6169, F1-measure: 0.5624
+
+
+
+Precision: 0.5367, Recall: 0.6221, F1-measure: 0.5525
+
+
+Precision: 0.5379, Recall: 0.6491, F1-measure: 0.5613 128,512
+with target Precision: 0.5715, Recall: 0.6438, F1-measure: 0.5818
+
+
+
+myfixit: Precision: 0.5670, Recall: 0.6736, F1-measure: 0.6004
+
+Precision: 0.6601, Recall: 0.8474, F1-measure: 0.7185
+
+
+
+without target: Precision: 0.5518, Recall: 0.6199, F1-measure: 0.5627
+with target: Precision: 0.5808, Recall: 0.6725, F1-measure: 0.5971
+

@@ -83,9 +83,9 @@ def write_result(hidden_size, gru_size, dens2_size):
 
 
 if __name__ == '__main__':
-    hidden_size = 128
+    hidden_size = 256
     gru_size = 128
-    dens2_size = 256
+    dens2_size = 512
     modelindex = 0
     file = write_result(hidden_size, gru_size, dens2_size)
     # upload(file)
