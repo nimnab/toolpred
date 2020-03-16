@@ -11,15 +11,15 @@ from sklearn.model_selection import train_test_split
 # bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/yammly/yammly_'
 # bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/mac/mlmac_'
 
-# tools = '/home/nnabizad/code/toolpred/data/mac/mac_tools'
-tools = '/home/nnabizad/code/toolpred/data/yam/yam_tools'
-# objects = '/home/nnabizad/code/toolpred/data/mac/mac_parts'
-objects = '/home/nnabizad/code/toolpred/data/yam/yam_ings'
+tools = '/home/nnabizad/code/toolpred/data/mac/mac_tools'
+# tools = '/home/nnabizad/code/toolpred/data/yam/yam_tools'
+objects = '/home/nnabizad/code/toolpred/data/mac/mac_parts'
+# objects = '/home/nnabizad/code/toolpred/data/yam/yam_ings'
 min_freq = 1
 
 seeds = [5, 896783, 21, 322, 45234]
-glove_embedding = WordEmbeddings('glove')
-# glove_embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/glove100_word2vec1')
+# glove_embedding = WordEmbeddings('glove')
+glove_embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/glove100_word2vec1')
 glovedim = 100
 document_embeddings = DocumentPoolEmbeddings([glove_embedding],
                                              pooling='max')
@@ -95,7 +95,7 @@ class Data:
         if usew2v:
             sentence = Sentence(string)
             document_embeddings.embed(sentence)
-            return sentence.embedding.detach().numpy()
+            return sentence.embedding.cpu().detach().numpy()
         else:
             words = string.split()
             vectors = []

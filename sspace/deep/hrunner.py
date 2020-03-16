@@ -29,7 +29,7 @@ def per_recal(target, pred):
 
 
 def write_result(mydata, hidden_size, gru_size, dens_size):
-    data = 'yamtools'
+    data = 'Emactools'
     model = models[modelindex]
     filename = '/home/nnabizad/code/toolpred/res/{}.txt'.format(data)
     modelname = '/hri/localdisk/nnabizad/models/{}_{}_{}'.format(data, hidden_size,dens_size) + '_s{}'
@@ -70,12 +70,12 @@ def write_result(mydata, hidden_size, gru_size, dens_size):
 
 
 if __name__ == '__main__':
-    hidden_sizes = [256 ,128, 64]
-    dens_sizes = [512, 256, 128, 64]
+    hidden_sizes = [256 ,128, 512]
+    dens_sizes = [512, 256, 128]
 
     gru_size = 128
     modelindex = 0
-    mydata = Data(15, usew2v=False, title=False)
+    mydata = Data(15, usew2v=True, title=False)
     for hidden_size in hidden_sizes:
         for dens_size in dens_sizes:
             file = write_result(mydata, hidden_size, gru_size, dens_size)
