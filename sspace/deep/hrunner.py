@@ -1,5 +1,6 @@
 from sspace.deep.mlmodels import *
 from utils.data_pool import Data
+from pandas import DataFrame
 
 models = [lstm_pred, lstm_sum, lstm_gru, lstm_sif, lstm_sum_zeroh, lstm_contcat]
 
@@ -27,32 +28,54 @@ def per_recal(target, pred):
 
 
 
-def write_result(hidden_size, gru_size, dens_size):
+def write_result(mydata, hidden_size, gru_size, dens_size):
+    data = 'yamtools'
     model = models[modelindex]
-    filename = '/home/nnabizad/code/toolpred/res/{}_{}_{}_{}.txt'.format(model.__name__, hidden_size,
-                                                                         gru_size, dens_size)
-    modelname = '/hri/localdisk/nnabizad/models/mac/{}_h{}_d{}_d{}'.format(model.__name__, hidden_size, gru_size,
-                                                                           dens_size) + '_s{}'
+    filename = '/home/nnabizad/code/toolpred/res/{}.txt'.format(data)
+    modelname = '/hri/localdisk/nnabizad/models/{}_{}_{}'.format(data, hidden_size,dens_size) + '_s{}'
     seeds = [15, 896783, 9, 12, 45234]
-    accu_list = []
-    global mydata
+
     for seed in seeds[0:1]:
-        mydata = Data(seed, usew2v=False, title=False)
         inputs = [mydata.dtest.input, [mydata.dtest.input, mydata.dtest.titles],
                   [mydata.dtest.input, mydata.dtest.titles], [mydata.dtest.input, mydata.dtest.titles],
                   [mydata.dtest.input, mydata.dtest.titles], [mydata.dtest.titles]]
         trained, history = model(mydata, modelname, seed, hidden_size, gru_size, dens_size)
         # saved_model = load_model(modelname.format(seed))
         # accu = trained.evaluate(inputs[modelindex], mydata.dtest.target)[1]
-
+        DataFrame(history.history).to_csv(
+            '/home/nnabizad/code/toolpred/res/logs/{}_lstm{}_dense{}.csv'.format(data, hidden_size, dens_size))
         predictions = trained.predict(inputs[modelindex])
-    return filename
+        thresholds = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+        with open(filename, 'a') as file:
+            file.write('lstm size: {}, dense size: {}\n'.format(hidden_size, dens_size))
+            for val in thresholds:
+                precision = []
+                recall = []
+                f1 = []
+                pred = predictions.copy()
+
+                pred[pred >= val] = 1
+                pred[pred < val] = 0
+
+                for man in range(len(pred)):
+                    for step in range(len(pred[man])):
+                        if np.sum(mydata.dtest.target[man][step]) !=0:
+                            per,rec,f_1 = per_recal(mydata.dtest.target[man][step], pred[man][step])
+                            precision.append(per)
+                            recall.append(rec)
+                            f1.append(f_1)
+                file.write("Val: {}, Precision: {:.4f}, Recall: {:.4f}, F1-measure: {:.4f}\n".format(val, np.mean(precision), np.mean(recall), np.mean(f1)))
+            file.write('------------\n')
+    return 0
 
 
 if __name__ == '__main__':
-    hidden_size = 256
-    dens_size = 512
+    hidden_sizes = [256 ,128, 64]
+    dens_sizes = [512, 256, 128, 64]
+
     gru_size = 128
     modelindex = 0
-    file = write_result(hidden_size, gru_size, dens_size)
-    # upload(file)
+    mydata = Data(15, usew2v=False, title=False)
+    for hidden_size in hidden_sizes:
+        for dens_size in dens_sizes:
+            file = write_result(mydata, hidden_size, gru_size, dens_size)

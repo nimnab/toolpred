@@ -11,12 +11,15 @@ from sklearn.model_selection import train_test_split
 # bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/yammly/yammly_'
 # bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/mac/mlmac_'
 
-datapath = '/home/nnabizad/code/toolpred/data/mac/mac_tools'
+# tools = '/home/nnabizad/code/toolpred/data/mac/mac_tools'
+tools = '/home/nnabizad/code/toolpred/data/yam/yam_tools'
+# objects = '/home/nnabizad/code/toolpred/data/mac/mac_parts'
+objects = '/home/nnabizad/code/toolpred/data/yam/yam_ings'
 min_freq = 1
 
 seeds = [5, 896783, 21, 322, 45234]
-# glove_embedding = WordEmbeddings('glove')
-glove_embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/glove100_word2vec1')
+glove_embedding = WordEmbeddings('glove')
+# glove_embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/glove100_word2vec1')
 glovedim = 100
 document_embeddings = DocumentPoolEmbeddings([glove_embedding],
                                              pooling='max')
@@ -48,10 +51,8 @@ class Mydata():
 
 class Data:
     def __init__(self, seed, usew2v=False, title=False):
-        train_ratio = 0.7
-        validation_ratio = 0.1
         test_ratio = 0.2
-        biglist = load_obj(datapath)
+        biglist = load_obj(tools)
         manuals, labels = self.encoder(biglist, usew2v=usew2v)
         X_train, X_test, y_train, y_test = train_test_split(
             manuals,
@@ -72,11 +73,13 @@ class Data:
         for manual in biglist:
             xvectors = np.zeros((maxlen, self.dim))
             yvectors = np.zeros((maxlen, self.dim))
-            xvectors[0] = self.vectorize(['start'], usew2v)
+            xvectors[0] = self.vectorize(['START'], usew2v)
+            # ind = 0 TODO: empty steps
             for ind, step in enumerate(manual):
-                xvectors[ind + 1] = self.vectorize(step, usew2v)
-                yvectors[ind] = xvectors[ind + 1]
-            yvectors[len(manual)] = self.vectorize(['end'], usew2v)
+                if step:
+                    xvectors[ind + 1] = self.vectorize(step, usew2v)
+                    yvectors[ind] = xvectors[ind + 1]
+            yvectors[len(manual)] = self.vectorize(['END'], usew2v)
             encodedmanuals = np.append(encodedmanuals, [xvectors], axis=0)
             encodedlabels = np.append(encodedlabels, [yvectors], axis=0)
         return encodedmanuals, encodedlabels
@@ -85,7 +88,7 @@ class Data:
         if word in self.encoddic:
             return self.encoddic[word]
         else:
-            return self.encoddic['unknown']
+            return self.encoddic['UNK']
 
     def vectorize(self, tup, usew2v):
         string = ' '.join(tup)
@@ -111,12 +114,12 @@ class Data:
                 self.encoddic[j[0]] = i
                 i += 1
         morethanmin = len(self.encoddic)
-        self.encoddic['start'] = 0
-        self.encoddic['unknown'] = morethanmin + 1
-        self.encoddic['end'] = morethanmin + 2
+        self.encoddic['START'] = 0
+        self.encoddic['UNK'] = morethanmin + 1
+        self.encoddic['END'] = morethanmin + 2
 
 
 if __name__ == '__main__':
-    mydata = Data(0, title=False, usew2v=True)
+    mydata = Data(0, title=False, usew2v=False)
     print()
     # t = Topicmodel(0)

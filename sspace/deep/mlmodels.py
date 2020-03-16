@@ -16,28 +16,26 @@ POS_WEIGHT = 2  # multiplier for positive targets, needs to be tuned
 def lstm_pred(mydata, modelname, seed, hidden_size, denc1_size, dens2_size):
     # for seed in seeds:
     _, seqlength, featurelen = np.shape(mydata.dtest.target)
-    # featurelen = np.shape(mydata.dtest.input[0])[1]
-
     model = Sequential()
     model.add(Masking(mask_value=0., input_shape=(seqlength, featurelen)))
-    model.add(SimpleRNN(hidden_size, return_sequences=True, recurrent_dropout=dr))
+    model.add(GRU(hidden_size, return_sequences=True, recurrent_dropout=dr))
 
     model.add(TimeDistributed(Dense(dens2_size, activation='relu')))
     model.add(Dropout(dr))
     model.add(Dense(featurelen, activation='sigmoid'))
     model.summary()
     # adam = Adam(lr=0.001)
-    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['binary_accuracy'])
+    model.compile(loss='binary_crossentropy', optimizer='adam')
     # tool_freq = [y for x in mydata.train[counter] for y in x]
 
     # class_weights = class_weight.compute_class_weight('balanced',np.unique(mydata.alltools), mydata.alltools)
     es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=10)
-    mc = ModelCheckpoint(modelname.format(seed), monitor='val_binary_crossentropy', mode='max', verbose=1,
+    mc = ModelCheckpoint(modelname.format(seed), monitor='val_loss', mode='min', verbose=1,
                          save_best_only=True)
 
     h=model.fit(mydata.dtrain.input, mydata.dtrain.target,
               validation_data=(mydata.dtest.input, mydata.dtest.target),
-              epochs=50, batch_size=10, verbose=2, callbacks=[es])
+              epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
     # np.concatenate(mydata.dtest.input, axis=0)
     return model,h
