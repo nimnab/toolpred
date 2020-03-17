@@ -23,11 +23,6 @@ def per_recal(target, pred):
         f1 = 2*(per*rec)/(per+rec)
         return per,rec,f1
 
-
-
-
-
-
 def write_result(mydata, hidden_size, gru_size, dens_size):
     data = 'macparts'
     model = models[modelindex]

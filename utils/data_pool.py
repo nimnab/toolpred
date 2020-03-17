@@ -54,6 +54,7 @@ class Data:
     def __init__(self, seed, usew2v=False, title=False):
         test_ratio = 0.2
         biglist = load_obj(topred)
+        self.train, self.test = train_test_split(biglist,test_size=test_ratio,random_state=seed,)
         manuals, labels = self.encoder(biglist, usew2v=usew2v)
         X_train, X_test, y_train, y_test = train_test_split(
             manuals,

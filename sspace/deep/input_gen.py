@@ -30,21 +30,34 @@ def per_recal(target, pred):
 
 
 
-def write_result(mydata, hidden_size, gru_size, dens_size):
+def save_data(hidden_size, gru_size, dens_size):
     data = 'mactools'
     filename = '/home/nnabizad/code/toolpred/{}.txt'.format(data)
-    modelname = '/hri/localdisk/nnabizad/models/{}_{}_{}'.format(data, hidden_size,dens_size) + '_s{} (copy)'
+    modelname = '/hri/localdisk/nnabizad/models/{}_{}_{}'.format(data, hidden_size,dens_size) + '_s{}'
     seeds = [15, 896783, 9, 12, 45234]
 
     for seed in seeds[0:1]:
         saved_model = load_model(modelname.format(seed))
         mydata = Data(15, usew2v=False, title=False)
         predictions = saved_model.predict(mydata.dtrain.input)
-        np.save('mactools_input', predictions)
-        save_obj('mactool_dic', mydata.encoddic)
-
-        # np.savez_compressed
-
+        _,_,featurelen = np.shape(predictions)
+        Xs = np.empty((0,featurelen))
+        Ys = []
+        for i in range(len(mydata.train)):
+            for j in range(len(mydata.train[i])):
+                Xs = np.append(Xs, [predictions[i][j]], axis =0)
+                Ys.append([y.split()[0] for y in mydata.train[i][j]])
+        np.save('{}_xtrain'.format(data), Xs)
+        save_obj(Ys, '{}_ytrain'.format(data))
+        predictions = saved_model.predict(mydata.dtest.input)
+        Xs = np.empty((0,featurelen))
+        Ys = []
+        for i in range(len(mydata.test)):
+            for j in range(len(mydata.test[i])):
+                Xs = np.append(Xs, [predictions[i][j]], axis =0)
+                Ys.append([y.split()[0] for y in mydata.test[i][j]])
+        np.save('{}_xtest'.format(data), Xs)
+        save_obj(Ys, '{}_ytest'.format(data))
     return 0
 
 
@@ -54,5 +67,4 @@ if __name__ == '__main__':
 
     gru_size = 128
     modelindex = 0
-    mydata = Data(15, usew2v=False, title=False)
-    file = write_result(mydata, hidden_size, gru_size, dens_size)
+    file = save_data(hidden_size, gru_size, dens_size)

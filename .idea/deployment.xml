@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData">
+    <serverData>
+      <paths name="nnabizad@cuda4xl-01:22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/nnabizad/code/toolpred" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="nnabizad@cuda4xl-02:22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/nnabizad/code/toolpred" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="nnabizad@cuda4xl-201:22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/nnabizad/code/toolpred" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="nnabizad@cuda4xl-202:22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/nnabizad/code/toolpred" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
