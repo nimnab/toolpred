@@ -1,0 +1,99 @@
+lstm size: 256, dense size: 512
+Val: 0.1, Precision: 1.0000, Recall: 0.0803, F1-measure: 0.1487
+Val: 0.2, Precision: 1.0000, Recall: 0.0803, F1-measure: 0.1487
+Val: 0.3, Precision: 1.0000, Recall: 0.0803, F1-measure: 0.1487
+Val: 0.4, Precision: 1.0000, Recall: 0.0803, F1-measure: 0.1487
+Val: 0.5, Precision: 1.0000, Recall: 0.0803, F1-measure: 0.1487
+Val: 0.6, Precision: 1.0000, Recall: 0.0803, F1-measure: 0.1487
+Val: 0.7, Precision: 1.0000, Recall: 0.0803, F1-measure: 0.1487
+Val: 0.8, Precision: 1.0000, Recall: 0.0803, F1-measure: 0.1487
+Val: 0.9, Precision: 1.0000, Recall: 0.0803, F1-measure: 0.1487
+------------
+lstm size: 256, dense size: 256
+Val: 0.1, Precision: 0.9999, Recall: 0.1004, F1-measure: 0.1825
+Val: 0.2, Precision: 0.9999, Recall: 0.1004, F1-measure: 0.1825
+Val: 0.3, Precision: 0.9999, Recall: 0.1004, F1-measure: 0.1825
+Val: 0.4, Precision: 0.9999, Recall: 0.1004, F1-measure: 0.1825
+Val: 0.5, Precision: 1.0000, Recall: 0.0904, F1-measure: 0.1657
+Val: 0.6, Precision: 1.0000, Recall: 0.0904, F1-measure: 0.1657
+Val: 0.7, Precision: 1.0000, Recall: 0.0904, F1-measure: 0.1657
+Val: 0.8, Precision: 1.0000, Recall: 0.0904, F1-measure: 0.1657
+Val: 0.9, Precision: 1.0000, Recall: 0.0904, F1-measure: 0.1657
+------------
+lstm size: 256, dense size: 128
+Val: 0.1, Precision: 0.9998, Recall: 0.1908, F1-measure: 0.3203
+Val: 0.2, Precision: 0.9998, Recall: 0.1908, F1-measure: 0.3203
+Val: 0.3, Precision: 0.9998, Recall: 0.1908, F1-measure: 0.3203
+Val: 0.4, Precision: 0.9998, Recall: 0.1908, F1-measure: 0.3203
+Val: 0.5, Precision: 0.9998, Recall: 0.1908, F1-measure: 0.3203
+Val: 0.6, Precision: 0.9998, Recall: 0.1908, F1-measure: 0.3203
+Val: 0.7, Precision: 0.9998, Recall: 0.1908, F1-measure: 0.3203
+Val: 0.8, Precision: 0.9998, Recall: 0.1908, F1-measure: 0.3203
+Val: 0.9, Precision: 0.9998, Recall: 0.1908, F1-measure: 0.3203
+------------
+lstm size: 128, dense size: 512
+Val: 0.1, Precision: 0.9995, Recall: 0.2408, F1-measure: 0.3880
+Val: 0.2, Precision: 0.9995, Recall: 0.2408, F1-measure: 0.3880
+Val: 0.3, Precision: 0.9995, Recall: 0.2408, F1-measure: 0.3880
+Val: 0.4, Precision: 0.9995, Recall: 0.2408, F1-measure: 0.3880
+Val: 0.5, Precision: 0.9995, Recall: 0.2408, F1-measure: 0.3880
+Val: 0.6, Precision: 0.9995, Recall: 0.2408, F1-measure: 0.3880
+Val: 0.7, Precision: 0.9995, Recall: 0.2408, F1-measure: 0.3880
+Val: 0.8, Precision: 0.9995, Recall: 0.2408, F1-measure: 0.3880
+Val: 0.9, Precision: 0.9995, Recall: 0.2408, F1-measure: 0.3880
+------------
+lstm size: 128, dense size: 256
+Val: 0.1, Precision: 0.9985, Recall: 0.1103, F1-measure: 0.1986
+Val: 0.2, Precision: 0.9985, Recall: 0.1103, F1-measure: 0.1986
+Val: 0.3, Precision: 0.9985, Recall: 0.1103, F1-measure: 0.1986
+Val: 0.4, Precision: 0.9985, Recall: 0.1103, F1-measure: 0.1986
+Val: 0.5, Precision: 0.9985, Recall: 0.1103, F1-measure: 0.1986
+Val: 0.6, Precision: 0.9985, Recall: 0.1103, F1-measure: 0.1986
+Val: 0.7, Precision: 0.9985, Recall: 0.1103, F1-measure: 0.1986
+Val: 0.8, Precision: 0.9985, Recall: 0.1103, F1-measure: 0.1986
+Val: 0.9, Precision: 0.9985, Recall: 0.1103, F1-measure: 0.1986
+------------
+lstm size: 128, dense size: 128
+Val: 0.1, Precision: 1.0000, Recall: 0.0502, F1-measure: 0.0956
+Val: 0.2, Precision: 1.0000, Recall: 0.0502, F1-measure: 0.0956
+Val: 0.3, Precision: 1.0000, Recall: 0.0502, F1-measure: 0.0956
+Val: 0.4, Precision: 1.0000, Recall: 0.0502, F1-measure: 0.0956
+Val: 0.5, Precision: 1.0000, Recall: 0.0502, F1-measure: 0.0956
+Val: 0.6, Precision: 1.0000, Recall: 0.0502, F1-measure: 0.0956
+Val: 0.7, Precision: 1.0000, Recall: 0.0502, F1-measure: 0.0956
+Val: 0.8, Precision: 1.0000, Recall: 0.0502, F1-measure: 0.0956
+Val: 0.9, Precision: 1.0000, Recall: 0.0502, F1-measure: 0.0956
+------------
+lstm size: 512, dense size: 512
+Val: 0.1, Precision: 1.0000, Recall: 0.1305, F1-measure: 0.2309
+Val: 0.2, Precision: 1.0000, Recall: 0.1305, F1-measure: 0.2309
+Val: 0.3, Precision: 1.0000, Recall: 0.1305, F1-measure: 0.2309
+Val: 0.4, Precision: 1.0000, Recall: 0.1305, F1-measure: 0.2309
+Val: 0.5, Precision: 1.0000, Recall: 0.1305, F1-measure: 0.2309
+Val: 0.6, Precision: 1.0000, Recall: 0.1305, F1-measure: 0.2309
+Val: 0.7, Precision: 1.0000, Recall: 0.1305, F1-measure: 0.2309
+Val: 0.8, Precision: 1.0000, Recall: 0.1305, F1-measure: 0.2309
+Val: 0.9, Precision: 1.0000, Recall: 0.1305, F1-measure: 0.2309
+------------
+lstm size: 512, dense size: 256
+Val: 0.1, Precision: 1.0000, Recall: 0.1406, F1-measure: 0.2465
+Val: 0.2, Precision: 1.0000, Recall: 0.1406, F1-measure: 0.2465
+Val: 0.3, Precision: 1.0000, Recall: 0.1406, F1-measure: 0.2465
+Val: 0.4, Precision: 1.0000, Recall: 0.1406, F1-measure: 0.2465
+Val: 0.5, Precision: 1.0000, Recall: 0.1406, F1-measure: 0.2465
+Val: 0.6, Precision: 1.0000, Recall: 0.1406, F1-measure: 0.2465
+Val: 0.7, Precision: 1.0000, Recall: 0.1406, F1-measure: 0.2465
+Val: 0.8, Precision: 1.0000, Recall: 0.1406, F1-measure: 0.2465
+Val: 0.9, Precision: 1.0000, Recall: 0.1406, F1-measure: 0.2465
+------------
+lstm size: 512, dense size: 128
+Val: 0.1, Precision: 1.0000, Recall: 0.1205, F1-measure: 0.2151
+Val: 0.2, Precision: 1.0000, Recall: 0.1205, F1-measure: 0.2151
+Val: 0.3, Precision: 1.0000, Recall: 0.1205, F1-measure: 0.2151
+Val: 0.4, Precision: 1.0000, Recall: 0.1205, F1-measure: 0.2151
+Val: 0.5, Precision: 1.0000, Recall: 0.1205, F1-measure: 0.2151
+Val: 0.6, Precision: 1.0000, Recall: 0.1205, F1-measure: 0.2151
+Val: 0.7, Precision: 1.0000, Recall: 0.1205, F1-measure: 0.2151
+Val: 0.8, Precision: 1.0000, Recall: 0.1205, F1-measure: 0.2151
+Val: 0.9, Precision: 1.0000, Recall: 0.1205, F1-measure: 0.2151
+------------

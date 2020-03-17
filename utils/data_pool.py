@@ -15,8 +15,9 @@ tools = '/home/nnabizad/code/toolpred/data/mac/mac_tools'
 # tools = '/home/nnabizad/code/toolpred/data/yam/yam_tools'
 objects = '/home/nnabizad/code/toolpred/data/mac/mac_parts'
 # objects = '/home/nnabizad/code/toolpred/data/yam/yam_ings'
-min_freq = 1
+topred = objects
 
+min_freq = 1
 seeds = [5, 896783, 21, 322, 45234]
 # glove_embedding = WordEmbeddings('glove')
 glove_embedding = WordEmbeddings('/hri/localdisk/nnabizad/w2v/glove100_word2vec1')
@@ -52,7 +53,7 @@ class Mydata():
 class Data:
     def __init__(self, seed, usew2v=False, title=False):
         test_ratio = 0.2
-        biglist = load_obj(tools)
+        biglist = load_obj(topred)
         manuals, labels = self.encoder(biglist, usew2v=usew2v)
         X_train, X_test, y_train, y_test = train_test_split(
             manuals,
