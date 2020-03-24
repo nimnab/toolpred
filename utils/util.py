@@ -1,9 +1,9 @@
-import numpy as np
 import pickle as pk
-# from nltk.util import ngrams
-import scipy.stats
 import sys
 
+import numpy as np
+# from nltk.util import ngrams
+import scipy.stats
 
 
 def save_obj(obj, name):

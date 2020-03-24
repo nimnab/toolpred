@@ -1,4 +1,5 @@
 from nltk.util import ngrams
+
 from utils.datas import Data
 from utils.util import mean_confidence_interval, output
 from .chain import Chain_withid

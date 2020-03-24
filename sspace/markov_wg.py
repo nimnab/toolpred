@@ -2,8 +2,6 @@
 
 import sys
 
-import numpy as np
-
 # from utils.sentemb import cosin_sim , fasttext , tfidf
 from utils.datas import Data
 from utils.util import ngram_simscore, output

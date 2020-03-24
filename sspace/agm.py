@@ -1,15 +1,17 @@
 import itertools
-import numpy as np
-from .chain import Chain_withid
-from gensim import matutils
 import sys
-from sklearn.cluster import KMeans
-from gensim.models.keyedvectors import KeyedVectors
-from fse.models import SIF
-from fse import IndexedList
-from utils.datas import Data, seeds
-from utils.util import output
 from collections import defaultdict
+
+import numpy as np
+from fse import IndexedList
+from fse.models import SIF
+from gensim import matutils
+from gensim.models.keyedvectors import KeyedVectors
+from sklearn.cluster import KMeans
+
+from utils.datas import Data
+from utils.util import output
+from .chain import Chain_withid
 
 datapath = '/hri/localdisk/nnabizad/toolpreddata/'
 # sentence_embedding = MeanEmbedding(lang="en")

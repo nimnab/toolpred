@@ -1,14 +1,11 @@
-
-
 import sys
 
 import numpy as np
-from utils.datas import Data
-from utils.util import ngram_simscore, output
-from .chain import Chain_withid
 from gensim import matutils
-import sys
-from collections import defaultdict
+
+from utils.datas import Data
+from utils.util import output
+from .chain import Chain_withid
 
 datapath = '/hri/localdisk/nnabizad/toolpreddata/'
 sentsembs = dict()

@@ -1,9 +1,10 @@
-import requests
 import json
-import atexit
 import os
+
 import dropbox
 import inflect
+import requests
+
 base = "https://mapi.yummly.com/mapi/v17/content/feed?&start={}&limit=20"
 
 os.environ['HTTP_PROXY'] = os.environ['http_proxy'] = "172.26.0.47:8118"

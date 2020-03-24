@@ -1,14 +1,14 @@
-from pyfixit import Guide
-
-from pymongo import MongoClient
-from nlps.nlp import Nlp
 import re
-from sklearn.model_selection import train_test_split
-from numpy import arange
 import sys
-from Bio import pairwise2
-from utils.util import output, upload
 
+from Bio import pairwise2
+from nlps.nlp import Nlp
+from numpy import arange
+from pyfixit import Guide
+from pymongo import MongoClient
+from sklearn.model_selection import train_test_split
+
+from utils.util import output, upload
 
 r = re.compile(r"(?:(?<=\s)|^)(?:[a-z]|\d+)", re.I)
 

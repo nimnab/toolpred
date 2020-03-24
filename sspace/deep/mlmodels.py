@@ -5,8 +5,6 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.layers import TimeDistributed, Input, LSTM, Dense, Masking, Lambda, concatenate, RepeatVector, GRU, Dropout, SimpleRNN ,Permute
 from keras.models import Sequential, Model
 from sklearn.utils.class_weight import compute_class_weight
-import tensorflow as tf
-import keras.backend.tensorflow_backend as tfb
 
 dr = 0.3
 

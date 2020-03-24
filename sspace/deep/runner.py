@@ -4,7 +4,7 @@ from sspace.deep.models import *
 from utils.datas import Data
 from utils.util import mean_confidence_interval
 from utils.util import output
-import sys
+
 models = [lstm_pred, lstm_sum, lstm_gru, lstm_sif, lstm_sum_zeroh, lstm_contcat]
 
 

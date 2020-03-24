@@ -13,6 +13,10 @@ def noneadd(y):
     nounset = {'screwdriver', 'screw', 'cover', 'shield', 'nut', 'drive', 'board', 'assembly', 'cable', 'bracket',
                'standoff', 'tape', 'bezel', 'connector', 'sticker', 'speaker', 'antenna', 'magnet', 'panel', 'fan' ,
                'ribbon', 'gasket', 'subwoofer'}
+    if y in nounset:
+        return 'None ' + y
+    else:
+        return y
 
 
 def save_data(hidden_size, gru_size, dens_size):
@@ -40,7 +44,7 @@ def save_data(hidden_size, gru_size, dens_size):
         for i in range(len(mydata.test)):
             for j in range(len(mydata.test[i])):
                 Xs = np.append(Xs, [predictions[i][j]], axis=0)
-                Ys.append([y.split()[0] for y in mydata.test[i][j]])
+                Ys.append([noneadd(y) for y in mydata.test[i][j]])
         np.save(filepath + '{}_xtest'.format(data), Xs)
         save_obj(Ys, filepath + '{}_ytest'.format(data))
     return 0
@@ -65,7 +69,7 @@ def save_layer(layer, hidden_size, gru_size, dens_size):
         for i in range(len(mydata.train)):
             for j in range(len(mydata.train[i])):
                 Xs = np.append(Xs, [predictions[i][j]], axis=0)
-                Ys.append([y.split()[0] for y in mydata.train[i][j]])
+                Ys.append([noneadd(y) for y in mydata.train[i][j]])
         np.save(filepath + '{}_xtrain_{}'.format(data, layer), Xs)
         save_obj(Ys, filepath + '{}_ytrain_{}'.format(data, layer))
         predictions = get_activations(saved_model, mydata.dtest.input, layer_name=layer, nodes_to_evaluate=None,
@@ -76,7 +80,7 @@ def save_layer(layer, hidden_size, gru_size, dens_size):
         for i in range(len(mydata.test)):
             for j in range(len(mydata.test[i])):
                 Xs = np.append(Xs, [predictions[i][j]], axis=0)
-                Ys.append([y.split()[0] for y in mydata.test[i][j]])
+                Ys.append([noneadd(y) for y in mydata.test[i][j]])
         np.save(filepath + '{}_xtest_{}'.format(data, layer), Xs)
         save_obj(Ys, filepath + '{}_ytest_{}'.format(data, layer))
     return 0
@@ -88,4 +92,4 @@ if __name__ == '__main__':
     layers = ['masking_1', 'gru_1', 'time_distributed_1', 'dropout_1', 'dense_2']
     gru_size = 128
     modelindex = 0
-    file = save_layer(layers[4], hidden_size, gru_size, dens_size)
+    file = save_layer(layers[2], hidden_size, gru_size, dens_size)

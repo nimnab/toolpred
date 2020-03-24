@@ -1,7 +1,7 @@
-import random
-import operator
 import bisect
 import json
+import operator
+import random
 
 # Python3 compatibility
 try: # pragma: no cover

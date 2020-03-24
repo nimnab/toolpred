@@ -1,16 +1,11 @@
 
-from fse import IndexedList
-from fse.models import uSIF, SIF
-from utils.datas import Data
-from gensim.models.keyedvectors import KeyedVectors, FastTextKeyedVectors
-from numpy import dot
-from gensim import matutils
-from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 import sister
+from fse import IndexedList
+from gensim import matutils
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-
-
+from utils.datas import Data
 
 datapath = '/hri/localdisk/nnabizad/toolpreddata/'
 mydata = Data(0, title=True)

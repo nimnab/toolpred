@@ -8,10 +8,11 @@ filename=$1
 # tags=$*
 
  
-seeds=(15 896783 9 12 45234)
- 
+#seeds=(15 896783 9 12 45234)
+seeds=(0 1 2 3 4 5 6)
+
 
 for j in "${seeds[@]}"
 do
-    python3 -m sspace.$filename ${j} &
+    python3 sspace/hierachy/$filename ${j} &
 done

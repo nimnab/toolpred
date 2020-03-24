@@ -2,7 +2,8 @@ import numpy as np
 from keras import backend as K
 from keras import regularizers
 from keras.callbacks import EarlyStopping, ModelCheckpoint
-from keras.layers import TimeDistributed, Input, LSTM, Dense, Masking, Lambda, concatenate, RepeatVector, GRU, Dropout, SimpleRNN ,Permute
+from keras.layers import TimeDistributed, Input, LSTM, Dense, Masking, Lambda, concatenate, RepeatVector, GRU, Dropout, \
+    Permute
 from keras.models import Sequential, Model
 from sklearn.utils.class_weight import compute_class_weight
 

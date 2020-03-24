@@ -1,13 +1,13 @@
 import sys
 
 import numpy as np
-from .chain import Chain_withid
-from nltk.util import ngrams
+from knlm import KneserNey
+
 # from utils.sentemb import cosin_sim , fasttext , tfidf
 from utils.datas import Data
-from utils.knlm import ModifiedKneserNey
-from utils.util import ngram_simscore, output
-from knlm import KneserNey
+from utils.util import output
+from .chain import Chain_withid
+
 datapath = '/hri/localdisk/nnabizad/toolpreddata/'
 
 

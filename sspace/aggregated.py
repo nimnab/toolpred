@@ -1,4 +1,10 @@
-import nltk, math, numpy, collections, pdb, sys, pickle
+import collections
+import math
+import nltk
+import numpy
+import pickle
+import sys
+
 nltk.data.path.append("/hri/localdisk/nnabizad/nltk_data")
 import matplotlib.pyplot as plt
 from utils.datas import Data

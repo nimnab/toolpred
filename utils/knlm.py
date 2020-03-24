@@ -4,19 +4,18 @@ Module contains the contents necessary to perform a modified Kneser-Ney smoothin
 probabilities of additional corpuses.
 
 """
+import random
+from collections import Counter, defaultdict
 from re import sub as re_sub
+
+import math
+from math import log
 from nltk import pos_tag, ngrams
 from nltk.corpus import wordnet
 from nltk.data import load as nltk_load
 from nltk.stem.wordnet import WordNetLemmatizer
-from collections import Counter
 from numpy import multiply as np_multiply
 from numpy import sum as np_sum
-from math import log
-
-import math
-import random
-from collections import Counter, defaultdict
 
 __author__ = "Elijah Peake"
 __email__ = "elijah.peake@gmail.com"

@@ -1,7 +1,9 @@
-from .chain import Chain
+import sys
+
 from utils.datas import Data
 from utils.util import output
-import sys
+from .chain import Chain
+
 
 def predict(lis):
     global prediction

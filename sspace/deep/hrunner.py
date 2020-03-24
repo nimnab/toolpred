@@ -1,6 +1,7 @@
+from pandas import DataFrame
+
 from sspace.deep.mlmodels import *
 from utils.data_pool import Data
-from pandas import DataFrame
 
 models = [lstm_pred, lstm_sum, lstm_gru, lstm_sif, lstm_sum_zeroh, lstm_contcat]
 

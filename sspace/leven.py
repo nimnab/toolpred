@@ -1,11 +1,11 @@
-import distance
-from utils.datas import Data
-from collections import defaultdict
-from utils.util import output, mean_confidence_interval
-import numpy as np
 import random
-import scipy.stats
+from collections import defaultdict
 
+import distance
+import numpy as np
+
+from utils.datas import Data
+from utils.util import output, mean_confidence_interval
 
 random.seed = 3
 
@@ -136,7 +136,6 @@ def write_result_excluded(filename):
 
 
 if __name__ == '__main__':
-    import sys
     notool = False
     filename = 'res/leven/'
     # seed = int(sys.argv[1])

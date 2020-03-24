@@ -1,7 +1,9 @@
 # from CPT import CPT
-from sspace.CPT import CPT
 import pickle as pk
+
 from sklearn.model_selection import train_test_split
+from sspace.CPT import CPT
+
 
 def predict(lis):
     global prediction

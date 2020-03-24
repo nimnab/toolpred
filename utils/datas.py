@@ -4,16 +4,14 @@ import re
 from collections import defaultdict, Counter
 
 import numpy as np
+from flair.data import Sentence
+from flair.embeddings import WordEmbeddings
+from fse import IndexedList
+from fse.models import SIF
 from gensim.models.keyedvectors import KeyedVectors
 from keras.preprocessing import sequence
 from keras.utils import np_utils
 from sklearn.model_selection import train_test_split
-
-from flair.embeddings import WordEmbeddings
-from flair.data import Sentence
-
-from fse.models import SIF
-from fse import IndexedList
 
 # datapath = '/home/nnabizad/code/toolpred/data/yammly/mlyam_'
 # bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/yammly/yammly_'

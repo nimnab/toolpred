@@ -1,18 +1,16 @@
-
-
 import sys
 
 import numpy as np
+from fse import IndexedList
+from fse.models import SIF
+from gensim import matutils
+from gensim.models.keyedvectors import KeyedVectors
 
 # from utils.sentemb import cosin_sim , fasttext , tfidf
 from utils.datas import Data
-from utils.util import ngram_simscore, output
+from utils.util import output
 from .chain import Chain_withid
-from gensim import matutils
-import sys
-from gensim.models.keyedvectors import KeyedVectors
-from fse.models import SIF
-from fse import IndexedList
+
 # from fse import IndexedList
 
 datapath = '/hri/localdisk/nnabizad/toolpreddata/'

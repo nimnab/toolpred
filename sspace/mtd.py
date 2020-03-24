@@ -2,8 +2,6 @@ import nltk
 import numpy as np
 
 nltk.data.path.append("/hri/localdisk/nnabizad/nltk_data")
-from utils.util import output
-from utils.util import mean_confidence_interval
 from utils.datas import Data
 import sys
 
