@@ -24,7 +24,7 @@ def per_recal(target, pred):
         return per,rec,f1
 
 def write_result(mydata, hidden_size, gru_size, dens_size):
-    data = 'macparts'
+    data = 'mactools'
     model = models[modelindex]
     filename = '/home/nnabizad/code/toolpred/res/{}.txt'.format(data)
     modelname = '/hri/localdisk/nnabizad/models/{}_{}_{}'.format(data, hidden_size,dens_size) + '_s{}'
