@@ -19,7 +19,7 @@ classifiers = [
     SVC(kernel="rbf", gamma="auto", C=100, probability=True, class_weight='balanced'),
     GaussianNB(),
     ComplementNB(),
-    tree.DecisionTreeClassifier(),
+    tree.DecisionTreeClassifier(class_weight='balanced'),
     RandomForestClassifier(n_estimators=100, random_state=0, class_weight='balanced'),
     MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(100,), random_state=1, max_iter=1000)
 ]
@@ -28,12 +28,17 @@ names = ["linear", "rbf", "GaussianNB", "ComplementNB", "DecisionTreeClassifier"
          "MLPClassifier"]
 
 
-def per_recal(target, pred):
+def per_recal(targets, preds):
     tp = fp = fn = 0
-    for i in range(len(target)):
-        if (target[i] and pred[i]): tp += 1
-        if (not target[i] and pred[i]): fp += 1
-        if (target[i] and not pred[i]): fn += 1
+    for i,step in enumerate(targets):
+        for j in step:
+            if j in preds[i]:
+                tp+=1
+            else:
+                fn+=1
+        for j in preds[i]:
+            if j not in step:
+                fp+=1
     if tp == 0:
         if fn == 0 and fp == 0:
             return 1, 1, 1
@@ -51,7 +56,10 @@ def myclassifier(index):
     clf = classifiers[index]
     model = HierarchicalClassifier(clf=clf, hierarchy=class_hierarchy)
     model.fit(xtrain=X_train, ytrain=y_train)
-    model.predict(xtest=X_test)
+    lens = [len(a) for a in y_test]
+    preds = model.predict(xtest=X_test, lens=lens)
+    per, rec, f1 = per_recal(y_test,preds)
+    print(per, rec, f1)
 
 
 

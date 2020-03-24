@@ -1,9 +1,11 @@
 from sklearn.base import clone
+import numpy as np
+
 
 class HierarchicalClassifier():
     def __init__(self,
-                 clf,
-                 hierarchy):
+                 hierarchy,
+                 clf= None):
         self.clf = clf
         self.clfs = dict()
         self.hierarchy = hierarchy
@@ -57,10 +59,31 @@ class HierarchicalClassifier():
                             print(grandchild)
         return leafs, nonleafs, revrese_hirachy
 
-    def predict(self, xtest):
-        for x in xtest:
-            y = self.clfs['<ROOT>'].predict(x.reshape(1, -1))
-            print()
+    def predict(self, xtest, lens):
+        ys = []
+        for i,x in enumerate(xtest):
+            step = []
+            y = self.clfs['<ROOT>'].predict_proba(x.reshape(1, -1))[0]
+            args = np.argsort(-y)
+            c = 0
+            while (len(step) < lens[i]):
+                label = self.clfs['<ROOT>'].classes_[args[c]]
+                c+=1
+                if self.isleaf(label):
+                    # print(label)
+                    step.append(label)
+                    continue
+                else:
+                    _y = self.clfs[label].predict(x.reshape(1, -1))[0]
+                    if self.isleaf(_y):
+                        step.append(_y)
+                        continue
+                    else:
+                        _yt = self.clfs[_y].predict(x.reshape(1, -1))[0]
+                        if self.isleaf(_yt):
+                            step.append(_yt)
+            ys.append(step)
+        return ys
 
 
     def isleaf(self, node):

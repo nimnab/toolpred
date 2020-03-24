@@ -1,15 +1,16 @@
 import logging
+import sys
 
 import numpy as np
-# from sklearn_hierarchical_classification.classifier import HierarchicalClassifier
-from .HierarchicalClassifier import HierarchicalClassifier
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB, ComplementNB
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
-import sys
+
+# from sklearn_hierarchical_classification.classifier import HierarchicalClassifier
+from HierarchicalClassifier import HierarchicalClassifier
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -25,7 +26,8 @@ classifiers = [
     MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(100,), random_state=1, max_iter=1000)
 ]
 
-names = ["linear", "rbf", "GaussianNB", "ComplementNB", "DecisionTreeClassifier", "RandomForestClassifier", "MLPClassifier"]
+names = ["linear", "rbf", "GaussianNB", "ComplementNB", "DecisionTreeClassifier", "RandomForestClassifier",
+         "MLPClassifier"]
 
 
 def per_recal(target, pred):
@@ -48,34 +50,39 @@ def per_recal(target, pred):
 
 def myclassifier(index):
     # bclf = OneVsRestClassifier(classifiers[2])
-    # clf = classifiers[6]
+    sclf = classifiers[index]
     model = HierarchicalClassifier(hierarchy=class_hierarchy)
-    xtrain, ytrain = model.rolled_data(X_train, y_train)
-    xtest, ytest = model.rolled_data(X_test, y_test)
-    mlp = MLPClassifier(max_iter=1000)
-    svm = SVC(kernel="rbf", probability=True, class_weight='balanced')
-    mlpparameter_space = {
-        'hidden_layer_sizes': [(200, 100, 50,), (200, 50), (100, 50,), (50, ), (100,), (200,)],
-        'activation': ['tanh', 'relu'],
-        'solver': ['sgd', 'adam', 'lbfgs'],
-        'alpha': [1e-5, 0.0001, 0.05],
-        'learning_rate': ['constant', 'adaptive'],
-    }
-    svmparameters = {'gamma':["auto", 1e-20, 1e-10, 1e-5, 0.001, 0.01, 1], "C":[100, 1000, 0.1, 0.01]}
-    # clf = GridSearchCV(svm, svmparameters, n_jobs=-1, cv=3)
-    clf = classifiers[index]
-    clf.fit(xtrain, ytrain)
-    preds = clf.predict(xtest)
-    accuracy = sum(1 for x, y in zip(preds, ytest) if x == y) / len(ytest)
-    print(layer, names[index], accuracy)
-    # means = clf.cv_results_['mean_test_score']
-    # stds = clf.cv_results_['std_test_score']
-    # for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-    #     print("%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params))
+    rootleafs, rootnonleafs, rootreverse = model.node_data('<ROOT>')
+    xtrain, ytrain = model.rolled_data(rootleafs, rootreverse, X_train, y_train)
+    xtest, ytest = model.rolled_data(rootleafs, rootreverse, X_test, y_test)
+    # mlp = MLPClassifier(max_iter=1000)
+    # svm = SVC(kernel="rbf", probability=True, class_weight='balanced')
+    # mlpparameter_space = {
+    #     'hidden_layer_sizes': [(200, 100, 50,), (200, 50), (100, 50,), (50,), (100,), (200,)],
+    #     'activation': ['tanh', 'relu'],
+    #     'solver': ['sgd', 'adam', 'lbfgs'],
+    #     'alpha': [1e-5, 0.0001, 0.05],
+    #     'learning_rate': ['constant', 'adaptive'],
+    # }
+    # svmparameters = {'gamma': ["auto", 1e-20, 1e-10, 1e-5, 0.001, 0.01, 1], "C": [100, 1000, 0.1, 0.01]}
+    treepars = {'criterion': ['gini', 'entropy'], 'splitter': ['best', 'random'], 'class_weight': ['balanced', None],
+                'min_samples_split': [2, 3, 4, 5, 10], 'min_samples_leaf': [1, 2, 3, 4, 5, 10],
+                'min_weight_fraction_leaf': [0, 0, 1e-5, 0.001, 0.01], 'max_features': ['auto', 'sqrt', 'log2', None],
+                'max_leaf_nodes': [None, 1, 2, 3, 4, 5], 'min_impurity_decrease': [0, 0, 1e-5, 0.001, 0.01],
+                'min_impurity_split': [0, 0, 1e-10, 1e-5, 0.001, 0.01]}
+    clf = GridSearchCV(sclf, treepars, n_jobs=-1, cv=3)
+    clf.fit(xtrain+xtest, ytrain+ytest)
+    # preds = clf.predict(xtest)
+    # accuracy = sum(1 for x, y in zip(preds, ytest) if x == y) / len(ytest)
+    # print(layer, names[index], accuracy)
+    means = clf.cv_results_['mean_test_score']
+    stds = clf.cv_results_['std_test_score']
+    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
+        print("%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params))
 
 
 if __name__ == '__main__':
-    layer = ['_gru_1', '_time_distributed_1', '_dense_2'][1]
+    layer = ['_gru_1', '_time_distributed_1', '_dense_2'][2]
     activations = ['relu', 'logistic', 'tanh']
     alpha = [0.001, 0.00001, 0.0001]
     hiddens = [256, 128, 64]
@@ -84,5 +91,5 @@ if __name__ == '__main__':
     y_train = np.load(path + 'svmdata/mactools_ytrain{}.pkl'.format(layer))
     X_test = np.load(path + 'svmdata/mactools_xtest{}.npy'.format(layer))
     y_test = np.load(path + 'svmdata/mactools_ytest{}.pkl'.format(layer))
-    index = int(sys.argv[1])
+    index = 4
     myclassifier(index=index)
