@@ -6,7 +6,7 @@ from flair.data import Sentence
 from flair.embeddings import WordEmbeddings, DocumentPoolEmbeddings
 from keras.utils import np_utils
 from sklearn.model_selection import train_test_split
-
+from sklearn.preprocessing import MultiLabelBinarizer
 # datapath = '/home/nnabizad/code/toolpred/data/yammly/mlyam_'
 # bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/yammly/yammly_'
 # bigdatapath = '/hri/localdisk/nnabizad/toolpreddata/mac/mlmac_'
@@ -51,11 +51,11 @@ class Mydata():
 
 
 class Data:
-    def __init__(self, seed, usew2v=False, title=False):
+    def __init__(self, seed, usew2v=False, title=False, ml_output = False):
         test_ratio = 0.2
         biglist = load_obj(topred)
         self.train, self.test = train_test_split(biglist,test_size=test_ratio,random_state=seed,)
-        manuals, labels = self.encoder(biglist, usew2v=usew2v)
+        manuals, labels = self.encoder(biglist, usew2v=usew2v, ml_output=ml_output)
         X_train, X_test, y_train, y_test = train_test_split(
             manuals,
             labels,
@@ -65,14 +65,20 @@ class Data:
         self.dtrain = Mydata(X_train, y_train)
         self.dtest = Mydata(X_test, y_test)
 
-    def encoder(self, biglist, usew2v):
+    def encoder(self, biglist, usew2v, ml_output):
+        mlb = MultiLabelBinarizer()
         self.create_encoddic(biglist)
         self.dim = glovedim if usew2v else len(self.encoddic)
         maxlen = max([len(a) for a in biglist]) + 2
         encodedmanuals = np.empty((0, maxlen, self.dim))
-        encodedlabels = np.empty((0, maxlen, self.dim))
-
+        if ml_output:
+            alltools = [(i,) for j in biglist for k in j for i in k] + [('END',)]
+            mlb.fit(alltools)
+            encodedlabels = np.empty((0, maxlen, len(mlb.classes_)))
+        else:
+            encodedlabels = np.empty((0, maxlen, self.dim))
         for manual in biglist:
+            ml_y = [(0,)] * maxlen
             xvectors = np.zeros((maxlen, self.dim))
             yvectors = np.zeros((maxlen, self.dim))
             xvectors[0] = self.vectorize(['START'], usew2v)
@@ -81,9 +87,15 @@ class Data:
                 if step:
                     xvectors[ind + 1] = self.vectorize(step, usew2v)
                     yvectors[ind] = xvectors[ind + 1]
+                    ml_y[ind] = tuple(step)
             yvectors[len(manual)] = self.vectorize(['END'], usew2v)
+            ml_y[ind+1] = ('END',)
             encodedmanuals = np.append(encodedmanuals, [xvectors], axis=0)
-            encodedlabels = np.append(encodedlabels, [yvectors], axis=0)
+            if ml_output:
+                encodedlabels = np.append(encodedlabels, [mlb.transform(ml_y)], axis=0)
+            else:
+                encodedlabels = np.append(encodedlabels, [yvectors], axis=0)
+
         return encodedmanuals, encodedlabels
 
     def encode(self, word):

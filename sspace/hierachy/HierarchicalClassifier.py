@@ -1,11 +1,11 @@
-from sklearn.base import clone
 import numpy as np
+from sklearn.base import clone
 
 
 class HierarchicalClassifier():
     def __init__(self,
                  hierarchy,
-                 clf= None):
+                 clf=None):
         self.clf = clf
         self.clfs = dict()
         self.hierarchy = hierarchy
@@ -74,7 +74,7 @@ class HierarchicalClassifier():
                     revrese_hirachy[child] = parent
                     for grandchild in self.hierarchy[child]:
                         if self.isleaf(grandchild):
-                            if level ==1:
+                            if level == 1:
                                 revrese_hirachy[grandchild] = parent
                             elif level == 2:
                                 revrese_hirachy[grandchild] = child
@@ -82,32 +82,58 @@ class HierarchicalClassifier():
                             print(grandchild)
         return revrese_hirachy
 
-    def predict(self, xtest, lens, level = 3):
+    def predict(self, xtest, lens, level=3):
         ys = []
-        for i,x in enumerate(xtest):
+        for i, x in enumerate(xtest):
             step = []
             y = self.clfs['<ROOT>'].predict_proba(x.reshape(1, -1))[0]
             args = np.argsort(-y)
-            c = 0
-            while (len(step) < lens[i]):
+            for c in range(len(args)):
                 label = self.clfs['<ROOT>'].classes_[args[c]]
-                c+=1
-                if self.isleaf(label) or level<2:
-                    # print(label)
+                if self.isleaf(label) or level == 1:
                     step.append(label)
-                    continue
+                    if len(step) >= lens[i]: break
                 elif label in self.clfs:
                     _y = self.clfs[label].predict(x.reshape(1, -1))[0]
-                    if self.isleaf(_y) or level <3:
+                    if self.isleaf(_y) or level == 2:
                         step.append(_y)
-                        continue
+                        if len(step) >= lens[i]: break
                     elif _y in self.clfs:
                         _yt = self.clfs[_y].predict(x.reshape(1, -1))[0]
                         if self.isleaf(_yt):
                             step.append(_yt)
+                            if len(step) >= lens[i]: break
             ys.append(step)
         return ys
 
+    def predictml(self, xtest, lens):
+        ys = []
+        for i, x in enumerate(xtest):
+            y = self.clfs['<ROOT>'].predict_proba(x.reshape(1, -1))[0]
+            args = np.argsort(-y)
+            labels = {self.clfs['<ROOT>'].classes_[args[c]]: y[args[c]] for c in range(lens[i])}
+            for label in labels.copy():
+                if not self.isleaf(label):
+                    if label in self.clfs:
+                        y1 = self.clfs[label].predict_proba(x.reshape(1, -1))[0]
+                        args1 = np.argsort(-y1)
+                        labs = {self.clfs[label].classes_[args1[c]]: y1[args1[c]] * labels[label] for c in
+                                range(min(lens[i],len(args1)))}
+                        del labels[label]
+                        labels.update(labs)
+                        for lab in labs:
+                            if not self.isleaf(lab):
+                                del labels[lab]
+                                if lab in self.clfs:
+                                    y2 = self.clfs[lab].predict_proba(x.reshape(1, -1))[0]
+                                    args2 = np.argsort(-y2)
+                                    labs3 = {self.clfs[lab].classes_[args2[c]]: y2[args2[c]] * labs[lab] for c in
+                                             range(min(lens[i],len(args2)))}
+                                    labels.update(labs3)
+
+            sorted_labels = [j[0] for j in sorted(labels.items(), key=lambda kv: kv[1], reverse=True)][:lens[i]]
+            ys.append(sorted_labels)
+        return ys
 
     def isleaf(self, node):
         if node in self.hierarchy.keys():
@@ -115,12 +141,13 @@ class HierarchicalClassifier():
         else:
             return True
 
-    def f1_score(self, targets, preds, level = 3):
+    def f1_score(self, targets, preds, level=3):
         targets = targets.copy()
         if level < 3:
             rootreverse = self.inverse_hierachy('<ROOT>', level)
             for s in range(len(targets)):
                 targets[s] = [rootreverse[i] for i in targets[s] if i in rootreverse]
+                preds[s] = [rootreverse[i] for i in preds[s] if i in rootreverse]
         tp = fp = fn = 0
         for i, step in enumerate(targets):
             for j in step:

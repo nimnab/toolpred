@@ -59,7 +59,7 @@ def myclassifier(index):
     model.fit(xtrain=X_train, ytrain=y_train)
     lens = [len(a) for a in y_test]
     for level in (1,2,3):
-        preds = model.predict(xtest=X_test, lens=lens, level=level)
+        preds = model.predictml(xtest=X_test, lens=lens, level=level)
         f1 = model.f1_score(y_test,preds, level=level)
         print(layer, names[index], f1)
 
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     # data = 'mactools'
     data = 'macparts'
     layer = ['_gru_1', '_time_distributed_1', '_dense_2'][2]
-    activations = ['relu', 'tanh']
+    activations = ['relu', 'tanh', '']
     alpha = [0.001, 0.00001, 0.0001]
     hiddens = [256, 128, 64]
     class_hierarchy = np.load(path + 'svmdata/{}_hi.pkl'.format(data))

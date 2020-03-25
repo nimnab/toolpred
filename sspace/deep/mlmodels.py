@@ -13,14 +13,15 @@ POS_WEIGHT = 2  # multiplier for positive targets, needs to be tuned
 
 def lstm_pred(mydata, modelname, seed, hidden_size, denc1_size, dens2_size):
     # for seed in seeds:
-    _, seqlength, featurelen = np.shape(mydata.dtest.target)
+    _, seqlength, toolnumber = np.shape(mydata.dtest.target)
+    _, _, featurelen = np.shape(mydata.dtest.input)
     model = Sequential()
     model.add(Masking(mask_value=0., input_shape=(seqlength, featurelen)))
     model.add(GRU(hidden_size, return_sequences=True, recurrent_dropout=dr))
 
     model.add(TimeDistributed(Dense(dens2_size, activation='relu')))
     model.add(Dropout(dr))
-    model.add(Dense(featurelen, activation='sigmoid'))
+    model.add(Dense(toolnumber, activation='sigmoid'))
     model.summary()
     # adam = Adam(lr=0.001)
     model.compile(loss='binary_crossentropy', optimizer='adam')
