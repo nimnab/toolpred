@@ -10,7 +10,7 @@ from sklearn.svm import SVC
 
 from utils.util import output
 # from sklearn_hierarchical_classification.classifier import HierarchicalClassifier
-from .HierarchicalClassifier import HierarchicalClassifier
+from HierarchicalClassifier import HierarchicalClassifier
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -53,31 +53,26 @@ def per_recal(targets, preds):
         return per, rec, f1
 
 
-def myclassifier(act, alpha, hidden):
+def myclassifier(hidden):
     # bclf = OneVsRestClassifier(classifiers[2])
-    clf = MLPClassifier(solver='lbfgs', alpha=alpha, hidden_layer_sizes=(hidden,), activation=act, random_state=1,
-                        max_iter=1000, learning_rate='adaptive')
+    clf = MLPClassifier(solver='lbfgs', hidden_layer_sizes=hidden, random_state=1,
+                        max_iter=1000, learning_rate='invscaling', learning_rate_init=0.1)
     model = HierarchicalClassifier(clf=clf, hierarchy=class_hierarchy)
     model.fit(xtrain=X_train, ytrain=y_train)
     lens = [len(a) for a in y_test]
     preds = model.predict(xtest=X_test, lens=lens)
     per, rec, f1 = per_recal(y_test, preds)
-    output(", {} , {} , {},  {}, {}, {}".format(alpha, hidden, act, per, rec, f1), filename=layer + '_resulth.csv',
-           func='write')
+    print("{} , {}, {}, {}".format(hidden, per, rec, f1))
 
 
 if __name__ == '__main__':
     data = 'macparts'
-    layer = ['_gru_1', '_time_distributed_1', '_dense_2'][2]
-    activations = ['relu', 'tanh']
-    alpha = [0.001, 0.00001, 0.0001]
-    hiddens = [256, 128, 64]
+    layer = ['_gru_1', '_time_distributed_1', '_dense_2'][1]
+    hiddens = [(256,), (128,), (64,), (128,64), (256,64)]
     class_hierarchy = np.load(path + 'svmdata/{}_hi.pkl'.format(data))
     X_train = np.load(path + 'svmdata/{}_xtrain{}.npy'.format(data,layer))
     y_train = np.load(path + 'svmdata/{}_ytrain{}.pkl'.format(data,layer))
     X_test = np.load(path + 'svmdata/{}_xtest{}.npy'.format(data,layer))
     y_test = np.load(path + 'svmdata/{}_ytest{}.pkl'.format(data,layer))
     a = int(sys.argv[1])
-    h = int(sys.argv[2])
-    for act in activations:
-        myclassifier(act, alpha[a], hiddens[h])
+    myclassifier(hiddens[a])

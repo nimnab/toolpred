@@ -61,7 +61,28 @@ class HierarchicalClassifier():
                             print(grandchild)
         return leafs, nonleafs, revrese_hirachy
 
-    def predict(self, xtest, lens):
+    def inverse_hierachy(self, node, level):
+        # collect samples for non leafs
+        nonleafs = {tool for tool in self.hierarchy[node] if not self.isleaf(tool)}
+        revrese_hirachy = dict()
+        for tool in self.hierarchy['<ROOT>']: revrese_hirachy[tool] = tool
+        for parent in nonleafs:
+            for child in self.hierarchy[parent]:
+                if self.isleaf(child):
+                    revrese_hirachy[child] = parent
+                else:
+                    revrese_hirachy[child] = parent
+                    for grandchild in self.hierarchy[child]:
+                        if self.isleaf(grandchild):
+                            if level ==1:
+                                revrese_hirachy[grandchild] = parent
+                            elif level == 2:
+                                revrese_hirachy[grandchild] = child
+                        else:
+                            print(grandchild)
+        return revrese_hirachy
+
+    def predict(self, xtest, lens, level = 3):
         ys = []
         for i,x in enumerate(xtest):
             step = []
@@ -71,13 +92,13 @@ class HierarchicalClassifier():
             while (len(step) < lens[i]):
                 label = self.clfs['<ROOT>'].classes_[args[c]]
                 c+=1
-                if self.isleaf(label):
+                if self.isleaf(label) or level<2:
                     # print(label)
                     step.append(label)
                     continue
                 elif label in self.clfs:
                     _y = self.clfs[label].predict(x.reshape(1, -1))[0]
-                    if self.isleaf(_y):
+                    if self.isleaf(_y) or level <3:
                         step.append(_y)
                         continue
                     elif _y in self.clfs:
@@ -93,3 +114,30 @@ class HierarchicalClassifier():
             return False
         else:
             return True
+
+    def f1_score(self, targets, preds, level = 3):
+        targets = targets.copy()
+        if level < 3:
+            rootreverse = self.inverse_hierachy('<ROOT>', level)
+            for s in range(len(targets)):
+                targets[s] = [rootreverse[i] for i in targets[s] if i in rootreverse]
+        tp = fp = fn = 0
+        for i, step in enumerate(targets):
+            for j in step:
+                if j in preds[i]:
+                    tp += 1
+                else:
+                    fn += 1
+            for j in preds[i]:
+                if j not in step:
+                    fp += 1
+        if tp == 0:
+            if fn == 0 and fp == 0:
+                return 1
+            else:
+                return 0
+        else:
+            per = tp / (tp + fp)
+            rec = tp / (tp + fn)
+            f1 = 2 * (per * rec) / (per + rec)
+            return f1

@@ -9,7 +9,7 @@ filename=$1
 
  
 #seeds=(15 896783 9 12 45234)
-seeds=(0 1 2 3 4 5 6)
+seeds=(0 1 2 3 4)
 
 
 for j in "${seeds[@]}"

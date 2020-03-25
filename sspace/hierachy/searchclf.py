@@ -12,7 +12,7 @@ from sklearn.model_selection import GridSearchCV
 # from sklearn_hierarchical_classification.classifier import HierarchicalClassifier
 from HierarchicalClassifier import HierarchicalClassifier
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.ERROR)
 
 path = '/home/nnabizad/code/toolpred/ipythons/'
 
@@ -66,24 +66,23 @@ def myclassifier(index):
     # }
     # svmparameters = {'gamma': ["auto", 1e-20, 1e-10, 1e-5, 0.001, 0.01, 1], "C": [100, 1000, 0.1, 0.01]}
     treepars = {'criterion': ['gini', 'entropy'], 'splitter': ['best', 'random'], 'class_weight': ['balanced', None],
-                'min_samples_split': [2, 3, 4, 5, 10], 'min_samples_leaf': [1, 2, 3, 4, 5, 10],
-                'min_weight_fraction_leaf': [0, 0, 1e-5, 0.001, 0.01], 'max_features': ['auto', 'sqrt', 'log2', None],
-                'max_leaf_nodes': [None, 1, 2, 3, 4, 5], 'min_impurity_decrease': [0, 0, 1e-5, 0.001, 0.01],
-                'min_impurity_split': [0, 0, 1e-10, 1e-5, 0.001, 0.01]}
-    clf = GridSearchCV(sclf, treepars, n_jobs=-1, cv=3)
+                'min_samples_split': [10, 15, 20], 'min_samples_leaf': [0.1, 0.5, 1],
+                'max_features': ['auto', 'sqrt', 'log2', None]}
+    clf = GridSearchCV(sclf, treepars, n_jobs=32, cv=2)
     clf.fit(xtrain+xtest, ytrain+ytest)
     # preds = clf.predict(xtest)
     # accuracy = sum(1 for x, y in zip(preds, ytest) if x == y) / len(ytest)
     # print(layer, names[index], accuracy)
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
-    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-        print("parts%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params))
+    with open(layer+'treesearch_parts.txt', 'w+') as f:
+        for mean, std, params in zip(means, stds, clf.cv_results_['params']):
+            f.write("%0.3f (+/-%0.03f) for %r \n" % (mean, std * 2, params))
 
 
 if __name__ == '__main__':
     data = 'macparts'
-    layer = ['_gru_1', '_time_distributed_1', '_dense_2'][2]
+    layer = ['_gru_1', '_time_distributed_1', '_dense_2'][1]
     activations = ['relu', 'logistic', 'tanh']
     alpha = [0.001, 0.00001, 0.0001]
     hiddens = [256, 128, 64]

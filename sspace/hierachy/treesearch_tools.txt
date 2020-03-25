@@ -1,0 +1,5 @@
+0.819 (+/-0.004) for {'min_samples_split': 10} 
+0.815 (+/-0.001) for {'min_samples_split': 15} 
+0.808 (+/-0.003) for {'min_samples_split': 20} 
+0.798 (+/-0.002) for {'min_samples_split': 30} 
+0.790 (+/-0.007) for {'min_samples_split': 40} 

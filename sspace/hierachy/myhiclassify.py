@@ -6,11 +6,12 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB, ComplementNB
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
+import sys
 
 # from sklearn_hierarchical_classification.classifier import HierarchicalClassifier
 from HierarchicalClassifier import HierarchicalClassifier
 
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 
 path = '/home/nnabizad/code/toolpred/ipythons/'
 
@@ -19,7 +20,7 @@ classifiers = [
     SVC(kernel="rbf", gamma="auto", C=100, probability=True, class_weight='balanced'),
     GaussianNB(),
     ComplementNB(),
-    tree.DecisionTreeClassifier(class_weight='balanced'),
+    tree.DecisionTreeClassifier(min_samples_split=10),
     RandomForestClassifier(n_estimators=100, random_state=0, class_weight='balanced'),
     MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(100,), random_state=1, max_iter=1000)
 ]
@@ -57,13 +58,15 @@ def myclassifier(index):
     model = HierarchicalClassifier(clf=clf, hierarchy=class_hierarchy)
     model.fit(xtrain=X_train, ytrain=y_train)
     lens = [len(a) for a in y_test]
-    preds = model.predict(xtest=X_test, lens=lens)
-    per, rec, f1 = per_recal(y_test,preds)
-    print(per, rec, f1)
+    for level in (1,2,3):
+        preds = model.predict(xtest=X_test, lens=lens, level=level)
+        f1 = model.f1_score(y_test,preds, level=level)
+        print(layer, names[index], f1)
 
 
 
 if __name__ == '__main__':
+    # data = 'mactools'
     data = 'macparts'
     layer = ['_gru_1', '_time_distributed_1', '_dense_2'][2]
     activations = ['relu', 'tanh']
@@ -74,5 +77,5 @@ if __name__ == '__main__':
     y_train = np.load(path + 'svmdata/{}_ytrain{}.pkl'.format(data,layer))
     X_test = np.load(path + 'svmdata/{}_xtest{}.npy'.format(data,layer))
     y_test = np.load(path + 'svmdata/{}_ytest{}.pkl'.format(data,layer))
-    index = 4
+    index = int(sys.argv[1])
     myclassifier(index=index)
