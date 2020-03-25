@@ -15,7 +15,7 @@ tools = '/home/nnabizad/code/toolpred/data/mac/mac_tools'
 # tools = '/home/nnabizad/code/toolpred/data/yam/yam_tools'
 objects = '/home/nnabizad/code/toolpred/data/mac/mac_parts'
 # objects = '/home/nnabizad/code/toolpred/data/yam/yam_ings'
-topred = tools
+topred = objects
 
 min_freq = 1
 seeds = [5, 896783, 21, 322, 45234]

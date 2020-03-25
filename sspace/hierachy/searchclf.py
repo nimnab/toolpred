@@ -78,18 +78,19 @@ def myclassifier(index):
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-        print("%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params))
+        print("parts%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params))
 
 
 if __name__ == '__main__':
+    data = 'macparts'
     layer = ['_gru_1', '_time_distributed_1', '_dense_2'][2]
     activations = ['relu', 'logistic', 'tanh']
     alpha = [0.001, 0.00001, 0.0001]
     hiddens = [256, 128, 64]
-    class_hierarchy = np.load(path + 'svmdata/mactool_hi.pkl')
-    X_train = np.load(path + 'svmdata/mactools_xtrain{}.npy'.format(layer))
-    y_train = np.load(path + 'svmdata/mactools_ytrain{}.pkl'.format(layer))
-    X_test = np.load(path + 'svmdata/mactools_xtest{}.npy'.format(layer))
-    y_test = np.load(path + 'svmdata/mactools_ytest{}.pkl'.format(layer))
+    class_hierarchy = np.load(path + 'svmdata/{}_hi.pkl'.format(data))
+    X_train = np.load(path + 'svmdata/{}_xtrain{}.npy'.format(data,layer))
+    y_train = np.load(path + 'svmdata/{}_ytrain{}.pkl'.format(data,layer))
+    X_test = np.load(path + 'svmdata/{}_xtest{}.npy'.format(data,layer))
+    y_test = np.load(path + 'svmdata/{}_ytest{}.pkl'.format(data,layer))
     index = 4
     myclassifier(index=index)

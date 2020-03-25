@@ -21,6 +21,6 @@ for c in "${orders[@]}"
 do
 	for j in "${seeds[@]}"
 	do
-	    python3 -m sspace.deep.$filename ${j} ${c} &
+	    python3 -m sspace.hierachy.$filename ${j} ${c} &
 	done
 done
