@@ -51,7 +51,7 @@ def save_data(hidden_size, gru_size, dens_size):
 
 
 def save_layer(layer, hidden_size, gru_size, dens_size):
-    data = 'macparts'
+    data = 'yam_ings'
     modelname = '/hri/localdisk/nnabizad/models/{}_{}_{}'.format(data, hidden_size, dens_size) + '_s{}'
     seeds = [15, 896783, 9, 12, 45234]
     for seed in seeds[0:1]:

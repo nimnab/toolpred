@@ -1,0 +1,150 @@
+, exclusive , 1e-20 , 1.0,  29.07942562261611
+, exclusive , 1e-05 , 1.0,  27.6401166704061
+, exclusive , 1e-05 , 10.0,  25.779448059232667
+, exclusive , 1e-10 , 10.0,  25.439533318375588
+, exclusive , 0.001 , 100.0,  30.764864258469824
+, exclusive , 0.001 , 10.0,  27.73053623513574
+, exclusive , 0.001 , 1.0,  27.525689925959167
+, exclusive , 1e-20 , 0.1,  24.498092887592552
+, exclusive , 1e-10 , 1.0,  27.824096926183532
+, exclusive , 0.001 , 0.1,  25.842270585595692
+, exclusive , 1e-10 , 100.0,  28.362800089746464
+, exclusive , 1e-05 , 0.1,  25.997531972178596
+, exclusive , 0.01 , 10.0,  30.74646623289208
+, exclusive , 0.01 , 1.0,  27.448059232667713
+, exclusive , 1e-20 , 10.0,  24.454790217635182
+, exclusive , 0.01 , 100.0,  30.77361453892753
+, exclusive , 1e-20 , 100.0,  28.317253758133273
+, exclusive , 1e-05 , 100.0,  27.901951985640565
+, exclusive , 0.01 , 0.1,  25.989230424052053
+, exclusive , 1e-10 , 0.1,  24.78685214269688
+, inclusive , 0.001 , 100.0,  30.764864258469824
+, inclusive , 0.001 , 1.0,  27.525689925959167
+, inclusive , 1e-10 , 10.0,  25.439533318375588
+, inclusive , 1e-10 , 1.0,  27.824096926183532
+, inclusive , 1e-20 , 1.0,  29.07942562261611
+, inclusive , 0.001 , 0.1,  25.842270585595692
+, inclusive , 1e-10 , 100.0,  28.362800089746464
+, inclusive , 1e-05 , 1.0,  27.6401166704061
+, inclusive , 1e-05 , 10.0,  25.779448059232667
+, inclusive , 0.01 , 1.0,  27.448059232667713
+, inclusive , 0.001 , 10.0,  27.73053623513574
+, inclusive , 1e-20 , 0.1,  24.498092887592552
+, inclusive , 1e-05 , 100.0,  27.901951985640565
+, inclusive , 0.01 , 100.0,  30.77361453892753
+, inclusive , 0.01 , 0.1,  25.989230424052053
+, inclusive , 1e-10 , 0.1,  24.78685214269688
+, inclusive , 1e-05 , 0.1,  25.997531972178596
+, inclusive , 1e-20 , 100.0,  28.317253758133273
+, inclusive , 1e-20 , 10.0,  24.454790217635182
+, inclusive , 0.01 , 10.0,  30.74646623289208
+, less_inclusive , 0.001 , 100.0,  30.764864258469824
+, less_inclusive , 0.001 , 1.0,  27.525689925959167
+, less_inclusive , 0.001 , 0.1,  25.842270585595692
+, less_inclusive , 1e-10 , 1.0,  27.824096926183532
+, less_inclusive , 1e-05 , 1.0,  27.6401166704061
+, less_inclusive , 1e-10 , 100.0,  28.362800089746464
+, less_inclusive , 1e-10 , 10.0,  25.439533318375588
+, less_inclusive , 1e-20 , 0.1,  24.498092887592552
+, less_inclusive , 1e-20 , 1.0,  29.07942562261611
+, less_inclusive , 1e-05 , 10.0,  25.779448059232667
+, less_inclusive , 0.001 , 10.0,  27.73053623513574
+, less_inclusive , 0.01 , 100.0,  30.77361453892753
+, less_inclusive , 1e-10 , 0.1,  24.78685214269688
+, less_inclusive , 1e-05 , 100.0,  27.901951985640565
+, less_inclusive , 0.01 , 0.1,  25.989230424052053
+, less_inclusive , 0.01 , 1.0,  27.448059232667713
+, less_inclusive , 1e-20 , 10.0,  24.454790217635182
+, less_inclusive , 0.01 , 10.0,  30.74646623289208
+, less_inclusive , 1e-20 , 100.0,  28.317253758133273
+, less_inclusive , 1e-05 , 0.1,  25.997531972178596
+, siblings , 0.001 , 1.0,  27.525689925959167
+, siblings , 1e-10 , 1.0,  27.824096926183532
+, siblings , 0.001 , 100.0,  30.764864258469824
+, siblings , 1e-10 , 10.0,  25.439533318375588
+, siblings , 1e-20 , 0.1,  24.498092887592552
+, siblings , 1e-20 , 1.0,  29.07942562261611
+, siblings , 0.001 , 0.1,  25.842270585595692
+, siblings , 1e-05 , 1.0,  27.6401166704061
+, siblings , 0.01 , 100.0,  30.77361453892753
+, siblings , 1e-05 , 100.0,  27.901951985640565
+, siblings , 1e-10 , 100.0,  28.362800089746464
+, siblings , 0.001 , 10.0,  27.73053623513574
+, siblings , 1e-05 , 10.0,  25.779448059232667
+, siblings , 1e-10 , 0.1,  24.78685214269688
+, siblings , 0.01 , 0.1,  25.989230424052053
+, siblings , 0.01 , 10.0,  30.74646623289208
+, siblings , 0.01 , 1.0,  27.448059232667713
+, siblings , 1e-20 , 10.0,  24.454790217635182
+, siblings , 1e-05 , 0.1,  25.997531972178596
+, siblings , 1e-20 , 100.0,  28.317253758133273
+, exclusive_siblings , 1e-10 , 1.0,  27.824096926183532
+, exclusive_siblings , 0.001 , 100.0,  30.764864258469824
+, exclusive_siblings , 0.001 , 1.0,  27.525689925959167
+, exclusive_siblings , 1e-20 , 1.0,  29.07942562261611
+, exclusive_siblings , 1e-05 , 100.0,  27.901951985640565
+, exclusive_siblings , 1e-10 , 100.0,  28.362800089746464
+, exclusive_siblings , 0.01 , 100.0,  30.77361453892753
+, exclusive_siblings , 1e-10 , 10.0,  25.439533318375588
+, exclusive_siblings , 0.001 , 0.1,  25.842270585595692
+, exclusive_siblings , 1e-20 , 0.1,  24.498092887592552
+, exclusive_siblings , 0.001 , 10.0,  27.73053623513574
+, exclusive_siblings , 1e-05 , 10.0,  25.779448059232667
+, exclusive_siblings , 1e-05 , 1.0,  27.6401166704061
+, exclusive_siblings , 1e-10 , 0.1,  24.78685214269688
+, exclusive_siblings , 0.01 , 10.0,  30.74646623289208
+, exclusive_siblings , 0.01 , 1.0,  27.448059232667713
+, exclusive_siblings , 0.01 , 0.1,  25.989230424052053
+, exclusive_siblings , 1e-20 , 10.0,  24.454790217635182
+, exclusive_siblings , 1e-05 , 0.1,  25.997531972178596
+, exclusive_siblings , 1e-20 , 100.0,  28.317253758133273
+, siblings , DecisionTreeClassifier   17.836437065290554
+, less_inclusive , DecisionTreeClassifier   22.09961857751851
+, exclusive_siblings , DecisionTreeClassifier   18.59860892977339
+, inclusive , DecisionTreeClassifier   23.73726722010321
+, exclusive_siblings , ComplementNB   15.55126766883554
+, siblings , ComplementNB   15.55126766883554
+, exclusive , DecisionTreeClassifier   20.783262284047566
+, less_inclusive , ComplementNB   15.55126766883554
+, inclusive , ComplementNB   15.55126766883554
+, exclusive , ComplementNB   15.55126766883554
+, inclusive , GaussianNB   16.502804577069778
+, siblings , GaussianNB   16.502804577069778
+, exclusive , GaussianNB   16.502804577069778
+, less_inclusive , GaussianNB   16.502804577069778
+, exclusive_siblings , GaussianNB   16.502804577069778
+, exclusive_siblings , MLPClassifier   11.328247700246802
+, less_inclusive , MLPClassifier   11.328247700246802
+, inclusive , MLPClassifier   11.328247700246802
+, siblings , MLPClassifier   11.328247700246802
+, exclusive , MLPClassifier   11.328247700246802
+, siblings , DecisionTreeClassifier   16.09041956472964
+, inclusive , DecisionTreeClassifier   10.742876374242764
+, exclusive_siblings , DecisionTreeClassifier   13.130356742203276
+, less_inclusive , DecisionTreeClassifier   13.671303567422033
+, exclusive , DecisionTreeClassifier   25.210455463316134
+, siblings , ComplementNB   15.55126766883554
+, exclusive , ComplementNB   15.55126766883554
+, inclusive , ComplementNB   15.55126766883554
+, exclusive_siblings , ComplementNB   15.55126766883554
+, less_inclusive , ComplementNB   15.55126766883554
+, less_inclusive , MLPClassifier   11.328247700246802
+, inclusive , MLPClassifier   11.328247700246802
+, exclusive_siblings , MLPClassifier   11.328247700246802
+, exclusive , MLPClassifier   11.328247700246802
+, siblings , MLPClassifier   11.328247700246802
+, siblings , GaussianNB   16.502804577069778
+, less_inclusive , GaussianNB   16.502804577069778
+, exclusive_siblings , GaussianNB   16.502804577069778
+, exclusive , GaussianNB   16.502804577069778
+, inclusive , GaussianNB   16.502804577069778
+, exclusive_siblings , RandomForestClassifier   14.479246129683643
+, less_inclusive , RandomForestClassifier   14.479246129683643
+, siblings , RandomForestClassifier   14.479246129683643
+, exclusive , RandomForestClassifier   14.479246129683643
+, inclusive , RandomForestClassifier   14.479246129683643
+, inclusive , RandomForestClassifier   14.479246129683643
+, siblings , RandomForestClassifier   14.479246129683643
+, less_inclusive , RandomForestClassifier   14.479246129683643
+, exclusive , RandomForestClassifier   14.479246129683643
+, exclusive_siblings , RandomForestClassifier   14.479246129683643

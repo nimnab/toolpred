@@ -1,0 +1,702 @@
+actication:tanh, hidden64, alpha0.001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 1e-05, Precision: 0.0403, Recall: 0.7291, F1-measure: 0.0762, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 0.001, Precision: 0.0457, Recall: 0.7237, F1-measure: 0.0856, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 0.01, Precision: 0.0689, Recall: 0.7107, F1-measure: 0.1252, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 0.01, Precision: 0.0617, Recall: 0.7152, F1-measure: 0.1132, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 0.1, Precision: 0.1587, Recall: 0.6577, F1-measure: 0.2542, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 0.1, Precision: 0.0921, Recall: 0.6739, F1-measure: 0.1608, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 0.2, Precision: 0.1591, Recall: 0.5640, F1-measure: 0.2457, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 0.2, Precision: 0.1433, Recall: 0.6334, F1-measure: 0.2313, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 0.3, Precision: 0.1032, Recall: 0.3065, F1-measure: 0.1528, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 0.3, Precision: 0.1254, Recall: 0.4189, F1-measure: 0.1910, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 0.4, Precision: 0.1012, Recall: 0.2983, F1-measure: 0.1501, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 0.4, Precision: 0.1018, Recall: 0.2983, F1-measure: 0.1504, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 0.5, Precision: 0.1079, Recall: 0.2958, F1-measure: 0.1550, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 0.5, Precision: 0.1014, Recall: 0.2983, F1-measure: 0.1503, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 0.6, Precision: 0.1039, Recall: 0.2983, F1-measure: 0.1532, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 0.6, Precision: 0.1482, Recall: 0.2869, F1-measure: 0.1845, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 0.7, Precision: 0.1378, Recall: 0.2967, F1-measure: 0.1857, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 0.7, Precision: 0.1738, Recall: 0.2154, F1-measure: 0.1854, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 0.8, Precision: 0.1580, Recall: 0.2967, F1-measure: 0.2041, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 0.8, Precision: 0.0818, Recall: 0.1039, F1-measure: 0.0890, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.001, Val: 0.9, Precision: 0.0473, Recall: 0.0466, F1-measure: 0.0468, RANK:10.648418218532646, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.001, Val: 0.9, Precision: 0.2986, Recall: 0.2879, F1-measure: 0.2915, RANK:10.870540722459053, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 0.01, Precision: 0.0676, Recall: 0.7133, F1-measure: 0.1231, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 0.1, Precision: 0.1576, Recall: 0.6598, F1-measure: 0.2526, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 0.2, Precision: 0.1522, Recall: 0.5945, F1-measure: 0.2392, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 0.3, Precision: 0.1347, Recall: 0.5098, F1-measure: 0.2100, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 0.4, Precision: 0.0969, Recall: 0.3002, F1-measure: 0.1453, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 0.5, Precision: 0.0974, Recall: 0.3001, F1-measure: 0.1458, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 0.6, Precision: 0.1060, Recall: 0.2990, F1-measure: 0.1554, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 0.7, Precision: 0.1291, Recall: 0.2974, F1-measure: 0.1776, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.001, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:11.159075611397801, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 0.01, Precision: 0.0651, Recall: 0.7162, F1-measure: 0.1190, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 0.1, Precision: 0.1365, Recall: 0.6636, F1-measure: 0.2254, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 0.2, Precision: 0.1375, Recall: 0.6636, F1-measure: 0.2268, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 0.3, Precision: 0.1365, Recall: 0.6553, F1-measure: 0.2248, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 0.4, Precision: 0.1299, Recall: 0.5586, F1-measure: 0.2088, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 0.01, Precision: 0.0657, Recall: 0.7169, F1-measure: 0.1200, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 0.5, Precision: 0.0933, Recall: 0.3029, F1-measure: 0.1414, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 0.1, Precision: 0.1373, Recall: 0.6636, F1-measure: 0.2265, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 0.6, Precision: 0.1319, Recall: 0.2991, F1-measure: 0.1805, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 0.2, Precision: 0.1358, Recall: 0.6439, F1-measure: 0.2231, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 0.7, Precision: 0.1453, Recall: 0.2984, F1-measure: 0.1935, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 0.3, Precision: 0.1108, Recall: 0.4773, F1-measure: 0.1786, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 0.8, Precision: 0.1563, Recall: 0.2967, F1-measure: 0.2030, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 0.4, Precision: 0.1007, Recall: 0.2989, F1-measure: 0.1496, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.001, Val: 0.9, Precision: 0.2897, Recall: 0.2796, F1-measure: 0.2829, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 0.5, Precision: 0.1013, Recall: 0.2983, F1-measure: 0.1502, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 0.6, Precision: 0.1077, Recall: 0.2974, F1-measure: 0.1565, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 0.7, Precision: 0.1339, Recall: 0.2967, F1-measure: 0.1821, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.001, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:11.16087054072246, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 0.01, Precision: 0.0640, Recall: 0.7144, F1-measure: 0.1172, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 0.1, Precision: 0.1129, Recall: 0.6628, F1-measure: 0.1919, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 0.2, Precision: 0.1612, Recall: 0.6588, F1-measure: 0.2572, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 0.3, Precision: 0.1653, Recall: 0.6577, F1-measure: 0.2625, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 0.4, Precision: 0.1005, Recall: 0.2983, F1-measure: 0.1492, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 0.5, Precision: 0.1009, Recall: 0.2983, F1-measure: 0.1497, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 0.6, Precision: 0.1495, Recall: 0.2967, F1-measure: 0.1970, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 0.7, Precision: 0.1676, Recall: 0.2967, F1-measure: 0.2093, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 0.8, Precision: 0.2757, Recall: 0.2926, F1-measure: 0.2780, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.001, Val: 0.9, Precision: 0.2140, Recall: 0.2087, F1-measure: 0.2105, RANK:10.433924164236034, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha0.001, Val: 1e-05, Precision: 0.0402, Recall: 0.7291, F1-measure: 0.0760, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 0.001, Precision: 0.0477, Recall: 0.7282, F1-measure: 0.0892, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 0.01, Precision: 0.0663, Recall: 0.7199, F1-measure: 0.1210, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 0.1, Precision: 0.0985, Recall: 0.6702, F1-measure: 0.1708, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 0.2, Precision: 0.1163, Recall: 0.6682, F1-measure: 0.1973, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 0.3, Precision: 0.1149, Recall: 0.6602, F1-measure: 0.1949, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 0.4, Precision: 0.0656, Recall: 0.3088, F1-measure: 0.1076, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 0.5, Precision: 0.0104, Recall: 0.0363, F1-measure: 0.0160, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 0.6, Precision: 0.0133, Recall: 0.0348, F1-measure: 0.0191, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 0.7, Precision: 0.0159, Recall: 0.0279, F1-measure: 0.0199, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 0.8, Precision: 0.0164, Recall: 0.0277, F1-measure: 0.0201, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.001, Val: 0.9, Precision: 0.0240, Recall: 0.0240, F1-measure: 0.0240, RANK:12.09759928202827, accu:0.027821404532196545
+
+actication:logistic, hidden128, alpha0.001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 0.01, Precision: 0.0697, Recall: 0.7133, F1-measure: 0.1266, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 0.1, Precision: 0.1521, Recall: 0.6607, F1-measure: 0.2455, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 0.2, Precision: 0.1528, Recall: 0.6607, F1-measure: 0.2464, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 0.3, Precision: 0.1533, Recall: 0.6607, F1-measure: 0.2471, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 0.4, Precision: 0.0966, Recall: 0.3001, F1-measure: 0.1448, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 0.5, Precision: 0.0992, Recall: 0.2987, F1-measure: 0.1478, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 0.6, Precision: 0.1027, Recall: 0.2983, F1-measure: 0.1519, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 0.01, Precision: 0.0676, Recall: 0.7162, F1-measure: 0.1231, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 0.7, Precision: 0.1519, Recall: 0.2967, F1-measure: 0.1995, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 0.1, Precision: 0.1375, Recall: 0.6636, F1-measure: 0.2268, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 0.2, Precision: 0.1375, Recall: 0.6636, F1-measure: 0.2268, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 0.3, Precision: 0.1375, Recall: 0.6636, F1-measure: 0.2268, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.001, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:11.24141799416648, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 0.4, Precision: 0.0791, Recall: 0.3042, F1-measure: 0.1249, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 0.5, Precision: 0.0791, Recall: 0.3042, F1-measure: 0.1249, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 0.6, Precision: 0.1046, Recall: 0.3027, F1-measure: 0.1547, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 0.7, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.001, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:10.62979582678932, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 0.01, Precision: 0.0689, Recall: 0.7107, F1-measure: 0.1252, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 0.1, Precision: 0.1587, Recall: 0.6577, F1-measure: 0.2542, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 0.2, Precision: 0.1591, Recall: 0.5640, F1-measure: 0.2457, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 0.3, Precision: 0.1032, Recall: 0.3065, F1-measure: 0.1528, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 0.4, Precision: 0.1012, Recall: 0.2983, F1-measure: 0.1501, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 0.5, Precision: 0.1014, Recall: 0.2983, F1-measure: 0.1503, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 0.6, Precision: 0.1039, Recall: 0.2983, F1-measure: 0.1532, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 0.7, Precision: 0.1378, Recall: 0.2967, F1-measure: 0.1857, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 0.8, Precision: 0.1580, Recall: 0.2967, F1-measure: 0.2041, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha1e-05, Val: 0.9, Precision: 0.2986, Recall: 0.2879, F1-measure: 0.2915, RANK:10.833744671303567, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 1e-05, Precision: 0.0403, Recall: 0.7291, F1-measure: 0.0762, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 0.001, Precision: 0.0457, Recall: 0.7237, F1-measure: 0.0856, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 0.01, Precision: 0.0617, Recall: 0.7152, F1-measure: 0.1132, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 0.1, Precision: 0.0921, Recall: 0.6739, F1-measure: 0.1608, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 0.2, Precision: 0.1433, Recall: 0.6334, F1-measure: 0.2313, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 0.3, Precision: 0.1254, Recall: 0.4189, F1-measure: 0.1910, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 0.4, Precision: 0.1018, Recall: 0.2983, F1-measure: 0.1504, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 0.5, Precision: 0.1079, Recall: 0.2958, F1-measure: 0.1550, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 0.6, Precision: 0.1482, Recall: 0.2869, F1-measure: 0.1845, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 0.01, Precision: 0.0677, Recall: 0.7124, F1-measure: 0.1232, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 0.7, Precision: 0.1738, Recall: 0.2154, F1-measure: 0.1854, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 0.1, Precision: 0.1577, Recall: 0.6598, F1-measure: 0.2526, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 0.8, Precision: 0.0818, Recall: 0.1039, F1-measure: 0.0890, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 0.2, Precision: 0.1523, Recall: 0.5943, F1-measure: 0.2393, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha1e-05, Val: 0.9, Precision: 0.0473, Recall: 0.0466, F1-measure: 0.0468, RANK:10.757908907336773, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 0.3, Precision: 0.1349, Recall: 0.5098, F1-measure: 0.2103, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 0.4, Precision: 0.0971, Recall: 0.3002, F1-measure: 0.1455, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 0.5, Precision: 0.0976, Recall: 0.2994, F1-measure: 0.1460, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 0.6, Precision: 0.1062, Recall: 0.2990, F1-measure: 0.1557, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 0.7, Precision: 0.1291, Recall: 0.2974, F1-measure: 0.1776, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha1e-05, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:11.184653354274175, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 0.01, Precision: 0.0651, Recall: 0.7162, F1-measure: 0.1190, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 0.1, Precision: 0.1365, Recall: 0.6636, F1-measure: 0.2253, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 0.2, Precision: 0.1375, Recall: 0.6636, F1-measure: 0.2268, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 0.3, Precision: 0.1365, Recall: 0.6553, F1-measure: 0.2248, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 0.4, Precision: 0.1299, Recall: 0.5586, F1-measure: 0.2088, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 0.5, Precision: 0.0933, Recall: 0.3029, F1-measure: 0.1414, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 0.6, Precision: 0.1319, Recall: 0.2991, F1-measure: 0.1805, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 0.7, Precision: 0.1453, Recall: 0.2984, F1-measure: 0.1935, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 0.8, Precision: 0.1563, Recall: 0.2967, F1-measure: 0.2030, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha1e-05, Val: 0.9, Precision: 0.2897, Recall: 0.2796, F1-measure: 0.2829, RANK:11.355844738613417, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 0.01, Precision: 0.0657, Recall: 0.7169, F1-measure: 0.1200, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 0.1, Precision: 0.1373, Recall: 0.6636, F1-measure: 0.2265, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 0.2, Precision: 0.1358, Recall: 0.6439, F1-measure: 0.2231, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 0.3, Precision: 0.1108, Recall: 0.4773, F1-measure: 0.1786, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 0.4, Precision: 0.1007, Recall: 0.2989, F1-measure: 0.1496, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 0.5, Precision: 0.1013, Recall: 0.2983, F1-measure: 0.1502, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 0.6, Precision: 0.1077, Recall: 0.2974, F1-measure: 0.1565, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 0.7, Precision: 0.1339, Recall: 0.2967, F1-measure: 0.1821, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha1e-05, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:10.984070002243662, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 0.01, Precision: 0.0623, Recall: 0.7164, F1-measure: 0.1143, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 0.1, Precision: 0.1145, Recall: 0.6621, F1-measure: 0.1942, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 0.01, Precision: 0.0689, Recall: 0.7107, F1-measure: 0.1252, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 0.2, Precision: 0.1642, Recall: 0.6581, F1-measure: 0.2611, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 0.1, Precision: 0.1587, Recall: 0.6577, F1-measure: 0.2542, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 0.3, Precision: 0.1679, Recall: 0.6577, F1-measure: 0.2659, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 0.2, Precision: 0.1591, Recall: 0.5640, F1-measure: 0.2457, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 0.4, Precision: 0.1009, Recall: 0.2983, F1-measure: 0.1497, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 0.5, Precision: 0.1009, Recall: 0.2983, F1-measure: 0.1498, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 0.3, Precision: 0.1032, Recall: 0.3065, F1-measure: 0.1528, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 0.6, Precision: 0.1504, Recall: 0.2967, F1-measure: 0.1979, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 0.4, Precision: 0.1012, Recall: 0.2983, F1-measure: 0.1501, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 0.7, Precision: 0.1676, Recall: 0.2967, F1-measure: 0.2093, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 0.5, Precision: 0.1014, Recall: 0.2983, F1-measure: 0.1503, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 0.6, Precision: 0.1039, Recall: 0.2983, F1-measure: 0.1532, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 0.8, Precision: 0.2757, Recall: 0.2926, F1-measure: 0.2780, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha1e-05, Val: 0.9, Precision: 0.2140, Recall: 0.2087, F1-measure: 0.2105, RANK:11.053623513574154, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 0.7, Precision: 0.1378, Recall: 0.2967, F1-measure: 0.1857, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 0.8, Precision: 0.1580, Recall: 0.2967, F1-measure: 0.2041, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:tanh, hidden64, alpha0.0001, Val: 0.9, Precision: 0.2986, Recall: 0.2879, F1-measure: 0.2915, RANK:10.91047789993269, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 1e-05, Precision: 0.0403, Recall: 0.7291, F1-measure: 0.0762, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 0.001, Precision: 0.0457, Recall: 0.7237, F1-measure: 0.0856, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 0.01, Precision: 0.0617, Recall: 0.7152, F1-measure: 0.1132, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 0.1, Precision: 0.0921, Recall: 0.6739, F1-measure: 0.1608, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 0.2, Precision: 0.1433, Recall: 0.6334, F1-measure: 0.2313, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 0.3, Precision: 0.1254, Recall: 0.4189, F1-measure: 0.1910, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 0.4, Precision: 0.1018, Recall: 0.2983, F1-measure: 0.1504, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 0.5, Precision: 0.1079, Recall: 0.2958, F1-measure: 0.1550, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 0.6, Precision: 0.1482, Recall: 0.2869, F1-measure: 0.1845, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 0.7, Precision: 0.1738, Recall: 0.2154, F1-measure: 0.1854, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 0.8, Precision: 0.0818, Recall: 0.1039, F1-measure: 0.0890, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:relu, hidden64, alpha0.0001, Val: 0.9, Precision: 0.0473, Recall: 0.0466, F1-measure: 0.0468, RANK:10.648642584698228, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.0001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.0001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.0001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.0001, Val: 0.01, Precision: 0.0676, Recall: 0.7128, F1-measure: 0.1231, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 1e-05, Precision: 0.0402, Recall: 0.7291, F1-measure: 0.0760, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden64, alpha0.0001, Val: 0.1, Precision: 0.1577, Recall: 0.6598, F1-measure: 0.2526, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden64, alpha0.0001, Val: 0.2, Precision: 0.1523, Recall: 0.5943, F1-measure: 0.2393, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 0.001, Precision: 0.0477, Recall: 0.7282, F1-measure: 0.0892, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden64, alpha0.0001, Val: 0.3, Precision: 0.1349, Recall: 0.5098, F1-measure: 0.2103, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha1e-05, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 0.01, Precision: 0.0663, Recall: 0.7199, F1-measure: 0.1210, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden64, alpha0.0001, Val: 0.4, Precision: 0.0971, Recall: 0.3002, F1-measure: 0.1455, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha1e-05, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 0.1, Precision: 0.0985, Recall: 0.6702, F1-measure: 0.1708, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden128, alpha1e-05, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 0.2, Precision: 0.1163, Recall: 0.6682, F1-measure: 0.1973, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden64, alpha0.0001, Val: 0.5, Precision: 0.0977, Recall: 0.2996, F1-measure: 0.1461, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 0.3, Precision: 0.1149, Recall: 0.6602, F1-measure: 0.1948, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden128, alpha1e-05, Val: 0.01, Precision: 0.0697, Recall: 0.7133, F1-measure: 0.1266, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.0001, Val: 0.6, Precision: 0.1062, Recall: 0.2990, F1-measure: 0.1557, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 0.4, Precision: 0.0655, Recall: 0.3088, F1-measure: 0.1076, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden128, alpha1e-05, Val: 0.1, Precision: 0.1521, Recall: 0.6607, F1-measure: 0.2455, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 0.5, Precision: 0.0105, Recall: 0.0370, F1-measure: 0.0162, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden64, alpha0.0001, Val: 0.7, Precision: 0.1291, Recall: 0.2974, F1-measure: 0.1776, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 0.6, Precision: 0.0130, Recall: 0.0339, F1-measure: 0.0186, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden128, alpha1e-05, Val: 0.2, Precision: 0.1529, Recall: 0.6607, F1-measure: 0.2465, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.0001, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 0.7, Precision: 0.0159, Recall: 0.0279, F1-measure: 0.0199, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden256, alpha1e-05, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:logistic, hidden64, alpha0.0001, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:10.861341709670182, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha1e-05, Val: 0.3, Precision: 0.1534, Recall: 0.6607, F1-measure: 0.2472, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 0.8, Precision: 0.0163, Recall: 0.0275, F1-measure: 0.0200, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden256, alpha1e-05, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha1e-05, Val: 0.4, Precision: 0.0966, Recall: 0.3001, F1-measure: 0.1448, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha1e-05, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha1e-05, Val: 0.9, Precision: 0.0240, Recall: 0.0240, F1-measure: 0.0240, RANK:12.200583352030513, accu:0.027597038366614316
+
+actication:logistic, hidden128, alpha1e-05, Val: 0.5, Precision: 0.0991, Recall: 0.2987, F1-measure: 0.1476, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha1e-05, Val: 0.01, Precision: 0.0676, Recall: 0.7162, F1-measure: 0.1231, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha1e-05, Val: 0.6, Precision: 0.1027, Recall: 0.2983, F1-measure: 0.1519, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha1e-05, Val: 0.7, Precision: 0.1519, Recall: 0.2967, F1-measure: 0.1995, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha1e-05, Val: 0.1, Precision: 0.1375, Recall: 0.6636, F1-measure: 0.2268, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha1e-05, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha1e-05, Val: 0.2, Precision: 0.1375, Recall: 0.6636, F1-measure: 0.2268, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha1e-05, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha1e-05, Val: 0.3, Precision: 0.1375, Recall: 0.6636, F1-measure: 0.2268, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha1e-05, Val: 0.4, Precision: 0.0791, Recall: 0.3042, F1-measure: 0.1249, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha1e-05, Val: 0.5, Precision: 0.0791, Recall: 0.3042, F1-measure: 0.1249, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha1e-05, Val: 0.6, Precision: 0.1046, Recall: 0.3027, F1-measure: 0.1547, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha1e-05, Val: 0.7, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha1e-05, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha1e-05, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:10.90845860444245, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.0001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:relu, hidden128, alpha0.0001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:relu, hidden128, alpha0.0001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:relu, hidden128, alpha0.0001, Val: 0.01, Precision: 0.0651, Recall: 0.7162, F1-measure: 0.1190, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:relu, hidden128, alpha0.0001, Val: 0.1, Precision: 0.1248, Recall: 0.6665, F1-measure: 0.2091, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:relu, hidden128, alpha0.0001, Val: 0.2, Precision: 0.1275, Recall: 0.6654, F1-measure: 0.2128, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:relu, hidden128, alpha0.0001, Val: 0.3, Precision: 0.1277, Recall: 0.6569, F1-measure: 0.2126, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:relu, hidden128, alpha0.0001, Val: 0.4, Precision: 0.1206, Recall: 0.5590, F1-measure: 0.1970, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:relu, hidden128, alpha0.0001, Val: 0.5, Precision: 0.0466, Recall: 0.1675, F1-measure: 0.0723, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:relu, hidden128, alpha0.0001, Val: 0.6, Precision: 0.0540, Recall: 0.1384, F1-measure: 0.0766, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:tanh, hidden128, alpha0.0001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.0001, Val: 0.7, Precision: 0.0537, Recall: 0.1205, F1-measure: 0.0731, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:tanh, hidden128, alpha0.0001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.0001, Val: 0.8, Precision: 0.0513, Recall: 0.0952, F1-measure: 0.0659, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:tanh, hidden128, alpha0.0001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.0001, Val: 0.01, Precision: 0.0657, Recall: 0.7169, F1-measure: 0.1200, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:relu, hidden128, alpha0.0001, Val: 0.9, Precision: 0.0590, Recall: 0.0570, F1-measure: 0.0577, RANK:11.88220776306933, accu:0.09176576172313215
+
+actication:tanh, hidden128, alpha0.0001, Val: 0.1, Precision: 0.1373, Recall: 0.6636, F1-measure: 0.2265, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.0001, Val: 0.2, Precision: 0.1358, Recall: 0.6439, F1-measure: 0.2231, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.0001, Val: 0.3, Precision: 0.1108, Recall: 0.4773, F1-measure: 0.1786, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.0001, Val: 0.4, Precision: 0.1007, Recall: 0.2989, F1-measure: 0.1496, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.0001, Val: 0.5, Precision: 0.1013, Recall: 0.2983, F1-measure: 0.1502, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.0001, Val: 0.6, Precision: 0.1077, Recall: 0.2974, F1-measure: 0.1565, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.0001, Val: 0.7, Precision: 0.1339, Recall: 0.2967, F1-measure: 0.1821, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.0001, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:tanh, hidden128, alpha0.0001, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:11.024680278214046, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 0.01, Precision: 0.0642, Recall: 0.7135, F1-measure: 0.1175, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 0.1, Precision: 0.1129, Recall: 0.6628, F1-measure: 0.1919, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 0.2, Precision: 0.1613, Recall: 0.6588, F1-measure: 0.2573, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 0.3, Precision: 0.1653, Recall: 0.6577, F1-measure: 0.2626, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 0.4, Precision: 0.1005, Recall: 0.2983, F1-measure: 0.1492, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 0.5, Precision: 0.1009, Recall: 0.2983, F1-measure: 0.1497, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 0.6, Precision: 0.1496, Recall: 0.2967, F1-measure: 0.1971, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 0.7, Precision: 0.1676, Recall: 0.2967, F1-measure: 0.2093, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 0.8, Precision: 0.2757, Recall: 0.2926, F1-measure: 0.2780, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:tanh, hidden256, alpha0.0001, Val: 0.9, Precision: 0.2140, Recall: 0.2087, F1-measure: 0.2105, RANK:10.359434597262732, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha0.0001, Val: 1e-05, Precision: 0.0402, Recall: 0.7291, F1-measure: 0.0760, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.0001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.0001, Val: 0.001, Precision: 0.0477, Recall: 0.7282, F1-measure: 0.0892, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.0001, Val: 0.01, Precision: 0.0663, Recall: 0.7199, F1-measure: 0.1210, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.0001, Val: 0.1, Precision: 0.0985, Recall: 0.6702, F1-measure: 0.1708, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.0001, Val: 0.2, Precision: 0.1163, Recall: 0.6682, F1-measure: 0.1973, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.0001, Val: 0.3, Precision: 0.1149, Recall: 0.6602, F1-measure: 0.1949, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.0001, Val: 0.4, Precision: 0.0656, Recall: 0.3088, F1-measure: 0.1076, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.0001, Val: 0.5, Precision: 0.0108, Recall: 0.0379, F1-measure: 0.0166, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:relu, hidden256, alpha0.0001, Val: 0.6, Precision: 0.0133, Recall: 0.0348, F1-measure: 0.0191, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:logistic, hidden128, alpha0.0001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha0.0001, Val: 0.7, Precision: 0.0160, Recall: 0.0282, F1-measure: 0.0200, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:logistic, hidden128, alpha0.0001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha0.0001, Val: 0.8, Precision: 0.0164, Recall: 0.0277, F1-measure: 0.0201, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:logistic, hidden128, alpha0.0001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:relu, hidden256, alpha0.0001, Val: 0.9, Precision: 0.0240, Recall: 0.0240, F1-measure: 0.0240, RANK:11.892304240520529, accu:0.027821404532196545
+
+actication:logistic, hidden128, alpha0.0001, Val: 0.01, Precision: 0.0697, Recall: 0.7133, F1-measure: 0.1266, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.0001, Val: 0.1, Precision: 0.1522, Recall: 0.6607, F1-measure: 0.2455, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.0001, Val: 0.2, Precision: 0.1530, Recall: 0.6607, F1-measure: 0.2466, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.0001, Val: 0.3, Precision: 0.1534, Recall: 0.6607, F1-measure: 0.2472, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.0001, Val: 0.4, Precision: 0.0966, Recall: 0.3001, F1-measure: 0.1448, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.0001, Val: 0.5, Precision: 0.0991, Recall: 0.2987, F1-measure: 0.1476, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.0001, Val: 0.6, Precision: 0.1027, Recall: 0.2983, F1-measure: 0.1519, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.0001, Val: 0.7, Precision: 0.1519, Recall: 0.2967, F1-measure: 0.1995, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.0001, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden128, alpha0.0001, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:11.24253982499439, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 1e-05, Precision: 0.0399, Recall: 0.7291, F1-measure: 0.0755, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 9, Precision: 0.0000, Recall: 0.0000, F1-measure: 0.0000, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 0.001, Precision: 0.0505, Recall: 0.7282, F1-measure: 0.0942, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 0.01, Precision: 0.0676, Recall: 0.7162, F1-measure: 0.1231, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 0.1, Precision: 0.1375, Recall: 0.6636, F1-measure: 0.2268, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 0.2, Precision: 0.1375, Recall: 0.6636, F1-measure: 0.2268, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 0.3, Precision: 0.1375, Recall: 0.6636, F1-measure: 0.2268, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 0.4, Precision: 0.0791, Recall: 0.3042, F1-measure: 0.1249, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 0.5, Precision: 0.0791, Recall: 0.3042, F1-measure: 0.1249, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 0.6, Precision: 0.1046, Recall: 0.3027, F1-measure: 0.1547, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 0.7, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 0.8, Precision: 0.1539, Recall: 0.2967, F1-measure: 0.2015, RANK:11.352927978460848, accu:0.3022212250392641
+
+actication:logistic, hidden256, alpha0.0001, Val: 0.9, Precision: 0.3040, Recall: 0.2930, F1-measure: 0.2967, RANK:11.352927978460848, accu:0.3022212250392641
+

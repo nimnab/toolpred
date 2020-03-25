@@ -25,10 +25,10 @@ def per_recal(target, pred):
         return per,rec,f1
 
 def write_result(mydata, hidden_size, gru_size, dens_size):
-    data = 'mactools'
+    data = 'yam_ings'
     model = models[modelindex]
-    filename = '/home/nnabizad/code/toolpred/res/multi_{}_{}_{}'.format(data, hidden_size,dens_size)
-    modelname = '/hri/localdisk/nnabizad/models/multi_{}_{}_{}'.format(data, hidden_size,dens_size) + '_s{}'
+    filename = '/home/nnabizad/code/toolpred/res/{}_{}_{}'.format(data, hidden_size,dens_size)
+    modelname = '/hri/localdisk/nnabizad/models/{}_{}_{}'.format(data, hidden_size,dens_size) + '_s{}'
     seeds = [15, 896783, 9, 12, 45234]
 
     for seed in seeds[0:1]:
@@ -38,7 +38,7 @@ def write_result(mydata, hidden_size, gru_size, dens_size):
         trained, history = model(mydata, modelname, seed, hidden_size, gru_size, dens_size)
         # trained = load_model(modelname.format(seed))
         DataFrame(history.history).to_csv(
-            '/home/nnabizad/code/toolpred/res/logs/multi{}_lstm{}_dense{}.csv'.format(data, hidden_size, dens_size))
+            '/home/nnabizad/code/toolpred/res/logs/{}_lstm{}_dense{}.csv'.format(data, hidden_size, dens_size))
         predictions = trained.predict(inputs[modelindex])
         thresholds = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
         # print('lstm size: {}, dense size: {}\n'.format(hidden_size, dens_size))
@@ -65,12 +65,12 @@ def write_result(mydata, hidden_size, gru_size, dens_size):
 
 
 if __name__ == '__main__':
-    hidden_sizes = [256,512,128]
-    dens_sizes = [256, 512,128]
+    hidden_sizes = [256,128]
+    dens_sizes = [256,128]
 
     gru_size = 128
     modelindex = 0
-    mydata = Data(15, usew2v=False, title=False, ml_output=True)
+    mydata = Data(15, usew2v=False, title=False, ml_output=False)
     for h in hidden_sizes:
         for d in dens_sizes:
             write_result(mydata, h, gru_size, d)

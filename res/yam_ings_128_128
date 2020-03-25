@@ -1,0 +1,10 @@
+Val: 0.1, Precision: 0.2898, Recall: 0.2925, F1-measure: 0.2691
+Val: 0.2, Precision: 0.2422, Recall: 0.2346, F1-measure: 0.2317
+Val: 0.3, Precision: 0.1232, Recall: 0.1154, F1-measure: 0.1147
+Val: 0.4, Precision: 0.0968, Recall: 0.0952, F1-measure: 0.0952
+Val: 0.5, Precision: 0.0928, Recall: 0.0910, F1-measure: 0.0913
+Val: 0.6, Precision: 0.0757, Recall: 0.0717, F1-measure: 0.0728
+Val: 0.7, Precision: 0.0657, Recall: 0.0617, F1-measure: 0.0624
+Val: 0.8, Precision: 0.0514, Recall: 0.0514, F1-measure: 0.0514
+Val: 0.9, Precision: 0.0286, Recall: 0.0286, F1-measure: 0.0286
+------------

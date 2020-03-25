@@ -67,8 +67,8 @@ def myclassifier(hidden, act):
 
 
 if __name__ == '__main__':
-    data = 'macparts'
-    layer = ['_gru_1', '_time_distributed_1', '_dense_2'][2]
+    data = 'yam_ings'
+    layer = ['_gru_1', '_time_distributed_1', '_dense_2'][1]
     activations = ['logistic','relu', 'tanh']
     alpha = [0.001, 0.00001, 0.0001]
     hiddens = [(256,), (128,64), (64,)]
