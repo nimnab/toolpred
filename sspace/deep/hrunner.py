@@ -24,23 +24,25 @@ def per_recal(target, pred):
         f1 = 2*(per*rec)/(per+rec)
         return per,rec,f1
 
-def write_result(mydata, hidden_size, gru_size, dens_size):
-    data = 'yam_ings'
+def write_result(hidden_size, dens_size):
+    data = 'mac_parts'
     model = models[modelindex]
-    filename = '/home/nnabizad/code/toolpred/res/{}_{}_{}'.format(data, hidden_size,dens_size)
-    modelname = '/hri/localdisk/nnabizad/models/{}_{}_{}'.format(data, hidden_size,dens_size) + '_s{}'
     seeds = [15, 896783, 9, 12, 45234]
 
-    for seed in seeds[0:1]:
+    mydata = Data(usew2v=False, title=False, ml_output=False, obj=data)
+    for seed in seeds:
+        mydata.generate_fold(seed)
+        filename = '/home/nnabizad/code/toolpred/res/{}_{}'.format(data, seed)
+        modelname = '/hri/localdisk/nnabizad/models/{}_{}'.format(data, seed)
         inputs = [mydata.dtest.input, [mydata.dtest.input, mydata.dtest.titles],
                   [mydata.dtest.input, mydata.dtest.titles], [mydata.dtest.input, mydata.dtest.titles],
                   [mydata.dtest.input, mydata.dtest.titles], [mydata.dtest.titles]]
-        trained, history = model(mydata, modelname, seed, hidden_size, gru_size, dens_size)
+        trained, history = model(mydata, modelname, seed, hidden_size, dens_size)
         # trained = load_model(modelname.format(seed))
         DataFrame(history.history).to_csv(
-            '/home/nnabizad/code/toolpred/res/logs/{}_lstm{}_dense{}.csv'.format(data, hidden_size, dens_size))
+            '/home/nnabizad/code/toolpred/res/logs/{}_{}.csv'.format(data, seed))
         predictions = trained.predict(inputs[modelindex])
-        thresholds = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+        thresholds = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
         # print('lstm size: {}, dense size: {}\n'.format(hidden_size, dens_size))
         with open(filename, 'a') as f:
             for val in thresholds:
@@ -59,7 +61,7 @@ def write_result(mydata, hidden_size, gru_size, dens_size):
                             precision.append(per)
                             recall.append(rec)
                             f1.append(f_1)
-                f.write("Val: {}, Precision: {:.4f}, Recall: {:.4f}, F1-measure: {:.4f}\n".format(val, np.mean(precision), np.mean(recall), np.mean(f1)))
+                f.write("Seed: {}, Val: {}, Precision: {:.4f}, Recall: {:.4f}, F1-measure: {:.4f}\n".format(seed, val, np.mean(precision), np.mean(recall), np.mean(f1)))
             f.write('------------\n')
     # return 0
 
@@ -70,8 +72,8 @@ if __name__ == '__main__':
 
     gru_size = 128
     modelindex = 0
-    mydata = Data(15, usew2v=False, title=False, ml_output=False)
-    for h in hidden_sizes:
-        for d in dens_sizes:
-            write_result(mydata, h, gru_size, d)
+
+    # for h in hidden_sizes:
+    #     for d in dens_sizes:
+    write_result(256,256)
 h

@@ -10,9 +10,12 @@ filepath = '/home/nnabizad/code/toolpred/ipythons/svmdata/'
 
 
 def noneadd(y):
-    nounset = {'screwdriver', 'screw', 'cover', 'shield', 'nut', 'drive', 'board', 'assembly', 'cable', 'bracket',
-               'standoff', 'tape', 'bezel', 'connector', 'sticker', 'speaker', 'antenna', 'magnet', 'panel', 'fan' ,
-               'ribbon', 'gasket', 'subwoofer'}
+    # nounset = {'screwdriver', 'screw', 'cover', 'shield', 'nut', 'drive', 'board', 'assembly', 'cable', 'bracket',
+    #            'standoff', 'tape', 'bezel', 'connector', 'sticker', 'speaker', 'antenna', 'magnet', 'panel', 'fan' ,
+    #            'ribbon', 'gasket', 'subwoofer'}
+
+    nounset = {'carrot', 'onion', 'butter', 'sugar', 'flour', 'cilantro', 'milk', 'salt', 'tomato', 'saucepan', 'knife', 'bowls', 'spatula', 'plate', 'spoon', 'bowl', 'skillet'}
+    if y == 'measuring cups': y = 'measuring cup'
     if y in nounset:
         return 'None ' + y
     else:
@@ -92,4 +95,4 @@ if __name__ == '__main__':
     layers = ['masking_1', 'gru_1', 'time_distributed_1', 'dropout_1', 'dense_2']
     gru_size = 128
     modelindex = 0
-    file = save_layer(layers[2], hidden_size, gru_size, dens_size)
+    file = save_layer(layers[4], hidden_size, gru_size, dens_size)

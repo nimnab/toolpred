@@ -118,7 +118,7 @@ class HierarchicalClassifier():
                         y1 = self.clfs[label].predict_proba(x.reshape(1, -1))[0]
                         args1 = np.argsort(-y1)
                         labs = {self.clfs[label].classes_[args1[c]]: y1[args1[c]] * labels[label] for c in
-                                range(min(lens[i],len(args1)))}
+                                range(min(lens[i],len(args1)-1))}
                         del labels[label]
                         labels.update(labs)
                         for lab in labs:
@@ -128,7 +128,7 @@ class HierarchicalClassifier():
                                     y2 = self.clfs[lab].predict_proba(x.reshape(1, -1))[0]
                                     args2 = np.argsort(-y2)
                                     labs3 = {self.clfs[lab].classes_[args2[c]]: y2[args2[c]] * labs[lab] for c in
-                                             range(min(lens[i],len(args2)))}
+                                             range(min(lens[i],len(args2)-1))}
                                     labels.update(labs3)
 
             sorted_labels = [j[0] for j in sorted(labels.items(), key=lambda kv: kv[1], reverse=True)][:lens[i]]

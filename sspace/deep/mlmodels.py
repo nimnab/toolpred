@@ -11,7 +11,7 @@ dr = 0.3
 POS_WEIGHT = 2  # multiplier for positive targets, needs to be tuned
 
 
-def lstm_pred(mydata, modelname, seed, hidden_size, denc1_size, dens2_size):
+def lstm_pred(mydata, modelname, seed, hidden_size, dens2_size):
     # for seed in seeds:
     _, seqlength, toolnumber = np.shape(mydata.dtest.target)
     _, _, featurelen = np.shape(mydata.dtest.input)

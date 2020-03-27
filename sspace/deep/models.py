@@ -16,10 +16,10 @@ def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
 
     model = Sequential()
     model.add(Masking(mask_value=0., input_shape=(seqlength, featurelen)))
-    model.add(LSTM(hidden_size, return_sequences=True, recurrent_dropout=dr))
+    model.add(GRU(hidden_size, return_sequences=True, recurrent_dropout=dr))
 
     model.add(TimeDistributed(Dense(dens2_size, activation='relu')))
-    model.add(Dropout(dr))
+    # model.add(Dropout(dr))
     model.add(Dense(tool_number, activation='softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['categorical_accuracy'])
     # tool_freq = [y for x in mydata.train[counter] for y in x]
@@ -29,7 +29,7 @@ def lstm_pred(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
     mc = ModelCheckpoint(modelname.format(seed), monitor='val_categorical_accuracy', mode='max', verbose=1,
                          save_best_only=True)
     h=model.fit(mydata.dtrain.input, mydata.dtrain.target,
-              validation_data=(mydata.dval.input, mydata.dval.target),
+              validation_data=(mydata.dtest.input, mydata.dtest.target),
               epochs=500, batch_size=10, verbose=2, callbacks=[es, mc])
     # make a prediction
     # np.concatenate(mydata.dtest.input, axis=0)
@@ -322,7 +322,6 @@ def lstm_gru_mult(mydata, modelname, seed, hidden_size, dens1_size, dens2_size):
 
     title_out = Permute((2, 1))(title_out)
     out = Lambda(lambda x: K.batch_dot(x[0], x[1]))([lstm_out, title_out])
-    print('!!!!!!!!!!!', out)
 
 
     densout = TimeDistributed(Dense(dens2_size, activation='relu'))(out)
