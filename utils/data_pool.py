@@ -43,9 +43,10 @@ def load_obj(name):
     with open(name + '.pkl', 'rb') as file:
         return pk.load(file)
 
-def onehot(x,len):
+
+def onehot(x, len):
     a = np.eye(len + 1)[x]
-    a[:,0]=0
+    a[:, 0] = 0
     return a
 
 
@@ -57,13 +58,14 @@ class Mydata():
 
 
 class Data:
-    def __init__(self, usew2v=False, title=False, ml_output=False, freq_output=False, obj = 'mac_tools'):
+    def __init__(self, usew2v=False, title=False, ml_output=False, freq_output=False, obj='mac_tools'):
         test_ratio = 0.2
         if obj.endswith('tools'):
             self.biglist = load_obj(tools)
         else:
             self.biglist = load_obj(objects)
-        self.manuals, self.labels = self.encoder(self.biglist, usew2v=usew2v, ml_output=ml_output, freq_output=freq_output)
+        self.manuals, self.labels = self.encoder(self.biglist, usew2v=usew2v, ml_output=ml_output,
+                                                 freq_output=freq_output)
 
     def generate_fold(self, seed):
         self.train, self.test = train_test_split(self.biglist, test_size=0.2, random_state=seed)
@@ -89,7 +91,7 @@ class Data:
             encodedlabels = np.empty((0, maxlen, len(mlb.classes_)))
         elif freq_output:
             maxsteplen = max([len(j) for i in biglist for j in i])
-            encodedlabels = np.empty((0, maxlen, maxsteplen+1))
+            encodedlabels = np.empty((0, maxlen, maxsteplen + 1))
         else:
             encodedlabels = np.empty((0, maxlen, self.dim))
         for manual in biglist:

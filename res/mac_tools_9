@@ -1,0 +1,7 @@
+Seed: 9, Val: 0.1, Precision: 0.3240, Recall: 0.8416, F1-measure: 0.4571
+Seed: 9, Val: 0.2, Precision: 0.4422, Recall: 0.7153, F1-measure: 0.5258
+Seed: 9, Val: 0.3, Precision: 0.4788, Recall: 0.5118, F1-measure: 0.4855
+Seed: 9, Val: 0.4, Precision: 0.4242, Recall: 0.4193, F1-measure: 0.4185
+Seed: 9, Val: 0.5, Precision: 0.2960, Recall: 0.2899, F1-measure: 0.2910
+Seed: 9, Val: 0.6, Precision: 0.1261, Recall: 0.1246, F1-measure: 0.1246
+------------

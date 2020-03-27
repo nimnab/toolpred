@@ -25,11 +25,11 @@ def per_recal(target, pred):
         return per,rec,f1
 
 def write_result(hidden_size, dens_size):
-    data = 'mac_parts'
+    data = 'mac_tools'
     model = models[modelindex]
     seeds = [15, 896783, 9, 12, 45234]
 
-    mydata = Data(usew2v=False, title=False, ml_output=False, obj=data)
+    mydata = Data(usew2v=False, title=False, ml_output=True, obj=data)
     for seed in seeds:
         mydata.generate_fold(seed)
         filename = '/home/nnabizad/code/toolpred/res/{}_{}'.format(data, seed)
@@ -76,4 +76,3 @@ if __name__ == '__main__':
     # for h in hidden_sizes:
     #     for d in dens_sizes:
     write_result(256,256)
-h

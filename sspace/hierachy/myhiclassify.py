@@ -68,7 +68,7 @@ def myclassifier(index):
 if __name__ == '__main__':
     # data = 'mactools'
     data = 'macparts'
-    layer = ['_gru_1', '_time_distributed_1', '_dense_2'][2]
+    layer = ['_time_distributed_1', '_dense_2'][2]
     activations = ['relu', 'tanh', '']
     alpha = [0.001, 0.00001, 0.0001]
     hiddens = [256, 128, 64]

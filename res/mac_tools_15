@@ -1,0 +1,7 @@
+Seed: 15, Val: 0.1, Precision: 0.4098, Recall: 0.8777, F1-measure: 0.5361
+Seed: 15, Val: 0.2, Precision: 0.5314, Recall: 0.7831, F1-measure: 0.6087
+Seed: 15, Val: 0.3, Precision: 0.5707, Recall: 0.6542, F1-measure: 0.5969
+Seed: 15, Val: 0.4, Precision: 0.5361, Recall: 0.5436, F1-measure: 0.5358
+Seed: 15, Val: 0.5, Precision: 0.4737, Recall: 0.4713, F1-measure: 0.4707
+Seed: 15, Val: 0.6, Precision: 0.3197, Recall: 0.3146, F1-measure: 0.3156
+------------
